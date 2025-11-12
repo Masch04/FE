@@ -1,0 +1,272 @@
+<template>
+    <footer class="footer-premium py-5">
+        <div class="container">
+            <div class="row g-5">
+                <!-- Logo + Mô tả -->
+                <div class="col-lg-4 text-center text-lg-start">
+                    <div class="d-flex align-items-center justify-content-center justify-content-lg-start mb-4">
+                        <img src="../../assets/img_homepage/logoo.jpg" alt="MONA Media" class="footer-logo me-3">
+                        <h1 class="h4 fw-bold text-white mb-0 logo-text">MONA MEDIA</h1>
+                    </div>
+                    <p class="text-light small lh-lg opacity-80">
+                        We started building our hotel in 1995. Since then, we’ve grown into the hotel with the best
+                        client service in our country.
+                    </p>
+                </div>
+
+                <!-- 3 cột: Liên Kết | Địa Chỉ | Liên Hệ – CĂN CHỈNH THẲNG HÀNG -->
+                <div class="col-lg-8">
+                    <div class="row g-4 g-lg-5">
+                        <!-- Liên Kết -->
+                        <div class="col-6 col-sm-4 col-lg-4">
+                            <h5 class="section-title">Liên Kết</h5>
+                            <ul class="list-unstyled footer-links">
+                                <li><a href="#" class="nav-link">Giới thiệu</a></li>
+                                <li><a href="#" class="nav-link">Liên hệ</a></li>
+                                <li><a href="#" class="nav-link">Term & Condition</a></li>
+                                <li><a href="#" class="nav-link">Help Desk</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Địa Chỉ -->
+                        <div class="col-6 col-sm-4 col-lg-4">
+                            <h5 class="section-title">Địa Chỉ</h5>
+                            <p class="text-light small mb-2 opacity-80">
+                                1073/23 Cách Mạng Tháng 8, P.7, Q.Tân Bình, TP.HCM
+                            </p>
+                            <a href="https://maps.app.goo.gl/81a7GXGaSkjqvMoJ6"
+                                class="text-warning text-decoration-underline link-glow d-inline-block">
+                                <i class="fas fa-map-marker-alt me-2"></i>Xem Google Map
+                            </a>
+                        </div>
+
+                        <!-- Liên Hệ -->
+                        <div class="col-12 col-sm-4 col-lg-4">
+                            <h5 class="section-title">Liên Hệ</h5>
+                            <p class="text-warning mb-2">
+                                <i class="fas fa-phone-alt me-2"></i>(+84) 0313-728-397
+                            </p>
+                            <p class="text-warning mb-4">
+                                <i class="fas fa-envelope me-2"></i>info@themona.global
+                            </p>
+                            <div class="social-icons d-flex gap-3">
+                                <a href="#" class="social-btn"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="social-btn"><i class="fab fa-tiktok"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dòng cuối -->
+            <hr class="footer-divider my-5">
+            <div class="text-center text-light small d-flex align-items-center justify-content-center gap-2 flex-wrap">
+                <span>© Thiết kế và lập trình bởi</span>
+                <a href="#" class="text-warning text-decoration-underline link-glow">MONA Media / Website</a>
+                <a href="#top" class="back-to-top ms-3">
+                    <i class="fas fa-arrow-up"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+</template>
+
+<script>
+export default {
+    name: 'PremiumFooter',
+    mounted() {
+        // Back to top smooth
+        document.querySelectorAll('.back-to-top').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    }
+}
+</script>
+
+<style scoped>
+.footer-premium {
+    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+    color: #ccc;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Logo */
+.footer-logo {
+    height: 50px;
+    border-radius: 10px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 6px rgba(255, 153, 0, 0.3));
+}
+
+.logo-text {
+    background: linear-gradient(90deg, #ffcc66, #ff9900);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 800 !important;
+}
+
+/* Tiêu đề cột – CĂN CHỈNH THẲNG HÀNG */
+.section-title {
+    color: #ff9900 !important;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 0.5rem;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: #ff9900;
+    border-radius: 2px;
+}
+
+/* Link – HIỆU ỨNG GIỐNG ĐĂNG NHẬP / ĐĂNG KÝ */
+.nav-link {
+    color: #bbb;
+    text-decoration: none;
+    font-size: 0.95rem;
+    display: block;
+    margin-bottom: 0.6rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1.5px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #fff !important;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.8), 0 0 10px rgba(255, 255, 255, 0.6);
+    transform: scale(1.05);
+}
+
+.nav-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* Link-glow – GIỐNG HỆT FORM */
+.link-glow {
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.link-glow::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+.link-glow:hover {
+    color: #fff !important;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.8), 0 0 10px rgba(255, 255, 255, 0.6);
+    transform: scale(1.05);
+}
+
+.link-glow:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* Icon mạng xã hội */
+.social-btn {
+    width: 38px;
+    height: 38px;
+    background: rgba(255, 153, 0, 0.15);
+    color: #ff9900;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.4s ease;
+    border: 1px solid rgba(255, 153, 0, 0.3);
+}
+
+.social-btn:hover {
+    background: #ff9900;
+    color: white;
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: 0 8px 20px rgba(255, 153, 0, 0.4);
+}
+
+/* Nút back to top */
+.back-to-top {
+    width: 36px;
+    height: 36px;
+    background: #ff9900;
+    color: white;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.4s ease;
+    box-shadow: 0 4px 12px rgba(255, 153, 0, 0.3);
+}
+
+.back-to-top:hover {
+    background: #cc7700;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 153, 0, 0.5);
+}
+
+/* Divider */
+.footer-divider {
+    border: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #444, transparent);
+    margin: 2.5rem 0 1.5rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .footer-premium {
+        text-align: center;
+    }
+
+    .section-title::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .social-btn {
+        width: 42px;
+        height: 42px;
+    }
+}
+</style>
