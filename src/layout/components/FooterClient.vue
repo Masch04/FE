@@ -2,18 +2,31 @@
     <footer class="footer-premium py-5">
         <div class="container">
             <div class="row g-5">
-                <!-- Logo + Mô tả -->
+                <!-- Logo + Mô tả (vẫn giữ col-lg-4) -->
                 <div class="col-lg-4 text-center text-lg-start">
-                    <div class="d-flex align-items-center justify-content-center justify-content-lg-start mb-4">
-                        <img src="../../assets/img_homepage/logoo.jpg" alt="MONA Media" class="footer-logo me-3">
-                        <h1 class="h4 fw-bold text-white mb-0 logo-text">MONA MEDIA</h1>
-                    </div>
-                    <p class="text-light small lh-lg opacity-80">
-                        We started building our hotel in 1995. Since then, we’ve grown into the hotel with the best
-                        client service in our country.
-                    </p>
-                </div>
+                    <!-- Lồng một row nhỏ bên trong -->
+                    <div class="row g-3"> <!-- g-3: khoảng cách giữa 2 cột nhỏ -->
 
+                        <!-- Phần 1: Logo (chiếm 6/12 của col-lg-4 → tương đương col-lg-2) -->
+                        <div class="col-6">
+                            <div class="d-flex align-items-center justify-content-center mb-3">
+                                <img src="https://cdn.discordapp.com/attachments/1418933749004898435/1438461524904775710/result_image__1_-removebg-preview.png?ex=6916f730&is=6915a5b0&hm=5055827e3fa2e149d3ef81bdad4beee1d3941eba510862bd56344c8950becc0e&"
+                                    alt="AIHOTEL PRO" class="footer-logo"
+                                    style="width: 100%; max-width: 180px; height: auto;">
+                            </div>
+                        </div>
+
+                        <!-- Phần 2: Mô tả (chiếm 6/12 của col-lg-4) -->
+                        <div class="col-6 d-flex align-items-center">
+                            <p class="text-light small lh-lg opacity-80 mb-0">
+                                We started building our hotel in 1995. Since then, we’ve grown into the hotel with the
+                                best
+                                client service in our country.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
                 <!-- 3 cột: Liên Kết | Địa Chỉ | Liên Hệ – CĂN CHỈNH THẲNG HÀNG -->
                 <div class="col-lg-8">
                     <div class="row g-4 g-lg-5">
