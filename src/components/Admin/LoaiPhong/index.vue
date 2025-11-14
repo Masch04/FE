@@ -225,6 +225,7 @@ export default {
     },
     mounted() {
         this.layDuLieu();
+        
     },
     methods: {
         timKiemNe() {
