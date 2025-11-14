@@ -159,7 +159,7 @@ export default {
                 { id: 3, avatar: 'https://randomuser.me/api/portraits/men/45.jpg', ten: 'Lê Văn C', chucVu: 'Trưởng phòng kỹ thuật', delay: 300 }
             ],
             thanhTuu: [
-                { id: 1, so: '500+', ten: 'Phòng nghỉ', delay: 100 },
+                { id: 1, so: '60+', ten: 'Phòng nghỉ', delay: 100 },
                 { id: 2, so: '98%', ten: 'Khách hài lòng', delay: 200 },
                 { id: 3, so: '10+', ten: 'Giải thưởng', delay: 300 },
                 { id: 4, so: '24/7', ten: 'Hỗ trợ khách hàng', delay: 400 }

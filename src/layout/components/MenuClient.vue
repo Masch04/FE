@@ -37,11 +37,21 @@
               </router-link>
             </li>
 
-            <!-- DỊCH VỤ -->
-            <li class="nav-item">
-              <router-link to="/dich-vu" class="nav-link active-link" active-class="active">
+            <!-- DỊCH VỤ - DROPDOWN (DÙNG V-FOR + TỰ ĐÓNG) -->
+            <li class="nav-item dropdown" ref="dichVuDropdown">
+              <a class="nav-link dropdown-toggle active-link" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false" :class="{ active: isDichVuActive }" ref="dichVuToggle">
                 DỊCH VỤ
-              </router-link>
+              </a>
+              <ul class="dropdown-menu">
+                <template v-for="(dichVu, index) in ds_dich_vu" :key="index">
+                  <li>
+                    <router-link :to="dichVu.to" class="dropdown-item" @click="closeDichVuDropdown">
+                      {{ dichVu.ten }}
+                    </router-link>
+                  </li>
+                </template>
+              </ul>
             </li>
 
             <!-- TIN TỨC (Dropdown) -->
@@ -62,11 +72,11 @@
             </li>
 
             <!-- LIÊN HỆ -->
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <router-link to="/lien-he" class="nav-link active-link" active-class="active">
                 LIÊN HỆ
               </router-link>
-            </li>
+            </li> -->
           </ul>
 
           <!-- Nút Đặt Phòng + Đăng nhập/Đăng ký + User -->
@@ -125,6 +135,17 @@ export default {
       ten_hien_thi: 'Chưa đăng nhập',
       is_check: false,
       ds_chuyen_muc: [],
+      ds_dich_vu: [
+        { ten: 'Nhà hàng', to: '/restaurant' },
+        { ten: 'Spa', to: '/spa' },
+        { ten: 'Bể bơi', to: '/pool' },
+        { ten: 'Gym', to: '/gym' },
+      ],
+    }
+  },
+  computed: {
+    isDichVuActive() {
+      return this.ds_dich_vu.some(d => d.to === this.$route.path);
     }
   },
   mounted() {
@@ -193,6 +214,17 @@ export default {
           document.body.style.paddingTop = `${navbar.offsetHeight}px`;
         }
       });
+    },
+
+    // TỰ ĐÓNG DROPDOWN DỊCH VỤ KHI CHỌN
+    closeDichVuDropdown() {
+      this.$nextTick(() => {
+        const toggle = this.$refs.dichVuToggle;
+        if (toggle && window.bootstrap?.Dropdown) {
+          const dropdown = window.bootstrap.Dropdown.getInstance(toggle) || new window.bootstrap.Dropdown(toggle);
+          dropdown.hide();
+        }
+      });
     }
   },
 }
@@ -248,7 +280,7 @@ export default {
   color: #ff9900 !important;
 }
 
-/* TẤT CẢ TRANG KHI ACTIVE – SÁNG NHƯ TRANG CHỦ */
+/* Active link style */
 .active-link {
   position: relative;
   border: 1px solid transparent;
@@ -257,13 +289,7 @@ export default {
   transition: all 0.3s ease;
 }
 
-.active-link.active {
-  border-color: #ff9900 !important;
-  background-color: rgba(255, 153, 0, 0.15) !important;
-  color: #ff9900 !important;
-}
-
-/* Dropdown TIN TỨC - active khi vào bài viết */
+.active-link.active,
 .dropdown-toggle.active {
   border-color: #ff9900 !important;
   background-color: rgba(255, 153, 0, 0.15) !important;
@@ -291,7 +317,7 @@ export default {
   color: #fff !important;
 }
 
-/* Nút Đặt Phòng Ngay */
+/* Buttons */
 .btn-book-now {
   background-color: #ff9900;
   color: #fff;
@@ -312,7 +338,6 @@ export default {
   box-shadow: 0 6px 15px rgba(255, 153, 0, 0.5);
 }
 
-/* Nút Đăng Nhập */
 .btn-login {
   color: #fff;
   border: 1.5px solid #fff;
@@ -332,7 +357,6 @@ export default {
   color: #ff9900;
 }
 
-/* Nút Đăng Ký */
 .btn-register {
   background-color: #ff9900;
   color: #fff;
