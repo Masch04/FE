@@ -180,7 +180,7 @@ export default {
         })
         .then((res) => {
           if (res.data.status) {
-            toaster.success('Thông báo<br>' + res.data.message);
+            toaster.success('' + res.data.message);
             localStorage.removeItem('token_khachhang');
             localStorage.removeItem('ho_ten');
             this.is_check = false;

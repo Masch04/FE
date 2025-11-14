@@ -9,14 +9,17 @@
                         <!-- Ngày Đến -->
                         <div class="col-md">
                             <label class="form-label fw-semibold text-dark">Ngày Đến</label>
-                            <input v-bind:min="tt_dat_phong.min_ngay_den" @change="capNhatNgayDiTuDong"
-                                v-model="tt_dat_phong.ngay_den" type="date" class="form-control rounded-pill h-50px">
+                            <input v-bind:min="tt_dat_phong.min_ngay_den"
+                                @change="capNhatNgayDiTuDong(); clearToaster('ngay_den')"
+                                v-model="tt_dat_phong.ngay_den" type="date"
+                                class="form-control rounded-pill h-50px">
                         </div>
 
                         <!-- Ngày Đi -->
                         <div class="col-md">
                             <label class="form-label fw-semibold text-dark">Ngày Đi</label>
                             <input :min="minNgayDi" v-model="tt_dat_phong.ngay_di" type="date"
+                                @change="clearToaster('ngay_di')"
                                 class="form-control rounded-pill h-50px">
                         </div>
 
@@ -250,6 +253,10 @@ export default {
             ds_loai_phong: [],
             info: { so_phong: 0, so_tre: 0, so_lon: 0, so_tien: 0 },
             is_login: 0,
+            toasterIds: {
+                ngay_den: null,
+                ngay_di: null
+            }
         }
     },
     computed: {
@@ -284,10 +291,16 @@ export default {
         this.tt_dat_phong.tre_em = Math.min(3, Math.max(0, parseInt(this.$route.params.tre_em) || 0));
 
         this.getToday();
-        this.layDanhSachPhong();
         this.kiemTraDangNhap();
     },
     methods: {
+
+        clearToaster(field) {
+            if (this.toasterIds[field]) {
+                toaster.clear(this.toasterIds[field]);
+                this.toasterIds[field] = null;
+            }
+        },
 
         tangSoPhong() {
             if (this.tt_dat_phong.so_phong < 3) this.tt_dat_phong.so_phong++;
@@ -330,6 +343,10 @@ export default {
                         .then((res) => {
                             if (res.data.status) {
                                 toaster.success(res.data.message);
+                                // RELOAD TRANG SAU KHI ĐẶT PHÒNG THÀNH CÔNG
+                                setTimeout(() => {
+                                    location.reload();
+                                }, 1500); // Chờ 1.5s để người dùng thấy thông báo
                             }
                         });
                 } else {
@@ -340,6 +357,7 @@ export default {
                 this.$router.push('/khach-hang/dang-nhap');
             }
         },
+
         kiemTraDangNhap() {
             axios
                 .get("http://127.0.0.1:8000/api/kiem-tra-token-khach-hang", {
@@ -396,6 +414,24 @@ export default {
             this.inLog();
         },
         layDanhSachPhong() {
+            this.clearToaster('ngay_den');
+            this.clearToaster('ngay_di');
+
+            let hasError = false;
+
+            if (!this.tt_dat_phong.ngay_den) {
+                this.toasterIds.ngay_den = toaster.warning("Bạn vui lòng chọn ngày đến");
+                hasError = true;
+            }
+            if (!this.tt_dat_phong.ngay_di) {
+                this.toasterIds.ngay_di = toaster.warning("Bạn vui lòng chọn ngày đi");
+                hasError = true;
+            }
+
+            if (hasError) {
+                return;
+            }
+
             baseRequest
                 .post('danh-sach-phong-dat', this.tt_dat_phong)
                 .then((res) => {
@@ -404,6 +440,7 @@ export default {
                         v.so_phong_dat = 0;
                         v.chon_phong = false;
                     });
+                    this.inLog();
                 });
         }
     },
