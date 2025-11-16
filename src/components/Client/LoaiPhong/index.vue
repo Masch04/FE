@@ -11,16 +11,14 @@
                             <label class="form-label fw-semibold text-dark">Ngày Đến</label>
                             <input v-bind:min="tt_dat_phong.min_ngay_den"
                                 @change="capNhatNgayDiTuDong(); clearToaster('ngay_den')"
-                                v-model="tt_dat_phong.ngay_den" type="date"
-                                class="form-control rounded-pill h-50px">
+                                v-model="tt_dat_phong.ngay_den" type="date" class="form-control rounded-pill h-50px">
                         </div>
 
                         <!-- Ngày Đi -->
                         <div class="col-md">
                             <label class="form-label fw-semibold text-dark">Ngày Đi</label>
                             <input :min="minNgayDi" v-model="tt_dat_phong.ngay_di" type="date"
-                                @change="clearToaster('ngay_di')"
-                                class="form-control rounded-pill h-50px">
+                                @change="clearToaster('ngay_di')" class="form-control rounded-pill h-50px">
                         </div>
 
                         <!-- Số Phòng (1-3) -->
@@ -122,6 +120,28 @@
                             </button>
                         </div>
                     </div>
+
+                    <!-- DỊCH VỤ BỔ SUNG -->
+                    <div v-if="ds_dich_vu.length > 0" class="mt-4 pt-3 border-top">
+                        <p class="text-muted small mb-2 text-center">Dịch vụ bổ sung</p>
+                        <div class="row g-2">
+                            <div class="col-md-6" v-for="dv in ds_dich_vu" :key="dv.id">
+                                <div
+                                    class="form-check d-flex align-items-center justify-content-between bg-light rounded-3 p-2">
+                                    <div class="form-check-label d-flex align-items-center">
+                                        <input class="form-check-input me-2" type="checkbox" v-model="dv.chon"
+                                            @change="inLog()">
+                                        <span class="small fw-medium">{{ dv.ten_dich_vu }}</span>
+                                    </div>
+                                    <span class="text-success small fw-bold">{{ formatVND(dv.don_gia) }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div v-if="tongTienDichVu > 0" class="text-end mt-2">
+                            <small class="text-muted">Tiền dịch vụ: </small>
+                            <strong class="text-success">{{ formatVND(tongTienDichVu) }}</strong>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -184,8 +204,8 @@
                                                 <div class="col">
                                                     <p class="text-muted small mb-1">Lợi ích</p>
                                                     <ul class="list-unstyled small mb-0 text-success">
-                                                        <li><i class="bx bx-check me-1"></i> Miễn phí ăn sáng</li>
-                                                        <li><i class="bx bx-check me-1"></i> Wifi tốc độ cao</li>
+                                                        <li>Miễn phí ăn sáng</li>
+                                                        <li>Wifi tốc độ cao</li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -251,6 +271,7 @@ export default {
                 min_ngay_di: ''
             },
             ds_loai_phong: [],
+            ds_dich_vu: [],
             info: { so_phong: 0, so_tre: 0, so_lon: 0, so_tien: 0 },
             is_login: 0,
             toasterIds: {
@@ -269,6 +290,11 @@ export default {
             const today = new Date();
             today.setDate(today.getDate() + 1);
             return today.toISOString().split('T')[0];
+        },
+        tongTienDichVu() {
+            return this.ds_dich_vu
+                .filter(dv => dv.chon)
+                .reduce((sum, dv) => sum + parseInt(dv.don_gia), 0);
         }
     },
     watch: {
@@ -332,7 +358,8 @@ export default {
                 if (this.info.so_phong > 0) {
                     var payload = {
                         'tt_dat_phong': this.tt_dat_phong,
-                        'tt_loai_phong': this.ds_loai_phong
+                        'tt_loai_phong': this.ds_loai_phong,
+                        'ds_dich_vu': this.ds_dich_vu.filter(dv => dv.chon)
                     };
                     axios
                         .post("http://127.0.0.1:8000/api/khach-hang-dat-phong", payload, {
@@ -343,10 +370,9 @@ export default {
                         .then((res) => {
                             if (res.data.status) {
                                 toaster.success(res.data.message);
-                                // RELOAD TRANG SAU KHI ĐẶT PHÒNG THÀNH CÔNG
                                 setTimeout(() => {
                                     location.reload();
-                                }, 1500); // Chờ 1.5s để người dùng thấy thông báo
+                                }, 1500);
                             }
                         });
                 } else {
@@ -371,6 +397,7 @@ export default {
         },
         formatVND(number) {
             return new Intl.NumberFormat('vi-VI', { style: 'currency', currency: 'VND' }).format(number);
+            
         },
         getToday() {
             var today = new Date();
@@ -392,10 +419,12 @@ export default {
             this.info.so_lon = 0;
             this.info.so_tre = 0;
             this.info.so_tien = 0;
+
             let date2 = new Date(this.tt_dat_phong.ngay_di);
             let date1 = new Date(this.tt_dat_phong.ngay_den);
             let Difference_In_Time = date2.getTime() - date1.getTime();
             let Difference_In_Days = Math.max(1, Math.round(Difference_In_Time / (1000 * 3600 * 24)));
+
             this.ds_loai_phong.forEach((value) => {
                 if (value.chon_phong) {
                     this.info.so_phong += value.so_phong_dat;
@@ -404,6 +433,8 @@ export default {
                     this.info.so_tre += value.so_phong_dat * value.so_tre_em;
                 }
             });
+
+            this.info.so_tien += this.tongTienDichVu;
         },
         tru(value) {
             value.so_phong_dat = Math.max(value.so_phong_dat - 1, 0);
@@ -440,9 +471,28 @@ export default {
                         v.so_phong_dat = 0;
                         v.chon_phong = false;
                     });
+
+                    this.layDanhSachDichVu(); // GỌI API DỊCH VỤ
                     this.inLog();
                 });
-        }
+        },
+
+        // HÀM LẤY DỊCH VỤ 
+        layDanhSachDichVu() {
+            axios
+                .get('http://127.0.0.1:8000/api/dich-vu') 
+                .then((res) => {
+                    if (res.data.status) {
+                        this.ds_dich_vu = res.data.dich_vu;
+                    } else {
+                        toaster.error(res.data.message || "Lỗi tải dữ liệu");
+                    }
+                })
+                .catch((err) => {
+                    console.error(err);
+                    toaster.error("Không kết nối được server");
+                });
+        },
     },
 }
 </script>

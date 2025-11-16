@@ -37,7 +37,7 @@
               </router-link>
             </li>
 
-            <!-- DỊCH VỤ - DROPDOWN (DÙNG V-FOR + TỰ ĐÓNG) -->
+            <!-- DỊCH VỤ - DROPDOWN -->
             <li class="nav-item dropdown" ref="dichVuDropdown">
               <a class="nav-link dropdown-toggle active-link" href="#" role="button" data-bs-toggle="dropdown"
                 aria-expanded="false" :class="{ active: isDichVuActive }" ref="dichVuToggle">
@@ -54,16 +54,27 @@
               </ul>
             </li>
 
-            <!-- TIN TỨC (Dropdown) -->
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle active-link" href="#" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false" :class="{ active: $route.path.includes('/bai-viet') }">
+            <!-- TIN TỨC (Dropdown) - ĐÃ SỬA -->
+            <li class="nav-item dropdown" ref="tinTucDropdown">
+              <a 
+                class="nav-link dropdown-toggle active-link" 
+                href="#" 
+                role="button" 
+                data-bs-toggle="dropdown"
+                aria-expanded="false" 
+                :class="{ active: $route.path.includes('/bai-viet') }"
+                ref="tinTucToggle"
+              >
                 TIN TỨC
               </a>
               <ul class="dropdown-menu">
                 <template v-for="(v, k) in ds_chuyen_muc" :key="k">
                   <li>
-                    <router-link :to="'/bai-viet/' + v.slug_chuyen_muc" class="dropdown-item">
+                    <router-link 
+                      :to="'/bai-viet/' + v.slug_chuyen_muc" 
+                      class="dropdown-item"
+                      @click="closeTinTucDropdown"
+                    >
                       {{ v.ten_chuyen_muc }}
                     </router-link>
                   </li>
@@ -216,10 +227,21 @@ export default {
       });
     },
 
-    // TỰ ĐÓNG DROPDOWN DỊCH VỤ KHI CHỌN
+    // ĐÓNG DROPDOWN DỊCH VỤ
     closeDichVuDropdown() {
       this.$nextTick(() => {
         const toggle = this.$refs.dichVuToggle;
+        if (toggle && window.bootstrap?.Dropdown) {
+          const dropdown = window.bootstrap.Dropdown.getInstance(toggle) || new window.bootstrap.Dropdown(toggle);
+          dropdown.hide();
+        }
+      });
+    },
+
+    // ĐÓNG DROPDOWN TIN TỨC - MỚI THÊM
+    closeTinTucDropdown() {
+      this.$nextTick(() => {
+        const toggle = this.$refs.tinTucToggle;
         if (toggle && window.bootstrap?.Dropdown) {
           const dropdown = window.bootstrap.Dropdown.getInstance(toggle) || new window.bootstrap.Dropdown(toggle);
           dropdown.hide();

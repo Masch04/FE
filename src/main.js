@@ -5,6 +5,7 @@ import Default from './layout/wrapper/index.vue'
 import Toaster from "@meforma/vue-toaster"
 import Auth from './layout/wrapper/auth.vue'
 import Client from './layout/wrapper/client.vue'
+import client2 from './layout/wrapper/client2.vue'
 
 // AOS
 import AOS from 'aos'
@@ -20,6 +21,7 @@ app.use(Toaster)
 app.component("default-layout", Default)
 app.component("auth-layout", Auth)
 app.component("client-layout", Client)
+app.component("client2-layout", client2)
 
 // Kích hoạt AOS với cấu hình mượt mà
 AOS.init({

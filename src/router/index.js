@@ -144,12 +144,12 @@ const routes = [
     {
         path: "/khach-hang/dang-ky",
         component: () => import("../components/Client/DangKy/index.vue"),
-        meta: { layout: "auth" },
+        meta: { layout: "client2" },
     },
     {
         path: "/khach-hang/dang-nhap",
         component: () => import("../components/Client/DangNhap/index.vue"),
-        meta: { layout: "auth" },
+        meta: { layout: "client2" },
     },
     {
         path: "/quen-mat-khau",
