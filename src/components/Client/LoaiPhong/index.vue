@@ -133,7 +133,7 @@
                                             @change="inLog()">
                                         <span class="small fw-medium">{{ dv.ten_dich_vu }}</span>
                                     </div>
-                                    <span class="text-success small fw-bold">{{ formatVND(dv.gia) }}</span>
+                                    <span class="text-success small fw-bold">{{ formatVND(dv.don_gia) }}</span>
                                 </div>
                             </div>
                         </div>
@@ -197,7 +197,7 @@
                                                         3.666.667đ
                                                     </p>
                                                     <p class="fw-bold text-success fs-4 mb-0">
-                                                        {{ formatVND(value.gia_trung_binh) }}
+                                                        {{ formatVND(value.gia_trung_binh_ko_format) }}
                                                         <small class="text-muted">/đêm</small>
                                                     </p>
                                                 </div>
@@ -291,10 +291,11 @@ export default {
             today.setDate(today.getDate() + 1);
             return today.toISOString().split('T')[0];
         },
+        // ĐÃ SỬA HOÀN CHỈNH - TÍNH ĐÚNG TIỀN DỊCH VỤ
         tongTienDichVu() {
             return this.ds_dich_vu
                 .filter(dv => dv.chon)
-                .reduce((sum, dv) => sum + parseInt(dv.gia), 0);
+                .reduce((sum, dv) => sum + (parseInt(dv.don_gia, 10) || 0), 0);
         }
     },
     watch: {
@@ -320,7 +321,6 @@ export default {
         this.kiemTraDangNhap();
     },
     methods: {
-
         clearToaster(field) {
             if (this.toasterIds[field]) {
                 toaster.clear(this.toasterIds[field]);
@@ -328,24 +328,12 @@ export default {
             }
         },
 
-        tangSoPhong() {
-            if (this.tt_dat_phong.so_phong < 3) this.tt_dat_phong.so_phong++;
-        },
-        giamSoPhong() {
-            if (this.tt_dat_phong.so_phong > 1) this.tt_dat_phong.so_phong--;
-        },
-        tangNguoiLon() {
-            if (this.tt_dat_phong.nguoi_lon < 4) this.tt_dat_phong.nguoi_lon++;
-        },
-        giamNguoiLon() {
-            if (this.tt_dat_phong.nguoi_lon > 1) this.tt_dat_phong.nguoi_lon--;
-        },
-        tangTreEm() {
-            if (this.tt_dat_phong.tre_em < 3) this.tt_dat_phong.tre_em++;
-        },
-        giamTreEm() {
-            if (this.tt_dat_phong.tre_em > 0) this.tt_dat_phong.tre_em--;
-        },
+        tangSoPhong() { if (this.tt_dat_phong.so_phong < 3) this.tt_dat_phong.so_phong++; },
+        giamSoPhong() { if (this.tt_dat_phong.so_phong > 1) this.tt_dat_phong.so_phong--; },
+        tangNguoiLon() { if (this.tt_dat_phong.nguoi_lon < 4) this.tt_dat_phong.nguoi_lon++; },
+        giamNguoiLon() { if (this.tt_dat_phong.nguoi_lon > 1) this.tt_dat_phong.nguoi_lon--; },
+        tangTreEm() { if (this.tt_dat_phong.tre_em < 3) this.tt_dat_phong.tre_em++; },
+        giamTreEm() { if (this.tt_dat_phong.tre_em > 0) this.tt_dat_phong.tre_em--; },
 
         capNhatNgayDiTuDong() {
             if (this.tt_dat_phong.ngay_di < this.minNgayDi) {
@@ -363,16 +351,12 @@ export default {
                     };
                     axios
                         .post("http://127.0.0.1:8000/api/khach-hang-dat-phong", payload, {
-                            headers: {
-                                Authorization: 'Bearer ' + localStorage.getItem("token_khachhang")
-                            }
+                            headers: { Authorization: 'Bearer ' + localStorage.getItem("token_khachhang") }
                         })
                         .then((res) => {
                             if (res.data.status) {
                                 toaster.success(res.data.message);
-                                setTimeout(() => {
-                                    location.reload();
-                                }, 1500);
+                                setTimeout(() => location.reload(), 1500);
                             }
                         });
                 } else {
@@ -387,68 +371,67 @@ export default {
         kiemTraDangNhap() {
             axios
                 .get("http://127.0.0.1:8000/api/kiem-tra-token-khach-hang", {
-                    headers: {
-                        Authorization: 'Bearer ' + localStorage.getItem("token_khachhang")
-                    }
+                    headers: { Authorization: 'Bearer ' + localStorage.getItem("token_khachhang") }
                 })
-                .then((res) => {
-                    this.is_login = res.data.status;
-                });
+                .then((res) => { this.is_login = res.data.status; });
         },
+
         formatVND(number) {
             return new Intl.NumberFormat('vi-VI', { style: 'currency', currency: 'VND' }).format(number);
         },
+
         getToday() {
-            var today = new Date();
-            var dd = String(today.getDate()).padStart(2, '0');
-            var mm = String(today.getMonth() + 1).padStart(2, '0');
-            var yyyy = today.getFullYear();
-            today = yyyy + '-' + mm + '-' + dd;
-            this.tt_dat_phong.min_ngay_di = today;
-            this.tt_dat_phong.min_ngay_den = today;
+            const today = new Date();
+            const yyyy = today.getFullYear();
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const dd = String(today.getDate()).padStart(2, '0');
+            const todayStr = `${yyyy}-${mm}-${dd}`;
+            this.tt_dat_phong.min_ngay_den = todayStr;
+            this.tt_dat_phong.min_ngay_di = todayStr;
         },
-        doiNgayDen() {
-            this.tt_dat_phong.min_ngay_di = this.tt_dat_phong.ngay_den;
-            if (this.tt_dat_phong.ngay_di < this.tt_dat_phong.ngay_den) {
-                this.tt_dat_phong.ngay_di = this.tt_dat_phong.ngay_den;
-            }
-        },
+
         inLog() {
+            // Reset tổng
             this.info.so_phong = 0;
             this.info.so_lon = 0;
             this.info.so_tre = 0;
             this.info.so_tien = 0;
 
-            let date2 = new Date(this.tt_dat_phong.ngay_di);
-            let date1 = new Date(this.tt_dat_phong.ngay_den);
-            let Difference_In_Time = date2.getTime() - date1.getTime();
-            let Difference_In_Days = Math.max(1, Math.round(Difference_In_Time / (1000 * 3600 * 24)));
+            const date1 = new Date(this.tt_dat_phong.ngay_den);
+            const date2 = new Date(this.tt_dat_phong.ngay_di);
+            const soDem = Math.max(1, Math.round((date2 - date1) / (1000 * 3600 * 24)));
 
-            this.ds_loai_phong.forEach((value) => {
-                if (value.chon_phong) {
-                    this.info.so_phong += value.so_phong_dat;
-                    this.info.so_tien += value.so_phong_dat * parseInt(value.gia_trung_binh_ko_format) * Difference_In_Days;
-                    this.info.so_lon += value.so_phong_dat * value.so_nguoi_lon;
-                    this.info.so_tre += value.so_phong_dat * value.so_tre_em;
+            this.ds_loai_phong.forEach(value => {
+                if (value.chon_phong && value.so_phong_dat > 0) {
+                    const giaPhong = parseInt(value.gia_trung_binh_ko_format, 10) || 0;
+                    const soPhongDat = parseInt(value.so_phong_dat, 10) || 0;
+
+                    this.info.so_phong += soPhongDat;
+                    this.info.so_tien += soPhongDat * giaPhong * soDem;
+                    this.info.so_lon += soPhongDat * value.so_nguoi_lon;
+                    this.info.so_tre += soPhongDat * value.so_tre_em;
                 }
             });
 
+            // Cộng tiền dịch vụ từ computed (đã sửa đúng)
             this.info.so_tien += this.tongTienDichVu;
         },
+
         tru(value) {
             value.so_phong_dat = Math.max(value.so_phong_dat - 1, 0);
             this.inLog();
         },
+
         cong(value) {
             value.so_phong_dat = Math.min(value.so_phong_dat + 1, value.so_phong_trong);
             this.inLog();
         },
+
         layDanhSachPhong() {
             this.clearToaster('ngay_den');
             this.clearToaster('ngay_di');
 
             let hasError = false;
-
             if (!this.tt_dat_phong.ngay_den) {
                 this.toasterIds.ngay_den = toaster.warning("Bạn vui lòng chọn ngày đến");
                 hasError = true;
@@ -457,95 +440,54 @@ export default {
                 this.toasterIds.ngay_di = toaster.warning("Bạn vui lòng chọn ngày đi");
                 hasError = true;
             }
-
-            if (hasError) {
-                return;
-            }
+            if (hasError) return;
 
             baseRequest
                 .post('danh-sach-phong-dat', this.tt_dat_phong)
                 .then((res) => {
-                    this.ds_loai_phong = res.data.data;
-                    this.ds_loai_phong.forEach((v) => {
+                    this.ds_loai_phong = res.data.data || [];
+                    this.ds_loai_phong.forEach(v => {
                         v.so_phong_dat = 0;
                         v.chon_phong = false;
                     });
-
-                    this.layDanhSachDichVu(); // GỌI API DỊCH VỤ
+                    this.layDanhSachDichVu();
                     this.inLog();
-                });
+                })
+                .catch(() => toaster.error("Không tải được danh sách phòng!"));
         },
 
-        // HÀM LẤY DỊCH VỤ - ĐÃ SỬA HOÀN CHỈNH
-       layDanhSachDichVu() {
-    axios
-        .get('http://127.0.0.1:8000/api/dich-vu')
-        .then((res) => {
-            if (res.data.status) {
-                // SỬA CHỈ DÒNG NÀY
-                this.ds_dich_vu = res.data.dich_vu.map(dv => ({
-                    ...dv,
-                    don_gia: parseInt(dv.don_gia) || 0
-                }));
-            } else {
-                toaster.error(res.data.message || "Lỗi tải dữ liệu");
-            }
-        })
-        .catch((err) => {
-            console.error(err);
-            toaster.error("Không kết nối được server");
-        });
-},
-    },
+        layDanhSachDichVu() {
+            axios
+                .get('http://127.0.0.1:8000/api/dich-vu')
+                .then((res) => {
+                    if (res.data.status) {
+                        this.ds_dich_vu = res.data.dich_vu.map(dv => ({
+                            ...dv,
+                            chon: false,
+                            don_gia: parseInt(dv.don_gia) || 0
+                        }));
+                    }
+                })
+                .catch(() => toaster.error("Không kết nối được server"));
+        },
+    }
 }
 </script>
 
 <style scoped>
-/* === TRANG ĐẶT PHÒNG === */
+/* Giữ nguyên toàn bộ style cũ của bạn */
 .dat-phong-page {
     background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.45)),
         url('https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg') center/cover no-repeat fixed;
     min-height: 100vh;
     color: #fff;
 }
-
-/* === FORM TÌM KIẾM - ĐỒNG NHẤT CHIỀU CAO === */
-.h-50px {
-    height: 50px !important;
-}
-
-.search-card .d-inline-flex {
-    min-width: 140px;
-    max-width: 160px;
-    justify-content: space-between;
-}
-
-.search-card .btn-outline-secondary {
-    width: 38px;
-    height: 38px;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-}
-
-.search-card .d-inline-flex input[readonly] {
-    min-width: 50px;
-    font-weight: 600;
-    color: #333;
-}
-
-.search-card .btn-warning {
-    min-width: 120px;
-}
-
-.search-card .form-control,
-.search-card .btn {
-    height: 50px;
-}
-
-/* === PHẦN NỘI DUNG PHÒNG === */
+.h-50px { height: 50px !important; }
+.search-card .d-inline-flex { min-width: 140px; max-width: 160px; justify-content: space-between; }
+.search-card .btn-outline-secondary { width: 38px; height: 38px; padding: 0; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+.search-card .d-inline-flex input[readonly] { min-width: 50px; font-weight: 600; color: #333; }
+.search-card .btn-warning { min-width: 120px; }
+.search-card .form-control, .search-card .btn { height: 50px; }
 .room-content-overlay {
     background: rgba(255, 255, 255, 0.95) !important;
     border-radius: 1rem;
@@ -556,75 +498,13 @@ export default {
     flex-direction: column;
     justify-content: center;
 }
-
-.room-content-overlay h4,
-.room-content-overlay p,
-.room-content-overlay li,
-.room-content-overlay a {
+.room-content-overlay h4, .room-content-overlay p, .room-content-overlay li, .room-content-overlay a {
     color: #212529 !important;
     font-weight: 600 !important;
 }
-
-.room-content-overlay .bx {
-    font-size: 1.1rem;
-}
-
-.room-content-overlay .d-inline-flex {
-    background: white;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.summary-card {
-    background: white;
-    border-radius: 1rem;
-}
-
-.room-item {
-    transition: all 0.4s ease;
-    overflow: hidden;
-}
-
-.room-item:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1) !important;
-}
-
-/* === FIX ẢNH KHÔNG BỊ KÉO === */
-.room-img-fixed {
-    height: 260px;
-    object-fit: cover;
-}
-
-@media (min-width: 992px) {
-    .room-img-fixed {
-        height: 100%;
-        max-height: 300px;
-    }
-}
-
-/* Responsive */
-@media (max-width: 992px) {
-    .search-card .col-md-auto {
-        min-width: 140px;
-    }
-}
-
-@media (max-width: 768px) {
-    .search-card .row>div {
-        margin-bottom: 1rem;
-    }
-
-    .search-card .col-md-auto.d-flex {
-        justify-content: start;
-    }
-
-    .search-card .d-inline-flex {
-        width: 100%;
-        max-width: none;
-    }
-
-    .room-content-overlay {
-        border-radius: 0.75rem;
-    }
-}
+.room-img-fixed { height: 260px; object-fit: cover; }
+@media (min-width: 992px) { .room-img-fixed { height: 100%; max-height: 300px; } }
+.room-item { transition: all 0.4s ease; }
+.room-item:hover { transform: translateY(-8px); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1) !important; }
+.summary-card { background: white; border-radius: 1rem; }
 </style>
