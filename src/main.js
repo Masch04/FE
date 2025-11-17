@@ -6,6 +6,7 @@ import Toaster from "@meforma/vue-toaster"
 import Auth from './layout/wrapper/auth.vue'
 import Client from './layout/wrapper/client.vue'
 import client2 from './layout/wrapper/client2.vue'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 // AOS
 import AOS from 'aos'

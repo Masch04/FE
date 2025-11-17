@@ -3,6 +3,7 @@
         <MenuClient></MenuClient>
         <router-view></router-view>
         <FooterClient></FooterClient>
+        <ChatbotVue></ChatbotVue>
     </div>
 </template>
 <script>
@@ -17,6 +18,7 @@ s0.parentNode.insertBefore(s1,s0);
 })();
 import MenuClient from "../components/MenuClient.vue";
 import FooterClient from "../components/FooterClient.vue";
+import ChatbotVue from '../components/Chatbot.vue';
 import "../../assets/js/bootstrap.bundle.min.js";
 import "../../assets/js/jquery.min.js";
 import "../../assets/plugins/simplebar/js/simplebar.min.js";
@@ -24,10 +26,11 @@ import "../../assets/plugins/metismenu/js/metisMenu.min.js";
 import "../../assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js";
 import "../../assets/js/index.js";
 import "../../assets/js/app.js";
+
 export default {
     name        : "app",
     components  : {
-        MenuClient, FooterClient
+        MenuClient, FooterClient, ChatbotVue
     }
 }
 </script>

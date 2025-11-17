@@ -17,6 +17,7 @@ s0.parentNode.insertBefore(s1,s0);
 })();
 import MenuClient from "../components/MenuClient.vue";
 import FooterClient from "../components/FooterClient.vue";
+import ChatbotVue from '../components/Chatbot.vue';
 import "../../assets/js/bootstrap.bundle.min.js";
 import "../../assets/js/jquery.min.js";
 import "../../assets/plugins/simplebar/js/simplebar.min.js";
@@ -28,7 +29,7 @@ import MenuClient2 from "../components/MenuClient2.vue";
 export default {
     name        : "app",
     components  : {
-        MenuClient2, FooterClient
+        MenuClient2, FooterClient, ChatbotVue
     }
 }
 </script>

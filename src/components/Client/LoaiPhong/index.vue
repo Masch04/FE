@@ -133,7 +133,7 @@
                                             @change="inLog()">
                                         <span class="small fw-medium">{{ dv.ten_dich_vu }}</span>
                                     </div>
-                                    <span class="text-success small fw-bold">{{ formatVND(dv.don_gia) }}</span>
+                                    <span class="text-success small fw-bold">{{ formatVND(dv.gia) }}</span>
                                 </div>
                             </div>
                         </div>
@@ -294,7 +294,7 @@ export default {
         tongTienDichVu() {
             return this.ds_dich_vu
                 .filter(dv => dv.chon)
-                .reduce((sum, dv) => sum + parseInt(dv.don_gia), 0);
+                .reduce((sum, dv) => sum + parseInt(dv.gia), 0);
         }
     },
     watch: {
@@ -397,7 +397,6 @@ export default {
         },
         formatVND(number) {
             return new Intl.NumberFormat('vi-VI', { style: 'currency', currency: 'VND' }).format(number);
-            
         },
         getToday() {
             var today = new Date();
@@ -477,22 +476,26 @@ export default {
                 });
         },
 
-        // HÀM LẤY DỊCH VỤ 
-        layDanhSachDichVu() {
-            axios
-                .get('http://127.0.0.1:8000/api/dich-vu') 
-                .then((res) => {
-                    if (res.data.status) {
-                        this.ds_dich_vu = res.data.dich_vu;
-                    } else {
-                        toaster.error(res.data.message || "Lỗi tải dữ liệu");
-                    }
-                })
-                .catch((err) => {
-                    console.error(err);
-                    toaster.error("Không kết nối được server");
-                });
-        },
+        // HÀM LẤY DỊCH VỤ - ĐÃ SỬA HOÀN CHỈNH
+       layDanhSachDichVu() {
+    axios
+        .get('http://127.0.0.1:8000/api/dich-vu')
+        .then((res) => {
+            if (res.data.status) {
+                // SỬA CHỈ DÒNG NÀY
+                this.ds_dich_vu = res.data.dich_vu.map(dv => ({
+                    ...dv,
+                    don_gia: parseInt(dv.don_gia) || 0
+                }));
+            } else {
+                toaster.error(res.data.message || "Lỗi tải dữ liệu");
+            }
+        })
+        .catch((err) => {
+            console.error(err);
+            toaster.error("Không kết nối được server");
+        });
+},
     },
 }
 </script>
