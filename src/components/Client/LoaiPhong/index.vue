@@ -342,31 +342,42 @@ export default {
         },
 
         datPhong() {
-            if (this.is_login) {
-                if (this.info.so_phong > 0) {
-                    var payload = {
-                        'tt_dat_phong': this.tt_dat_phong,
-                        'tt_loai_phong': this.ds_loai_phong,
-                        'ds_dich_vu': this.ds_dich_vu.filter(dv => dv.chon)
-                    };
-                    axios
-                        .post("http://127.0.0.1:8000/api/khach-hang-dat-phong", payload, {
-                            headers: { Authorization: 'Bearer ' + localStorage.getItem("token_khachhang") }
-                        })
-                        .then((res) => {
-                            if (res.data.status) {
-                                toaster.success(res.data.message);
-                                setTimeout(() => location.reload(), 1500);
-                            }
-                        });
-                } else {
-                    toaster.warning("Bạn chưa chọn bất kỳ phòng nào");
-                }
-            } else {
-                toaster.error("Bạn cần đăng nhập trước khi đặt phòng");
-                this.$router.push('/khach-hang/dang-nhap');
+        if (!this.is_login) {
+            toaster.error("Bạn cần đăng nhập trước!");
+            this.$router.push('/khach-hang/dang-nhap');
+            return;
+        }
+
+        if (this.info.so_phong <= 0) {
+            toaster.warning("Bạn chưa chọn phòng nào!");
+            return;
+        }
+
+        const payload = {
+            tt_dat_phong: this.tt_dat_phong,
+            tt_loai_phong: this.ds_loai_phong.filter(p => p.chon_phong && p.so_phong_dat > 0),
+            ds_dich_vu: this.ds_dich_vu
+                .filter(dv => dv.chon)
+                .map(dv => ({
+                    id: dv.id,
+                    don_gia: dv.don_gia  // số nguyên, không format
+                }))
+        };
+
+        axios.post("http://127.0.0.1:8000/api/khach-hang-dat-phong", payload, {
+            headers: { Authorization: 'Bearer ' + localStorage.getItem("token_khachhang") }
+        })
+        .then(res => {
+            if (res.data.status) {
+                toaster.success(res.data.message || "Đặt phòng thành công! Kiểm tra email của bạn.");
+                setTimeout(() => location.reload(), 2000);
             }
-        },
+        })
+        .catch(err => {
+            console.error(err);
+            toaster.error("Đặt phòng thất bại, vui lòng thử lại!");
+        });
+    },
 
         kiemTraDangNhap() {
             axios
