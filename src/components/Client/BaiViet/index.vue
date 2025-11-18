@@ -191,7 +191,7 @@ export default {
 .featured-card:hover {
   transform: translateY(-12px);
   box-shadow: 0 20px 50px rgba(255, 193, 7, 0.25);
-  border-color: #ffc107;
+  border-color: #DBAB57;
 }
 
 /* Badge - NỀN VÀNG, CHỮ ĐEN */
@@ -206,9 +206,9 @@ export default {
 }
 
 .badge-new {
-  background: #ffc107;
+  background: #DBAB57;
   color: #212529;
-  border: 1px solid #ffc107;
+  border: 1px solid #DBAB57;
 }
 
 .badge-popular {
@@ -227,7 +227,7 @@ export default {
 .section-title {
   font-size: 2.8rem;
   font-weight: 700;
-  color: #ffc107;
+  color: #DBAB57;
   margin: 0;
   text-shadow: 0 3px 10px rgba(0,0,0,0.6);
 }
@@ -235,7 +235,7 @@ export default {
 .underline {
   width: 100px;
   height: 5px;
-  background: linear-gradient(90deg, #ffc107, #ff8c00);
+  background: linear-gradient(90deg, #DBAB57, #ff8c00);
   border-radius: 3px;
   margin: 16px auto 0;
   display: block;
@@ -255,7 +255,7 @@ export default {
 
 .blog-card:hover {
   transform: translateY(-12px);
-  border-color: #ffc107;
+  border-color: #DBAB57;
   box-shadow: 0 24px 48px rgba(255, 193, 7, 0.2);
 }
 

@@ -28,9 +28,10 @@
                   <input v-model="tt_dat_phong.tre_em" type="number" class="form-control" placeholder="Nhập số trẻ em" />
                 </div>
                 <div class="col mt-2">
-                  <button class="btn btn-warning w-100" style="margin-top: 28px">
-                    Tìm Kiếm
-                  </button>
+<button class="btn w-100" 
+        style="margin-top: 28px; background-color: #DBAB57; border-color: #DBAB57; color: #fff;">
+  Tìm Kiếm
+</button>
                 </div>
               </div>
             </div>
@@ -68,10 +69,10 @@
                             <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked="" />
                             <label class="form-check-label text-nowrap"><div class="d-flex align-items-center ">
 								  <div class="cursor-pointer">
-									<i class="bx bxs-star text-warning"></i>
-									<i class="bx bxs-star text-warning"></i>
-									<i class="bx bxs-star text-warning"></i>
-									<i class="bx bxs-star text-warning"></i>
+									<i class="bx bxs-star text-gold"></i>
+									<i class="bx bxs-star text-gold"></i>
+									<i class="bx bxs-star text-gold"></i>
+									<i class="bx bxs-star text-gold"></i>
 									<i class="bx bxs-star text-secondary"></i>
 								  </div>
 								</div></label>
@@ -80,11 +81,11 @@
                             <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked="" />
                             <label class="form-check-label text-nowrap"><div class="d-flex align-items-center ">
 								  <div class="cursor-pointer">
-									<i class="bx bxs-star text-warning"></i>
-									<i class="bx bxs-star text-warning"></i>
-									<i class="bx bxs-star text-warning"></i>
-									<i class="bx bxs-star text-warning"></i>
-									<i class="bx bxs-star text-warning"></i>
+									<i class="bx bxs-star text-gold"></i>
+									<i class="bx bxs-star text-gold"></i>
+									<i class="bx bxs-star text-gold"></i>
+									<i class="bx bxs-star text-gold"></i>
+									<i class="bx bxs-star text-gold"></i>
 								  </div>
 								</div></label>
                           </div>
@@ -141,7 +142,7 @@
                             <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked="" />
                             <label class="form-check-label text-nowrap"><div class="d-flex align-items-center ">
 								  <div class="cursor-pointer">
-									<i class="bx bxs-star text-warning"></i>
+									<i class="bx bxs-star text-gold"></i>
 									<i class="bx bxs-star text-secondary"></i>
 									<i class="bx bxs-star text-secondary"></i>
 									<i class="bx bxs-star text-secondary"></i>
@@ -153,8 +154,8 @@
                             <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked="" />
                             <label class="form-check-label text-nowrap"><div class="d-flex align-items-center ">
 								  <div class="cursor-pointer">
-									<i class="bx bxs-star text-warning"></i>
-									<i class="bx bxs-star text-warning"></i>
+									<i class="bx bxs-star text-gold"></i>
+									<i class="bx bxs-star text-gold"></i>
 									<i class="bx bxs-star text-secondary"></i>
 									<i class="bx bxs-star text-secondary"></i>
 									<i class="bx bxs-star text-secondary"></i>
@@ -165,9 +166,9 @@
                             <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked="" />
                             <label class="form-check-label text-nowrap"><div class="d-flex align-items-center ">
 								  <div class="cursor-pointer">
-									<i class="bx bxs-star text-warning"></i>
-									<i class="bx bxs-star text-warning"></i>
-									<i class="bx bxs-star text-warning"></i>
+									<i class="bx bxs-star text-gold"></i>
+									<i class="bx bxs-star text-gold"></i>
+									<i class="bx bxs-star text-gold"></i>
 									<i class="bx bxs-star text-secondary"></i>
 									<i class="bx bxs-star text-secondary"></i>
 								  </div>
@@ -178,10 +179,10 @@
                             <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked="" />
                             <label class="form-check-label text-nowrap"><div class="d-flex align-items-center ">
 								  <div class="cursor-pointer">
-									<i class="bx bxs-star text-warning"></i>
-									<i class="bx bxs-star text-warning"></i>
-									<i class="bx bxs-star text-warning"></i>
-									<i class="bx bxs-star text-warning"></i>
+									<i class="bx bxs-star text-gold"></i>
+									<i class="bx bxs-star text-gold"></i>
+									<i class="bx bxs-star text-gold"></i>
+									<i class="bx bxs-star text-gold"></i>
 									<i class="bx bxs-star text-secondary"></i>
 								  </div>
 								</div></label>
@@ -190,11 +191,11 @@
                             <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked="" />
                             <label class="form-check-label text-nowrap"><div class="d-flex align-items-center ">
 								  <div class="cursor-pointer">
-									<i class="bx bxs-star text-warning"></i>
-									<i class="bx bxs-star text-warning"></i>
-									<i class="bx bxs-star text-warning"></i>
-									<i class="bx bxs-star text-warning"></i>
-									<i class="bx bxs-star text-warning"></i>
+									<i class="bx bxs-star text-gold"></i>
+									<i class="bx bxs-star text-gold"></i>
+									<i class="bx bxs-star text-gold"></i>
+									<i class="bx bxs-star text-gold"></i>
+									<i class="bx bxs-star text-gold"></i>
 								  </div>
 								</div></label>
                           </div>
@@ -436,4 +437,8 @@
       },
     };
   </script>
-  <style></style>
+  <style>
+
+.text-gold {
+  color: #DBAB57 !important;
+}</style>

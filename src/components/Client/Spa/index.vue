@@ -6,12 +6,12 @@
             <div class="container position-relative" style="z-index: 2;">
                 <div class="row justify-content-center text-center py-5">
                     <div class="col-lg-8">
-                        <p class="text-warning small mb-2" style="letter-spacing: 2px;" data-aos="fade-down"
+                        <p class="text-gold small mb-2" style="letter-spacing: 2px;" data-aos="fade-down"
                             data-aos-delay="200">
                             Cúc sống lành mạnh
                         </p>
                         <h1 class="display-4 fw-bold text-white mb-3" data-aos="fade-up" data-aos-delay="300">
-                            TRUNG TÂM <span class="text-warning">SPA</span>
+                            TRUNG TÂM <span class="text-gold">SPA</span>
                         </h1>
                         <p class="text-white lead mb-0 opacity-90" data-aos="fade-up" data-aos-delay="400">
                             Chúng tôi tự hào giới thiệu đến bạn một trải nghiệm spa tuyệt vời để giúp bạn thoát khỏi
@@ -89,7 +89,7 @@
                         <div class="row g-4">
                             <div class="col-6 text-center" data-aos="fade-up" data-aos-delay="100">
                                 <div class="benefit-icon mb-3">
-                                    <i class="bx bxs-spa text-warning" style="font-size: 2.5rem;"></i>
+                                    <i class="bx bxs-spa text-gold" style="font-size: 2.5rem;"></i>
                                 </div>
                                 <h6 class="fw-bold">Thư giãn</h6>
                                 <p class="text-muted small">
@@ -99,7 +99,7 @@
                             </div>
                             <div class="col-6 text-center" data-aos="fade-up" data-aos-delay="200">
                                 <div class="benefit-icon mb-3">
-                                    <i class="bx bxs-leaf text-warning" style="font-size: 2.5rem;"></i>
+                                    <i class="bx bxs-leaf text-gold" style="font-size: 2.5rem;"></i>
                                 </div>
                                 <h6 class="fw-bold">Tái tạo da</h6>
                                 <p class="text-muted small">
@@ -109,7 +109,7 @@
                             </div>
                             <div class="col-6 text-center" data-aos="fade-up" data-aos-delay="300">
                                 <div class="benefit-icon mb-3">
-                                    <i class="bx bxs-heart text-warning" style="font-size: 2.5rem;"></i>
+                                    <i class="bx bxs-heart text-gold" style="font-size: 2.5rem;"></i>
                                 </div>
                                 <h6 class="fw-bold">Tăng cường sức khỏe</h6>
                                 <p class="text-muted small">
@@ -119,7 +119,7 @@
                             </div>
                             <div class="col-6 text-center" data-aos="fade-up" data-aos-delay="400">
                                 <div class="benefit-icon mb-3">
-                                    <i class="bx bxs-star text-warning" style="font-size: 2.5rem;"></i>
+                                    <i class="bx bxs-star text-gold" style="font-size: 2.5rem;"></i>
                                 </div>
                                 <h6 class="fw-bold">Nâng cao tinh thần</h6>
                                 <p class="text-muted small">
@@ -136,7 +136,7 @@
         <!-- Cam kết trải nghiệm -->
         <section class="py-5 bg-light">
             <div class="container text-center">
-                <p class="text-warning small mb-2" style="letter-spacing: 2px;" data-aos="fade-down">
+                <p class="text-gold small mb-2" style="letter-spacing: 2px;" data-aos="fade-down">
                     Sức khỏe và tâm đạo
                 </p>
                 <h2 class="display-5 fw-bold mb-4" data-aos="fade-up">Cam kết trải nghiệm</h2>
@@ -149,7 +149,7 @@
                     <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
                         <div
                             class="commitment-card p-4 rounded-4 shadow-sm bg-white text-center h-100 d-flex flex-column justify-content-center">
-                            <i class="bx bxs-star text-warning mb-3" style="font-size: 2.5rem;"></i>
+                            <i class="bx bxs-star text-gold mb-3" style="font-size: 2.5rem;"></i>
                             <h6 class="fw-bold">Chất lượng dịch vụ</h6>
                             <p class="text-muted small">
                                 Chúng tôi cam kết đem đến cho bạn những liệu trình chăm sóc chất lượng cao.
@@ -159,7 +159,7 @@
                     <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
                         <div
                             class="commitment-card p-4 rounded-4 shadow-sm bg-white text-center h-100 d-flex flex-column justify-content-center">
-                            <i class="bx bxs-like text-warning mb-3" style="font-size: 2.5rem;"></i>
+                            <i class="bx bxs-like text-gold mb-3" style="font-size: 2.5rem;"></i>
                             <h6 class="fw-bold">Thoải mái an toàn</h6>
                             <p class="text-muted small">
                                 Chúng tôi tạo một không gian yên tĩnh, thư thái và an toàn để bạn có thể thư giãn tối
@@ -170,7 +170,7 @@
                     <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
                         <div
                             class="commitment-card p-4 rounded-4 shadow-sm bg-white text-center h-100 d-flex flex-column justify-content-center">
-                            <i class="bx bxs-heart text-warning mb-3" style="font-size: 2.5rem;"></i>
+                            <i class="bx bxs-heart text-gold mb-3" style="font-size: 2.5rem;"></i>
                             <h6 class="fw-bold">Sự cá nhân hóa</h6>
                             <p class="text-muted small">
                                 Chúng tôi hiểu rằng mỗi khách hàng là độc nhất và có nhu cầu riêng.
@@ -223,6 +223,10 @@ export default {
 .commitment-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-    border: 1px solid #ffc107;
+    border: 1px solid #DBAB57;
 }
+.text-gold {
+  color: #DBAB57 !important;
+}
+
 </style>

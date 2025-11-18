@@ -7,7 +7,7 @@
         <div class="row justify-content-center text-center py-5">
           <div class="col-lg-8">
             <h1 class="display-4 fw-bold text-white mb-3" data-aos="fade-up" data-aos-delay="200">
-              NHÀ HÀNG <span class="text-warning">SANG TRỌNG</span>
+              NHÀ HÀNG <span class="text-gold">SANG TRỌNG</span>
             </h1>
             <p class="text-white lead mb-0 opacity-90" data-aos="fade-up" data-aos-delay="300">
               Trải nghiệm ẩm thực đỉnh cao với thực đơn đa dạng và không gian tinh tế.
@@ -36,15 +36,15 @@
             <h5 class="fw-bold mb-3">Khung giờ</h5>
             <ul class="list-unstyled text-muted">
               <li class="mb-2 d-flex align-items-center" data-aos="fade-up" data-aos-delay="100">
-                <i class="bx bxs-time text-warning me-2"></i>
+                <i class="bx bxs-time text-gold me-2"></i>
                 <strong>Bữa sáng:</strong> 07:00 sáng – 11:00 trưa (hàng ngày)
               </li>
               <li class="mb-2 d-flex align-items-center" data-aos="fade-up" data-aos-delay="200">
-                <i class="bx bxs-time text-warning me-2"></i>
+                <i class="bx bxs-time text-gold me-2"></i>
                 <strong>Bữa trưa:</strong> 12:00 trưa – 02:00 chiều (hàng ngày)
               </li>
               <li class="mb-2 d-flex align-items-center" data-aos="fade-up" data-aos-delay="300">
-                <i class="bx bxs-time text-warning me-2"></i>
+                <i class="bx bxs-time text-gold me-2"></i>
                 <strong>Bữa tối:</strong> 05:00 chiều – 09:00 tối (daily)
               </li>
             </ul>
@@ -112,7 +112,7 @@ export default {
 }
 
 .carousel-indicators .active {
-  background-color: #ffc107;
+  background-color: #DBAB57;
   opacity: 1;
   transform: scale(1.3);
 }
@@ -126,4 +126,8 @@ export default {
   transform: scale(1.02);
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
 }
+.text-gold {
+  color: #DBAB57 !important;
+}
+
 </style>

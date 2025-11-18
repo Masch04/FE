@@ -8,7 +8,7 @@
           <div class="col-lg-10 col-xl-8 text-center">
             <h1 class="display-2 fw-bold text-white mb-4 animate__animated animate__fadeInDown"
               style="text-shadow: 0 2px 10px rgba(0,0,0,0.5); letter-spacing: -1px;">
-              KHÁM PHÁ <span class="text-warning">PHÒNG NGHỈ</span>
+              KHÁM PHÁ <span class="text-gold">PHÒNG NGHỈ</span>
             </h1>
             <p class="lead text-white mb-0 opacity-95 animate__animated animate__fadeInUp animate__delay-1s">
               Chọn không gian lý tưởng cho kỳ nghỉ của bạn – nơi sang trọng gặp gỡ sự thoải mái
@@ -44,7 +44,7 @@
 
                   <!-- GIÁ CHÍNH XÁC TỪ API -->
                   <div class="price-tag mb-3">
-                    <span class="text-warning fw-bold fs-5">
+                    <span class="text-gold fw-bold fs-5">
                       {{ formatPrice(v.gia_trung_binh_ko_format) }}
                     </span>
                     <span class="text-muted small">/ đêm</span>
@@ -52,9 +52,9 @@
 
                   <!-- Tiện ích -->
                   <div class="d-flex flex-wrap gap-3 text-muted small mb-3">
-                    <span><i class="bx bx-expand text-warning me-1"></i>{{ v.dien_tich }} m²</span>
-                    <span><i class="bx bx-bed text-warning me-1"></i>{{ v.so_giuong }} Giường</span>
-                    <span><i class="bx bx-user text-warning me-1"></i>{{ v.so_nguoi_lon }} Người lớn</span>
+                    <span><i class="bx bx-expand text-gold me-1"></i>{{ v.dien_tich }} m²</span>
+                    <span><i class="bx bx-bed text-gold me-1"></i>{{ v.so_giuong }} Giường</span>
+                    <span><i class="bx bx-user text-gold me-1"></i>{{ v.so_nguoi_lon }} Người lớn</span>
                     <span v-if="v.so_tre_em > 0">
                       <i class="bx bx-child text-primary me-1"></i>{{ v.so_tre_em }} Trẻ em
                     </span>
@@ -69,7 +69,7 @@
                     Phòng rộng rãi với nội thất hiện đại, view hướng biển, phù hợp cho cặp đôi hoặc gia đình nhỏ.
                   </p>
                   <div class="price-tag-sm">
-                    <span class="text-warning fw-bold">
+                    <span class="text-gold fw-bold">
                       {{ formatPrice(v.gia_trung_binh_ko_format) }}
                     </span>
                     <span class="text-muted small">/ đêm</span>
@@ -142,6 +142,10 @@ export default {
     url('https://images.pexels.com/photos/775219/pexels-photo-775219.jpeg?auto=compress&cs=tinysrgb&w=1600') center/cover no-repeat;
   display: flex; align-items: center;
 }
+.text-gold {
+  color: #DBAB57 !important;
+}
+
 .hero-overlay {
   position: absolute; inset: 0;
   background: linear-gradient(135deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.6) 100%);

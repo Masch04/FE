@@ -270,11 +270,11 @@ export default {
 }
 
 .logo-text {
-  color: #ff9900;
+  color: #DBAB57;
   font-weight: 800;
   font-size: 1.8rem;
   letter-spacing: 2px;
-  text-shadow: 0 0 10px rgba(255, 153, 0, 0.6);
+  text-shadow: 0 0 10px rgba(170, 121, 47, 0.6);
 }
 
 .mona-navbar .nav-link {
@@ -287,7 +287,7 @@ export default {
 }
 
 .mona-navbar .nav-link:hover {
-  color: #ff9900 !important;
+  color: #DBAB57 !important;
 }
 
 .active-link {
@@ -300,9 +300,9 @@ export default {
 
 .active-link.active,
 .dropdown-toggle.active {
-  border-color: #ff9900 !important;
+  border-color: #DBAB57 !important;
   background-color: rgba(255, 153, 0, 0.15) !important;
-  color: #ff9900 !important;
+  color: #DBAB57 !important;
 }
 
 .dropdown-menu {
@@ -321,12 +321,12 @@ export default {
 }
 
 .dropdown-item:hover {
-  background-color: #ff9900;
+  background-color: #DBAB57;
   color: #fff !important;
 }
 
 .btn-book-now {
-  background-color: #ff9900;
+  background-color: #DBAB57;
   color: #fff;
   font-weight: 600;
   text-transform: uppercase;
@@ -340,7 +340,7 @@ export default {
 }
 
 .btn-book-now:hover {
-  background-color: #e68a00;
+  background-color: #b4883c;
   transform: translateY(-3px);
   box-shadow: 0 6px 15px rgba(255, 153, 0, 0.5);
 }
@@ -360,12 +360,12 @@ export default {
 
 .btn-login:hover {
   background-color: rgba(255, 255, 255, 0.1);
-  border-color: #ff9900;
-  color: #ff9900;
+  border-color: #DBAB57;
+  color: #DBAB57;
 }
 
 .btn-register {
-  background-color: #ff9900;
+  background-color: #DBAB57;
   color: #fff;
   font-weight: 600;
   text-transform: uppercase;
@@ -379,7 +379,7 @@ export default {
 }
 
 .btn-register:hover {
-  background-color: #e68a00;
+  background-color: #b4883c;
   transform: translateY(-2px);
   box-shadow: 0 5px 12px rgba(255, 153, 0, 0.4);
 }
@@ -388,7 +388,7 @@ export default {
   width: 42px;
   height: 42px;
   object-fit: cover;
-  border: 2px solid #ff9900;
+  border: 2px solid #DBAB57;
   box-shadow: 0 0 8px rgba(255, 153, 0, 0.4);
 }
 

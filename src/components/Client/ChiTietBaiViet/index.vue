@@ -42,7 +42,7 @@
                   v-html="bai_viet.mo_ta_chi_tiet"
                 ></div>
                 <div v-else class="text-center py-5">
-                  <div class="spinner-border text-warning" role="status">
+                  <div class="spinner-border text-gold" role="status">
                     <span class="visually-hidden">Đang tải...</span>
                   </div>
                 </div>
@@ -179,6 +179,9 @@
     padding-bottom: 5rem;
   }
   
+  .text-gold {
+  color: #DBAB57 !important;
+}
   .article-card {
     background: #ffffff;
     color: #1a1a1a;
@@ -266,7 +269,7 @@
   }
   
   .article-body a:hover {
-    color: #ffc107;
+    color: #DBAB57;
   }
   
   .article-body blockquote {

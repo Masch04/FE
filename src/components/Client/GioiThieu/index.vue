@@ -7,7 +7,7 @@
                 <div class="row justify-content-center text-center py-5">
                     <div class="col-lg-10">
                         <h1 class="display-3 fw-bold text-white mb-4 animate__animated animate__fadeInDown">
-                            CHÀO MỪNG ĐẾN VỚI <span class="text-warning">AIHOTEL PRO</span>
+                            CHÀO MỪNG ĐẾN VỚI <span class="text-gold">AIHOTEL PRO</span>
                         </h1>
                         <p
                             class="lead text-white mb-0 opacity-90 animate__animated animate__fadeInUp animate__delay-1s">
@@ -29,13 +29,13 @@
                         </h2>
                         <p class="lead mb-4" style="font-size: 1.15rem; line-height: 1.8; color: #4a5568;">
                             Mang đến cho du khách những khoảnh khắc nghỉ dưỡng
-                            <span class="text-warning fw-bold">đẳng cấp, riêng tư và trọn vẹn</span>.
+                            <span class="text-gold fw-bold">đẳng cấp, riêng tư và trọn vẹn</span>.
                         </p>
                         <p class="text-muted mb-0" style="font-size: 1rem; line-height: 1.75; color: #718096;">
                             Với tâm huyết xây dựng một không gian sống hoàn hảo, chúng tôi không chỉ cung cấp dịch vụ
                             lưu trú,<br>
                             mà còn kiến tạo những
-                            <span class="text-warning fw-semibold">trải nghiệm đáng nhớ</span>,
+                            <span class="text-gold fw-semibold">trải nghiệm đáng nhớ</span>,
                             nơi mỗi chi tiết đều được chăm chút tỉ mỉ.
                         </p>
                     </div>
@@ -55,12 +55,12 @@
                         </h2>
                         <p class="lead mb-4" style="font-size: 1.15rem; line-height: 1.8; color: #4a5568;">
                             Trở thành
-                            <span class="text-warning fw-bold">thương hiệu khách sạn hàng đầu Việt Nam</span>,
+                            <span class="text-gold fw-bold">thương hiệu khách sạn hàng đầu Việt Nam</span>,
                             được công nhận quốc tế về chất lượng và dịch vụ.
                         </p>
                         <p class="text-muted mb-0" style="font-size: 1rem; line-height: 1.75; color: #718096;">
                             Chúng tôi hướng tới việc mở rộng hệ thống lên
-                            <span class="text-warning fw-semibold">10 cơ sở</span> trên toàn quốc,
+                            <span class="text-gold fw-semibold">10 cơ sở</span> trên toàn quốc,
                             đồng thời duy trì tiêu chuẩn 5 sao và phát triển bền vững, thân thiện với môi trường.
                         </p>
                     </div>
@@ -89,7 +89,7 @@
                         :data-aos-delay="gt.delay">
                         <div class="text-center p-4">
                             <div class="icon-box mb-3 mx-auto">
-                                <i :class="gt.icon" class="text-warning"></i>
+                                <i :class="gt.icon" class="text-gold"></i>
                             </div>
                             <h5 class="fw-bold">{{ gt.tieuDe }}</h5>
                             <p class="text-muted small">{{ gt.moTa }}</p>
@@ -133,7 +133,7 @@
                 <div class="row g-4 text-center">
                     <div class="col-6 col-md-3" v-for="tt in thanhTuu" :key="tt.id" data-aos="zoom-in"
                         :data-aos-delay="tt.delay">
-                        <h3 class="display-4 fw-bold text-warning mb-0">{{ tt.so }}</h3>
+                        <h3 class="display-4 fw-bold text-gold mb-0">{{ tt.so }}</h3>
                         <p class="text-muted small text-uppercase">{{ tt.ten }}</p>
                     </div>
                 </div>
@@ -213,4 +213,8 @@ export default {
 * {
     font-family: 'Poppins', sans-serif !important;
 }
+.text-gold {
+  color: #DBAB57 !important;
+}
+
 </style>

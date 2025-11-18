@@ -282,7 +282,7 @@
   
   /* Logo */
   .logo-text {
-    color: #ff9900;
+    color: #DBAB57;
     font-weight: 800;
     font-size: 1.8rem;
     letter-spacing: 2px;
@@ -300,7 +300,7 @@
   }
   
   .mona-navbar .nav-link:hover {
-    color: #ff9900 !important;
+    color: #DBAB57 !important;
   }
   
   /* Active link style */
@@ -314,9 +314,9 @@
   
   .active-link.active,
   .dropdown-toggle.active {
-    border-color: #ff9900 !important;
+    border-color: #DBAB57 !important;
     background-color: rgba(255, 153, 0, 0.15) !important;
-    color: #ff9900 !important;
+    color: #DBAB57 !important;
   }
   
   /* Dropdown menu */
@@ -336,13 +336,13 @@
   }
   
   .dropdown-item:hover {
-    background-color: #ff9900;
+    background-color: #DBAB57;
     color: #fff !important;
   }
   
   /* Buttons */
   .btn-book-now {
-    background-color: #ff9900;
+    background-color: #DBAB57;
     color: #fff;
     font-weight: 600;
     text-transform: uppercase;
@@ -376,12 +376,12 @@
   
   .btn-login:hover {
     background-color: rgba(255, 255, 255, 0.1);
-    border-color: #ff9900;
-    color: #ff9900;
+    border-color: #DBAB57;
+    color: #DBAB57;
   }
   
   .btn-register {
-    background-color: #ff9900;
+    background-color: #DBAB57;
     color: #fff;
     font-weight: 600;
     text-transform: uppercase;
@@ -405,7 +405,7 @@
     width: 42px;
     height: 42px;
     object-fit: cover;
-    border: 2px solid #ff9900;
+    border: 2px solid #DBAB57;
     box-shadow: 0 0 8px rgba(255, 153, 0, 0.4);
   }
   

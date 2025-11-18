@@ -11,7 +11,7 @@
                             Đẳng cấp nghỉ dưỡng
                         </p>
                         <h1 class="display-4 fw-bold text-white mb-3" data-aos="fade-up" data-aos-delay="300">
-                            TRUNG TÂM <span class="text-warning">BỂ BƠI</span>
+                            TRUNG TÂM <span class="text-gold">BỂ BƠI</span>
                         </h1>
                         <p class="text-white lead mb-0 opacity-90" data-aos="fade-up" data-aos-delay="400">
                             Không gian sang trọng, nước trong xanh, dịch vụ chuyên nghiệp – nơi thư giãn và rèn luyện lý
@@ -29,7 +29,7 @@
                     <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
                         <div
                             class="h-100 p-4 border rounded-3 shadow-sm d-flex flex-column justify-content-center transition-all">
-                            <i class="bx bxs-crown text-warning mb-3" style="font-size: 2rem;"></i>
+                            <i class="bx bxs-crown text-gold mb-3" style="font-size: 2rem;"></i>
                             <h6 class="fw-bold mb-2">Không gian sang trọng</h6>
                             <p class="text-muted small mb-0 flex-grow-1">
                                 Thiết kế hiện đại, nội thất cao cấp, mang đến trải nghiệm nghỉ dưỡng đỉnh cao.
@@ -39,7 +39,7 @@
                     <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
                         <div
                             class="h-100 p-4 border rounded-3 shadow-sm d-flex flex-column justify-content-center transition-all">
-                            <i class="bx bxs-medal text-warning mb-3" style="font-size: 2rem;"></i>
+                            <i class="bx bxs-medal text-gold mb-3" style="font-size: 2rem;"></i>
                             <h6 class="fw-bold mb-2">Tiêu chuẩn quốc tế</h6>
                             <p class="text-muted small mb-0 flex-grow-1">
                                 Đạt chuẩn 5 sao về an toàn, vệ sinh và chất lượng dịch vụ.
@@ -49,7 +49,7 @@
                     <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
                         <div
                             class="h-100 p-4 border rounded-3 shadow-sm d-flex flex-column justify-content-center transition-all">
-                            <i class="bx bxs-group text-warning mb-3" style="font-size: 2rem;"></i>
+                            <i class="bx bxs-group text-gold mb-3" style="font-size: 2rem;"></i>
                             <h6 class="fw-bold mb-2">Dịch vụ chuyên nghiệp</h6>
                             <p class="text-muted small mb-0 flex-grow-1">
                                 Đội ngũ nhân viên tận tâm, huấn luyện viên chuyên nghiệp luôn sẵn sàng hỗ trợ.
@@ -134,13 +134,13 @@
 
                 <div class="row g-5 justify-content-center">
                     <div class="col-md-4 text-center" data-aos="fade-up" data-aos-delay="100">
-                        <i class="bx bxs-heart text-warning mb-3" style="font-size: 2.5rem;"></i>
+                        <i class="bx bxs-heart text-gold mb-3" style="font-size: 2.5rem;"></i>
                         <h6 class="fw-bold">Cải thiện sức khỏe</h6>
                         <p class="text-muted small">Bơi lội giúp tăng cường tuần hoàn...</p>
                     </div>
 
                     <div class="col-md-4 text-center" data-aos="fade-up" data-aos-delay="200">
-                        <div class="text-warning mb-3" style="font-size: 2.5rem;">
+                        <div class="text-gold mb-3" style="font-size: 2.5rem;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
                                 viewBox="0 0 16 16">
                                 <path
@@ -153,22 +153,22 @@
 
                     <!-- Các ô còn lại tương tự, thêm data-aos-delay tăng dần: 300, 400, 500, 600 -->
                     <div class="col-md-4 text-center" data-aos="fade-up" data-aos-delay="300">
-                        <i class="bx bxs-shield text-warning mb-3" style="font-size: 2.5rem;"></i>
+                        <i class="bx bxs-shield text-gold mb-3" style="font-size: 2.5rem;"></i>
                         <h6 class="fw-bold">An toàn tuyệt đối</h6>
                         <p class="text-muted small">Hệ thống lọc nước hiện đại...</p>
                     </div>
                     <div class="col-md-4 text-center" data-aos="fade-up" data-aos-delay="400">
-                        <i class="bx bxs-leaf text-warning mb-3" style="font-size: 2.5rem;"></i>
+                        <i class="bx bxs-leaf text-gold mb-3" style="font-size: 2.5rem;"></i>
                         <h6 class="fw-bold">Thư giãn tinh thần</h6>
                         <p class="text-muted small">Không gian xanh mát...</p>
                     </div>
                     <div class="col-md-4 text-center" data-aos="fade-up" data-aos-delay="500">
-                        <i class="bx bxs-group text-warning mb-3" style="font-size: 2.5rem;"></i>
+                        <i class="bx bxs-group text-gold mb-3" style="font-size: 2.5rem;"></i>
                         <h6 class="fw-bold">Gắn kết gia đình</h6>
                         <p class="text-muted small">Hoạt động lý tưởng...</p>
                     </div>
                     <div class="col-md-4 text-center" data-aos="fade-up" data-aos-delay="600">
-                        <i class="bx bxs-star text-warning mb-3" style="font-size: 2.5rem;"></i>
+                        <i class="bx bxs-star text-gold mb-3" style="font-size: 2.5rem;"></i>
                         <h6 class="fw-bold">Trải nghiệm cao cấp</h6>
                         <p class="text-muted small">Dịch vụ 5 sao...</p>
                     </div>
@@ -200,10 +200,13 @@ export default {
 .transition-all:hover {
     transform: translateY(-8px);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1) !important;
-    border-color: #ffc107 !important;
+    border-color: #DBAB57 !important;
 }
 
 .bg-warning {
-    background: linear-gradient(135deg, #f4a261, #e76f51) !important;
+    background: linear-gradient(135deg, #DBAB57, #83693b) !important;
+}
+.text-gold {
+  color: #DBAB57 !important;
 }
 </style>

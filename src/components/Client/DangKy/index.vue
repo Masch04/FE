@@ -167,7 +167,7 @@ export default {
 
 /* Header vàng cam */
 .card-header {
-  background: linear-gradient(135deg, #ff9900, #e68a00) !important;
+  background: linear-gradient(135deg, #DBAB57, #e68a00) !important;
   position: relative;
   overflow: hidden;
   border-radius: 1.5rem 1.5rem 0 0;
@@ -199,7 +199,7 @@ export default {
 }
 
 .form-control:focus {
-  border-color: #ff9900;
+  border-color: #DBAB57;
   box-shadow: 0 0 0 0.2rem rgba(255, 153, 0, 0.25);
   transform: translateY(-1px);
   background-color: white;
@@ -207,7 +207,7 @@ export default {
 
 /* Nút Đăng ký */
 .btn-register {
-  background: linear-gradient(135deg, #ff9900, #e68a00);
+  background: linear-gradient(135deg, #DBAB57, #e68a00);
   color: white;
   font-size: 1.1rem;
   letter-spacing: 1px;

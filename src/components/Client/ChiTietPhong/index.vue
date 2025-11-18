@@ -13,10 +13,10 @@
                                 <h4 class="card-title">Phòng Standard - Phòng 203</h4>
                                 <div class="d-flex gap-3 py-3">
                                     <div class="cursor-pointer">
-                                        <i class='bx bxs-star text-warning'></i>
-                                        <i class='bx bxs-star text-warning'></i>
-                                        <i class='bx bxs-star text-warning'></i>
-                                        <i class='bx bxs-star text-warning'></i>
+                                        <i class='bx bxs-star text-gold'></i>
+                                        <i class='bx bxs-star text-gold'></i>
+                                        <i class='bx bxs-star text-gold'></i>
+                                        <i class='bx bxs-star text-gold'></i>
                                         <i class='bx bxs-star text-secondary'></i>
                                     </div>
                                     <div>142 reviews</div>
@@ -125,4 +125,8 @@ export default {
 
 }
 </script>
-<style></style>
+<style>
+.text-gold {
+  color: #DBAB57 !important;
+}
+</style>

@@ -63,7 +63,7 @@
                 href="https://maps.app.goo.gl/81a7GXGaSkjqvMoJ6"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="text-warning text-decoration-underline link-glow d-inline-block"
+                class="text-gold text-decoration-underline link-glow d-inline-block"
               >
                 <i class="fas fa-map-marker-alt me-2"></i>Xem Google Map
               </a>
@@ -72,10 +72,10 @@
             <!-- Liên Hệ -->
             <div class="col-12 col-sm-4 col-lg-4">
               <h5 class="section-title">Liên Hệ</h5>
-              <p class="text-warning mb-2">
+              <p class="text-gold mb-2">
                 <i class="fas fa-phone-alt me-2"></i>(+84) 379.892.25
               </p>
-              <p class="text-warning mb-4">
+              <p class="text-gold mb-4">
                 <i class="fas fa-envelope me-2"></i>aihotel@gmail.com
               </p>
             </div>
@@ -85,7 +85,7 @@
       <!-- Dòng cuối -->
       <hr class="footer-divider my-5" />
       <div class="text-center text-light small py-3">
-        © Hẹn gặp bạn tại <strong class="text-warning">AIHotel Pro!</strong>
+        © Hẹn gặp bạn tại <strong class="text-gold">AIHotel Pro!</strong>
         <a href="#top" class="back-to-top ms-3 text-light">
           <i class="fas fa-arrow-up"></i>
         </a>
@@ -125,7 +125,7 @@ export default {
 }
 
 .logo-text {
-  background: linear-gradient(90deg, #ffcc66, #ff9900);
+  background: linear-gradient(90deg, #a37e34, #DBAB57);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -134,7 +134,7 @@ export default {
 
 /* Tiêu đề cột – CĂN CHỈNH THẲNG HÀNG */
 .section-title {
-  color: #ff9900 !important;
+  color: #DBAB57 !important;
   font-weight: 700;
   font-size: 1.1rem;
   margin-bottom: 1rem;
@@ -150,7 +150,7 @@ export default {
   left: 0;
   width: 40px;
   height: 3px;
-  background: #ff9900;
+  background: #DBAB57;
   border-radius: 2px;
 }
 
@@ -229,7 +229,7 @@ export default {
   width: 38px;
   height: 38px;
   background: rgba(255, 153, 0, 0.15);
-  color: #ff9900;
+  color: #DBAB57;
   border-radius: 50%;
   display: inline-flex;
   align-items: center;
@@ -241,7 +241,7 @@ export default {
 }
 
 .social-btn:hover {
-  background: #ff9900;
+  background: #DBAB57;
   color: white;
   transform: translateY(-3px) scale(1.1);
   box-shadow: 0 8px 20px rgba(255, 153, 0, 0.4);
@@ -251,7 +251,7 @@ export default {
 .back-to-top {
   width: 36px;
   height: 36px;
-  background: #ff9900;
+  background: #DBAB57;
   color: white;
   border-radius: 50%;
   display: inline-flex;
@@ -291,5 +291,8 @@ export default {
     width: 42px;
     height: 42px;
   }
+}
+.text-gold {
+  color: #f1c881 !important;
 }
 </style>
