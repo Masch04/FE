@@ -2,42 +2,35 @@
   <div class="sticky-header">
     <nav class="navbar navbar-expand-lg navbar-dark mona-navbar">
       <div class="container-fluid">
-        <!-- Logo -->
         <router-link to="/" class="navbar-brand d-flex align-items-center">
           <span class="logo-text">AIHOTEL PRO</span>
         </router-link>
 
-        <!-- Toggle button for mobile -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#monaNavbarContent"
           aria-controls="monaNavbarContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
 
-        <!-- Navbar Content -->
         <div class="collapse navbar-collapse" id="monaNavbarContent">
           <ul class="navbar-nav mx-auto mb-2 mb-lg-0 text-center text-lg-start">
-            <!-- TRANG CHỦ -->
             <li class="nav-item">
               <router-link to="/" class="nav-link active-link" active-class="active">
                 TRANG CHỦ
               </router-link>
             </li>
 
-            <!-- GIỚI THIỆU -->
             <li class="nav-item">
               <router-link to="/gioi-thieu" class="nav-link active-link" active-class="active">
                 GIỚI THIỆU
               </router-link>
             </li>
 
-            <!-- DANH SÁCH PHÒNG -->
             <li class="nav-item">
               <router-link to="/danh-sach-phong" class="nav-link active-link" active-class="active">
                 PHÒNG
               </router-link>
             </li>
 
-            <!-- DỊCH VỤ - DROPDOWN -->
             <li class="nav-item dropdown" ref="dichVuDropdown">
               <a class="nav-link dropdown-toggle active-link" href="#" role="button" data-bs-toggle="dropdown"
                 aria-expanded="false" :class="{ active: isDichVuActive }" ref="dichVuToggle">
@@ -54,7 +47,6 @@
               </ul>
             </li>
 
-            <!-- TIN TỨC (Dropdown) - ĐÃ SỬA -->
             <li class="nav-item dropdown" ref="tinTucDropdown">
               <a 
                 class="nav-link dropdown-toggle active-link" 
@@ -81,16 +73,8 @@
                 </template>
               </ul>
             </li>
-
-            <!-- LIÊN HỆ -->
-            <!-- <li class="nav-item">
-              <router-link to="/lien-he" class="nav-link active-link" active-class="active">
-                LIÊN HỆ
-              </router-link>
-            </li> -->
           </ul>
 
-          <!-- Nút Đặt Phòng + Đăng nhập/Đăng ký + User -->
           <div class="d-flex align-items-center justify-content-center justify-content-lg-end gap-2">
             <router-link to="/dat-phong">
               <button class="btn btn-book-now">ĐẶT PHÒNG NGAY</button>
@@ -163,6 +147,17 @@ export default {
     this.checkLogin();
     this.layDuLieuChuyenMuc();
     this.setNavbarPadding();
+
+    // === CHỈ THÊM DÒNG NÀY ĐỂ TÊN ĐỔI NGAY KHI SỬA PROFILE ===
+    // Lắng nghe thay đổi từ localStorage (khi Profile cập nhật)
+    window.addEventListener('storage', (e) => {
+      if (e.key === 'ho_ten') {
+        this.ten_hien_thi = e.newValue || 'Khách Hàng';
+      }
+    });
+
+    // Cập nhật tên nếu localStorage đã thay đổi (trường hợp tab khác)
+    this.ten_hien_thi = localStorage.getItem('ho_ten') || 'Khách Hàng';
   },
   methods: {
     checkLogin() {
@@ -227,7 +222,6 @@ export default {
       });
     },
 
-    // ĐÓNG DROPDOWN DỊCH VỤ
     closeDichVuDropdown() {
       this.$nextTick(() => {
         const toggle = this.$refs.dichVuToggle;
@@ -238,7 +232,6 @@ export default {
       });
     },
 
-    // ĐÓNG DROPDOWN TIN TỨC - MỚI THÊM
     closeTinTucDropdown() {
       this.$nextTick(() => {
         const toggle = this.$refs.tinTucToggle;
@@ -253,16 +246,14 @@ export default {
 </script>
 
 <style scoped>
-/* === GOOGLE FONTS: POPPINS === */
+/* Toàn bộ style gốc của mày giữ nguyên 100% */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
 
-/* ÁP DỤNG FONT */
 .mona-navbar,
 .mona-navbar * {
   font-family: 'Poppins', sans-serif !important;
 }
 
-/* Cố định navbar */
 .sticky-header {
   position: fixed;
   top: 0;
@@ -274,12 +265,10 @@ export default {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
 }
 
-/* Navbar chính */
 .mona-navbar {
   padding: 1rem 1.5rem;
 }
 
-/* Logo */
 .logo-text {
   color: #ff9900;
   font-weight: 800;
@@ -288,7 +277,6 @@ export default {
   text-shadow: 0 0 10px rgba(255, 153, 0, 0.6);
 }
 
-/* Nav links */
 .mona-navbar .nav-link {
   color: #e0e0e0 !important;
   font-weight: 500;
@@ -302,7 +290,6 @@ export default {
   color: #ff9900 !important;
 }
 
-/* Active link style */
 .active-link {
   position: relative;
   border: 1px solid transparent;
@@ -318,7 +305,6 @@ export default {
   color: #ff9900 !important;
 }
 
-/* Dropdown menu */
 .dropdown-menu {
   background-color: #1a1a1a;
   border: 1px solid #333;
@@ -339,7 +325,6 @@ export default {
   color: #fff !important;
 }
 
-/* Buttons */
 .btn-book-now {
   background-color: #ff9900;
   color: #fff;
@@ -399,7 +384,6 @@ export default {
   box-shadow: 0 5px 12px rgba(255, 153, 0, 0.4);
 }
 
-/* User avatar */
 .user-img {
   width: 42px;
   height: 42px;
@@ -419,7 +403,6 @@ export default {
   color: #aaa;
 }
 
-/* Mobile */
 @media (max-width: 992px) {
   .mona-navbar {
     padding: 0.8rem 1rem;

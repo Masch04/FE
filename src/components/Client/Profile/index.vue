@@ -32,13 +32,11 @@
                                     <div class="card flex-fill">
                                         <div class="card-body">
                                             <div class="d-flex flex-column align-items-center text-center">
-                                                <img src="https://i.pinimg.com/736x/cc/55/23/cc55235082b0cbee0f53587c11278fb2.jpg"
+                                                <img src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg"
                                                     style="width: 140px; height: 140px;" alt="Admin"
-                                                    class="rounded-circle p-1 bg-primary">
+                                                    class="rounded-circle">
                                                 <div class="mt-3">
                                                     <h4> {{ thong_tin.ho_lot }} {{ thong_tin.ten }}</h4>
-                                                    <!-- <p class="text-secondary mb-1">{{ thong_tin.email }}</p>
-                                                    <p class="text-muted font-size-sm">je</p> -->
                                                 </div>
                                             </div>
                                         </div>
@@ -61,7 +59,9 @@
                                                     <h6 class="mb-0">Tên</h6>
                                                 </div>
                                                 <div class="col-lg-9 text-secondary">
+                                                    <!-- ĐÃ THÊM @keyup.enter ĐÚNG CHỖ NÀY -->
                                                     <input type="text" v-model="thong_tin.ten"
+                                                        @keyup.enter="thayDoiThongTin"
                                                         class="form-control" placeholder="Nhập họ và tên">
                                                 </div>
                                             </div>
@@ -174,7 +174,6 @@ export default {
 
                     } else {
                         toaster.error(res.data.message);
-                        // this.$router.push('/');
                     }
                 })
                 .catch((res) => {
@@ -211,6 +210,8 @@ export default {
                     if (res.data.status) {
                         toaster.success(res.data.message);
                         this.layThongTinKhachHang();
+                        location.reload();
+                        localStorage.setItem('ho_ten', this.thong_tin.ho_lot + ' ' + this.thong_tin.ten);
 
                     } else {
                         toaster.error(res.data.message);
