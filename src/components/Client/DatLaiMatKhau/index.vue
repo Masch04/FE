@@ -1,81 +1,213 @@
 <template>
-    <div class="authentication-reset-password d-flex align-items-center justify-content-center">
-        <div class="row">
-            <div class="col-12 col-lg-10 mx-auto">
-                <div class="card">
-                    <div class="row g-0">
-                        <div class="col-lg-6 border-end">
-                            <div class="card-body">
-                                <div class="p-5">
-                                    <div class="text-center">
-                                        <img src="https://i.pinimg.com/736x/cc/55/23/cc55235082b0cbee0f53587c11278fb2.jpg" width="180"
-                                            alt="">
-                                    </div>
-                                    <h4 class="font-weight-bold text-center">Đặt Lại Mật Khẩu</h4>
-                                    <p class="text-muted">Chúng tôi đã nhận được yêu cầu đặt lại mật khẩu của bạn. Vui
-                                        lòng nhập mật khẩu mới của bạn!</p>
-                                    <input v-model="tai_khoan.hash_reset" type="hidden" class="form-control" placeholder="id" />
-                                    <div class="mb-3">
-                                        <label class="form-label">Nhập Mật Khẩu Mới</label>
-                                        <input v-model="tai_khoan.password" type="text" class="form-control" placeholder="Nhập vào mật khẩu mới" />
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Nhập Lại Mật Khẩu Mới</label>
-                                        <input v-model="tai_khoan.re_password" type="text" class="form-control" placeholder="Nhập lại mật khẩu mới" />
-                                    </div>
-                                    <div class="d-grid gap-2">
-                                        <button v-on:click="xacNhan()" type="button" class="btn btn-primary">Xác Nhận</button> 
-                                        <router-link to="/khach-hang/dang-nhap">
-                                            <a href="/khach-hang/dang-nhap" class="btn btn-light btn-lg w-100"><i class='bx bx-arrow-back me-1'></i>Quay Lại Đăng Nhập</a>
-                                        </router-link>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <img src="../../../assets/images/login-images/forgot-password-frent-img.jpg"
-                                class="card-img login-img h-100" alt="...">
-                        </div>
-                    </div>
+    <div class="reset-password-page min-vh-100 d-flex align-items-center justify-content-center py-5">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden animate__animated animate__fadeIn">
+  
+              <!-- Header vàng cam – giống hệt Đăng nhập & Quên mật khẩu -->
+              <div class="card-header bg-gradient text-center py-4 position-relative">
+                <div class="header-bg"></div>
+                <h3 class="mb-3 fw-bold position-relative z-10 text-dark">ĐẶT LẠI MẬT KHẨU</h3>
+                <p class="mb-0 position-relative z-10 small text-white d-inline-flex align-items-center gap-1 lh-1">
+                  Đã nhớ mật khẩu?
+                  <router-link to="/khach-hang/dang-nhap" class="text-white fw-bold text-decoration-underline link-glow"
+                    style="vertical-align: baseline;">
+                    Đăng nhập ngay
+                  </router-link>
+                </p>
+              </div>
+  
+              <!-- Body -->
+              <div class="card-body p-4 p-md-5">
+                <div class="text-center mb-4">
+                  <img src="../../../assets/images/imgfooter.png" width="120"  alt="Logo">
                 </div>
+  
+                <p class="text-muted text-center mb-4">
+                  Vui lòng nhập mật khẩu mới cho tài khoản của bạn
+                </p>
+  
+                <form @submit.prevent="xacNhan()" class="row g-3">
+                  <!-- Hash ẩn -->
+                  <input v-model="tai_khoan.hash_reset" type="hidden" />
+  
+                  <!-- Mật khẩu mới -->
+                  <div class="col-12">
+                    <label class="form-label text-dark fw-semibold">Mật khẩu mới</label>
+                    <input v-model="tai_khoan.password" type="password" 
+                           class="form-control form-control-lg rounded-pill" 
+                           placeholder="••••••••" required>
+                  </div>
+  
+                  <!-- Nhập lại mật khẩu -->
+                  <div class="col-12">
+                    <label class="form-label text-dark fw-semibold">Nhập lại mật khẩu</label>
+                    <input v-model="tai_khoan.re_password" type="password" 
+                           class="form-control form-control-lg rounded-pill" 
+                           placeholder="••••••••" required>
+                  </div>
+  
+                  <!-- Nút Xác nhận -->
+                  <div class="col-12 mt-4">
+                    <button type="submit" class="btn btn-login w-100 py-3 rounded-pill fw-bold text-uppercase shadow-lg">
+                      Xác Nhận
+                    </button>
+                  </div>
+  
+                  <!-- Quay lại đăng nhập -->
+                  <div class="col-12 text-center mt-3">
+                    <router-link to="/khach-hang/dang-nhap" class="text-muted small text-decoration-underline link-forgot">
+                      <i class="bx bx-arrow-back me-1"></i> Quay lại đăng nhập
+                    </router-link>
+                  </div>
+                </form>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-</template>
-<script>
-import axios from 'axios';
-import { createToaster } from "@meforma/vue-toaster";
-const toaster = createToaster({ position: "top-right" });
-export default {
+  </template>
+  
+  <script>
+  // Giữ nguyên 100% script cũ của bạn – không thay đổi gì hết
+  import axios from 'axios';
+  import { createToaster } from "@meforma/vue-toaster";
+  const toaster = createToaster({ position: "top-right" });
+  
+  export default {
     props: ['ma_bi_mat'],
     data() {
-        return {
-            tai_khoan   :   {},
-        }
+      return {
+        tai_khoan: {},
+      }
     },
     mounted() {
-        this.tai_khoan.hash_reset = this.$route.params.ma_bi_mat;
+      this.tai_khoan.hash_reset = this.$route.params.ma_bi_mat;
     },
     methods: {
-        xacNhan() {
-            axios
-                .post("http://127.0.0.1:8000/api/khach-hang/dat-lai-mat-khau", this.tai_khoan)
-                .then((res) => {
-                    if(res.data.status) {
-                        toaster.success(res.data.message);
-                        this.$router.push('/khach-hang/dang-nhap');
-                    } else {
-                        toaster.error(res.data.message);
-                    }
-                })
-                .catch((res) => {
-                    var result = Object.entries(res.response.data.errors);
-                    result.forEach((v, k) => {
-                        toaster.error(v[1][0]);
-                    });
-                });
-        }
+      xacNhan() {
+        axios
+          .post("http://127.0.0.1:8000/api/khach-hang/dat-lai-mat-khau", this.tai_khoan)
+          .then((res) => {
+            if (res.data.status) {
+              toaster.success(res.data.message);
+              this.$router.push('/khach-hang/dang-nhap');
+            } else {
+              toaster.error(res.data.message);
+            }
+          })
+          .catch((res) => {
+            var result = Object.entries(res.response.data.errors);
+            result.forEach((v) => {
+              toaster.error(v[1][0]);
+            });
+          });
+      }
     },
-}
-</script>
-<style></style>
+  }
+  </script>
+  
+  <style scoped>
+  /* HOÀN TOÀN ĐỒNG BỘ VỚI TRANG ĐĂNG NHẬP & QUÊN MẬT KHẨU */
+  .reset-password-page {
+    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+    min-height: 100vh;
+    padding-top: 0 !important;
+  }
+  
+  /* Header vàng cam */
+  .card-header {
+    background: linear-gradient(135deg, #DBAB57, #977334) !important;
+    position: relative;
+    overflow: hidden;
+    border-radius: 1.5rem 1.5rem 0 0;
+  }
+  
+  .header-bg {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,30 L100,100 L0,100 Z" fill="rgba(255,255,255,0.1)"/></svg>') no-repeat bottom;
+    background-size: cover;
+    opacity: 0.3;
+  }
+  
+  .card-header p {
+    line-height: 1 !important;
+    margin: 0 !important;
+  }
+  
+  /* Input giống hệt */
+  .form-control {
+    border: 2px solid #ddd;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    background-color: #f8f9fa;
+  }
+  .form-control:focus {
+    border-color: #DBAB57;
+    box-shadow: 0 0 0 0.2rem rgba(219, 171, 87, 0.25);
+    transform: translateY(-1px);
+    background-color: white;
+  }
+  
+  /* Nút Xác nhận giống nút Đăng nhập */
+  .btn-login {
+    background: linear-gradient(135deg, #DBAB57, #e68a00);
+    color: white;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    transition: all 0.4s ease;
+    border: none;
+  }
+  .btn-login:hover {
+    background: linear-gradient(135deg, #e68a00, #cc7700);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(255, 153, 0, 0.4);
+  }
+  
+  /* Link glow giống trang đăng nhập */
+  .link-glow {
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+  }
+  .link-glow::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+  }
+  .link-glow:hover {
+    color: #ffcc00 !important;
+    text-shadow: 0 0 8px rgba(255, 204, 0, 0.6);
+    transform: scale(1.05);
+  }
+  .link-glow:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+  
+  .link-forgot {
+    color: #888 !important;
+    transition: all 0.3s ease;
+  }
+  .link-forgot:hover {
+    color: #DBAB57 !important;
+  }
+  
+  /* Responsive */
+  @media (max-width: 576px) {
+    .card { margin: 1rem; border-radius: 1rem; }
+    .card-body { padding: 1.5rem !important; }
+    .btn-login { font-size: 1rem; }
+  }
+  </style>

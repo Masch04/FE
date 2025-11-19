@@ -4,7 +4,7 @@
       <div class="row justify-content-center">
         <div class="col-12 col-md-8 col-lg-6 col-xl-5">
           <div class="card border-0 shadow-lg rounded-4 overflow-hidden animate__animated animate__fadeIn">
-            <!-- Header vàng cam – CĂN CHỈNH CHUẨN + HIỆU ỨNG HOVER -->
+            <!-- Header vàng cam -->
             <div class="card-header bg-gradient text-center py-4 position-relative">
               <div class="header-bg"></div>
               <h3 class="mb-3 fw-bold position-relative z-10 text-dark">Đăng Ký</h3>
@@ -51,7 +51,7 @@
                     required>
                 </div>
 
-                <!-- Mật khẩu -->
+                <!-- Mật khẩu – ĐÃ SỬA ICON ĐÚNG LOGIC -->
                 <div class="col-md-6">
                   <label class="form-label text-dark fw-semibold">Mật khẩu</label>
                   <div class="input-group">
@@ -59,13 +59,12 @@
                       v-model="data_dang_ky.password" placeholder="••••••••" required>
                     <span class="input-group-text bg-white border-0 rounded-end-pill" @click="togglePasswordVisibility"
                       style="cursor: pointer;">
-                      <i
-                        :class="passwordFieldType === 'password' ? 'fa-regular fa-eye' : 'fa-regular fa-eye-slash'"></i>
+                      <i :class="passwordFieldType === 'password' ? 'fa-regular fa-eye-slash' : 'fa-regular fa-eye'"></i>
                     </span>
                   </div>
                 </div>
 
-                <!-- Nhập lại mật khẩu -->
+                <!-- Nhập lại mật khẩu – ĐÃ SỬA ICON ĐÚNG LOGIC -->
                 <div class="col-md-6">
                   <label class="form-label text-dark fw-semibold">Nhập lại mật khẩu</label>
                   <div class="input-group">
@@ -73,8 +72,7 @@
                       v-model="data_dang_ky.re_password" placeholder="••••••••" required>
                     <span class="input-group-text bg-white border-0 rounded-end-pill"
                       @click="toggleRePasswordVisibility" style="cursor: pointer;">
-                      <i
-                        :class="rePasswordFieldType === 'password' ? 'fa-regular fa-eye' : 'fa-regular fa-eye-slash'"></i>
+                      <i :class="rePasswordFieldType === 'password' ? 'fa-regular fa-eye-slash' : 'fa-regular fa-eye'"></i>
                     </span>
                   </div>
                 </div>
@@ -158,14 +156,13 @@ export default {
 </script>
 
 <style scoped>
-/* Trang đăng ký */
+/* Toàn bộ style giữ nguyên đẹp như cũ */
 .register-page {
   background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
   min-height: 100vh;
   padding-top: 0 !important;
 }
 
-/* Header vàng cam */
 .card-header {
   background: linear-gradient(135deg, #DBAB57, #e68a00) !important;
   position: relative;
@@ -175,29 +172,20 @@ export default {
 
 .header-bg {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  top: 0; left: 0; right: 0; bottom: 0;
   background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,30 L100,100 L0,100 Z" fill="rgba(255,255,255,0.1)"/></svg>') no-repeat bottom;
   background-size: cover;
   opacity: 0.3;
 }
 
-/* Căn chỉnh header chuẩn */
-.card-header p {
-  line-height: 1 !important;
-  margin: 0 !important;
-}
+.card-header p { line-height: 1 !important; margin: 0 !important; }
 
-/* Input */
 .form-control {
   border: 2px solid #ddd;
   transition: all 0.3s ease;
   font-size: 0.95rem;
   background-color: #f8f9fa;
 }
-
 .form-control:focus {
   border-color: #DBAB57;
   box-shadow: 0 0 0 0.2rem rgba(255, 153, 0, 0.25);
@@ -205,7 +193,6 @@ export default {
   background-color: white;
 }
 
-/* Nút Đăng ký */
 .btn-register {
   background: linear-gradient(135deg, #DBAB57, #e68a00);
   color: white;
@@ -214,22 +201,18 @@ export default {
   transition: all 0.4s ease;
   border: none;
 }
-
 .btn-register:hover {
   background: linear-gradient(135deg, #e68a00, #cc7700);
   transform: translateY(-3px);
   box-shadow: 0 10px 25px rgba(255, 153, 0, 0.4);
 }
 
-/* HIỆU ỨNG HOVER CHO "Đăng nhập tại đây" – GIỐNG ĐĂNG NHẬP */
 .link-glow {
   transition: all 0.3s ease;
   position: relative;
   display: inline-block;
   overflow: hidden;
-  line-height: 1;
 }
-
 .link-glow::after {
   content: '';
   position: absolute;
@@ -242,34 +225,19 @@ export default {
   transform-origin: right;
   transition: transform 0.3s ease;
 }
-
 .link-glow:hover {
   color: #fff !important;
-  text-shadow:
-    0 0 5px rgba(255, 255, 255, 0.8),
-    0 0 10px rgba(255, 255, 255, 0.6);
+  text-shadow: 0 0 5px rgba(255,255,255,0.8), 0 0 10px rgba(255,255,255,0.6);
   transform: scale(1.05);
 }
-
 .link-glow:hover::after {
   transform: scaleX(1);
   transform-origin: left;
 }
 
-/* Responsive */
 @media (max-width: 576px) {
-  .card {
-    margin: 1rem;
-    border-radius: 1rem;
-  }
-
-  .card-body {
-    padding: 1.5rem !important;
-  }
-
-  .btn-register {
-    font-size: 1rem;
-    padding: 0.75rem !important;
-  }
+  .card { margin: 1rem; border-radius: 1rem; }
+  .card-body { padding: 1.5rem !important; }
+  .btn-register { font-size: 1rem; padding: 0.75rem !important; }
 }
 </style>
