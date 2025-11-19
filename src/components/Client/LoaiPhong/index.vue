@@ -1,7 +1,7 @@
 <template>
     <div class="dat-phong-page py-5">
         <div class="container">
-            <!-- FORM TÌM KIẾM -->
+            <!-- FORM TÌM KIẾM (giữ nguyên) -->
             <div class="card search-card mb-5 shadow-lg border-0 rounded-4" data-aos="fade-up">
                 <div class="card-body p-4 p-lg-5">
                     <div class="row g-3 align-items-end">
@@ -21,57 +21,42 @@
                                 @change="clearToaster('ngay_di')" class="form-control rounded-pill h-50px">
                         </div>
 
-                        <!-- Số Phòng (1-3) -->
+                        <!-- Số Phòng -->
                         <div class="col-md-auto">
                             <label class="form-label fw-semibold text-dark">Số Phòng</label>
                             <div class="d-inline-flex align-items-center border rounded-pill p-1 w-100 h-50px">
                                 <button @click="giamSoPhong" class="btn btn-outline-secondary rounded-pill px-3 h-100"
-                                    :disabled="tt_dat_phong.so_phong <= 1">
-                                    -
-                                </button>
+                                    :disabled="tt_dat_phong.so_phong <= 1">-</button>
                                 <input v-model="tt_dat_phong.so_phong"
-                                    class="form-control text-center border-0 mx-2 flex-grow-1" style="width: 50px;"
-                                    readonly>
+                                    class="form-control text-center border-0 mx-2 flex-grow-1" style="width: 50px;" readonly>
                                 <button @click="tangSoPhong" class="btn btn-outline-secondary rounded-pill px-3 h-100"
-                                    :disabled="tt_dat_phong.so_phong >= 3">
-                                    +
-                                </button>
+                                    :disabled="tt_dat_phong.so_phong >= 3">+</button>
                             </div>
                         </div>
 
-                        <!-- Người Lớn (1-4) -->
+                        <!-- Người Lớn -->
                         <div class="col-md-auto">
                             <label class="form-label fw-semibold text-dark">Người Lớn</label>
                             <div class="d-inline-flex align-items-center border rounded-pill p-1 w-100 h-50px">
                                 <button @click="giamNguoiLon" class="btn btn-outline-secondary rounded-pill px-3 h-100"
-                                    :disabled="tt_dat_phong.nguoi_lon <= 1">
-                                    -
-                                </button>
+                                    :disabled="tt_dat_phong.nguoi_lon <= 1">-</button>
                                 <input v-model="tt_dat_phong.nguoi_lon"
-                                    class="form-control text-center border-0 mx-2 flex-grow-1" style="width: 50px;"
-                                    readonly>
+                                    class="form-control text-center border-0 mx-2 flex-grow-1" style="width: 50px;" readonly>
                                 <button @click="tangNguoiLon" class="btn btn-outline-secondary rounded-pill px-3 h-100"
-                                    :disabled="tt_dat_phong.nguoi_lon >= 4">
-                                    +
-                                </button>
+                                    :disabled="tt_dat_phong.nguoi_lon >= 4">+</button>
                             </div>
                         </div>
 
-                        <!-- Trẻ Em (0-3) -->
+                        <!-- Trẻ Em -->
                         <div class="col-md-auto">
                             <label class="form-label fw-semibold text-dark">Trẻ Em</label>
                             <div class="d-inline-flex align-items-center border rounded-pill p-1 w-100 h-50px">
                                 <button @click="giamTreEm" class="btn btn-outline-secondary rounded-pill px-3 h-100"
-                                    :disabled="tt_dat_phong.tre_em <= 0">
-                                    -
-                                </button>
+                                    :disabled="tt_dat_phong.tre_em <= 0">-</button>
                                 <input v-model="tt_dat_phong.tre_em"
-                                    class="form-control text-center border-0 mx-2 flex-grow-1" style="width: 50px;"
-                                    readonly>
+                                    class="form-control text-center border-0 mx-2 flex-grow-1" style="width: 50px;" readonly>
                                 <button @click="tangTreEm" class="btn btn-outline-secondary rounded-pill px-3 h-100"
-                                    :disabled="tt_dat_phong.tre_em >= 3">
-                                    +
-                                </button>
+                                    :disabled="tt_dat_phong.tre_em >= 3">+</button>
                             </div>
                         </div>
 
@@ -121,36 +106,47 @@
                         </div>
                     </div>
 
-                    <!-- DỊCH VỤ BỔ SUNG -->
-                    <div v-if="ds_dich_vu.length > 0" class="mt-4 pt-3 border-top">
-                        <p class="text-muted small mb-2 text-center">Dịch vụ bổ sung</p>
-                        <div class="row g-2">
+                    <!-- DỊCH VỤ BỔ SUNG - ĐÃ BỎ ICON + BỎ TỔNG TIỀN -->
+                    <div v-if="ds_dich_vu.length > 0" class="mt-5 pt-4 border-top border-light">
+                        <h5 class="text-center mb-4 fw-bold text-gold">
+                            Dịch Vụ Bổ Sung (Tùy Chọn)
+                        </h5>
+                        <div class="row g-4">
                             <div class="col-md-6" v-for="dv in ds_dich_vu" :key="dv.id">
-                                <div
-                                    class="form-check d-flex align-items-center justify-content-between bg-light rounded-3 p-2">
-                                    <div class="form-check-label d-flex align-items-center">
-                                        <input class="form-check-input me-2" type="checkbox" v-model="dv.chon"
-                                            @change="inLog()">
-                                        <span class="small fw-medium">{{ dv.ten_dich_vu }}</span>
+                                <div class="service-item d-flex align-items-center justify-content-between p-4 rounded-4 border transition-all position-relative overflow-hidden shadow-sm"
+                                     :class="dv.chon ? 'border-warning bg-warning bg-opacity-10' : 'border-light bg-white'"
+                                     @click="dv.chon = !dv.chon; inLog()"
+                                     style="cursor: pointer; min-height: 90px;">
+                                    
+                                    <!-- Checkbox + Tên dịch vụ -->
+                                    <div class="d-flex align-items-center">
+                                        <div class="me-4">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" v-model="dv.chon" @change.stop 
+                                                       style="width: 1.5em; height: 1.5em;">
+                                            </div>
+                                        </div>
+                                        <h6 class="fw-bold mb-0 text-dark">{{ dv.ten_dich_vu }}</h6>
                                     </div>
-                                    <span class="text-success small fw-bold">{{ formatVND(dv.don_gia) }}</span>
+
+                                    <!-- Giá tiền -->
+                                    <p class="text-success fw-bold mb-0">{{ formatVND(dv.don_gia) }}</p>
+
+                                    <!-- Hover overlay -->
+                                    <div class="position-absolute inset-0 bg-gold opacity-0 hover-overlay transition-all"></div>
                                 </div>
                             </div>
                         </div>
-                        <div v-if="tongTienDichVu > 0" class="text-end mt-2">
-                            <small class="text-muted">Tiền dịch vụ: </small>
-                            <strong class="text-success">{{ formatVND(tongTienDichVu) }}</strong>
-                        </div>
+                        <!-- ĐÃ BỎ HOÀN TOÀN PHẦN TỔNG TIỀN DỊCH VỤ -->
                     </div>
                 </div>
             </div>
 
-            <!-- DANH SÁCH PHÒNG -->
+            <!-- DANH SÁCH PHÒNG (giữ nguyên hoàn toàn) -->
             <template v-for="(value, index) in ds_loai_phong" :key="index">
                 <div class="card room-item mb-4 shadow-sm border-0 rounded-4 overflow-hidden" data-aos="fade-up"
                     :data-aos-delay="index * 100">
                     <div class="row g-0">
-                        <!-- Ảnh + Checkbox -->
                         <div class="col-lg-4 position-relative">
                             <img :src="value.hinh_anh" class="w-100 room-img-fixed object-fit-cover" alt="">
                             <div class="position-absolute top-0 end-0 p-3">
@@ -161,7 +157,6 @@
                             </div>
                         </div>
 
-                        <!-- Nội dung -->
                         <div class="col-lg-8 d-flex align-items-center">
                             <div class="card-body p-4 w-100 room-content-overlay">
                                 <div class="d-flex justify-content-between align-items-start mb-3">
@@ -169,24 +164,18 @@
                                     <span class="badge bg-success fs-6">Còn {{ value.so_phong_trong }} phòng</span>
                                 </div>
 
-                                <!-- Tiện ích -->
                                 <div class="row g-3 mb-4">
                                     <div class="col-sm-4">
-                                        <p class="mb-1 text-dark"><i
-                                                class="bx bx-expand text-warning me-2"></i><strong>{{
-                                                    value.dien_tich }} m²</strong></p>
+                                        <p class="mb-1 text-dark"><i class="bx bx-expand text-warning me-2"></i><strong>{{ value.dien_tich }} m²</strong></p>
                                     </div>
                                     <div class="col-sm-4">
-                                        <p class="mb-1 text-dark"><i class="bx bx-bed text-warning me-2"></i><strong>{{
-                                            value.so_giuong }} giường</strong></p>
+                                        <p class="mb-1 text-dark"><i class="bx bx-bed text-warning me-2"></i><strong>{{ value.so_giuong }} giường</strong></p>
                                     </div>
                                     <div class="col-sm-4">
-                                        <p class="mb-1 text-dark"><i class="bx bx-user text-warning me-2"></i><strong>{{
-                                            value.so_nguoi_lon }} NL + {{ value.so_tre_em }} TE</strong></p>
+                                        <p class="mb-1 text-dark"><i class="bx bx-user text-warning me-2"></i><strong>{{ value.so_nguoi_lon }} NL + {{ value.so_tre_em }} TE</strong></p>
                                     </div>
                                 </div>
 
-                                <!-- Bảng giá & số lượng -->
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="bg-white p-3 rounded-3 shadow-sm">
@@ -225,7 +214,6 @@
                                     </div>
                                 </div>
 
-                                <!-- Tiện ích mở rộng -->
                                 <div class="mt-3">
                                     <a data-bs-toggle="collapse" :href="'#collapse' + value.id"
                                         class="text-warning small fw-semibold">
@@ -235,7 +223,6 @@
                                         <div v-html="value.tien_ich" class="small text-dark"></div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -247,7 +234,6 @@
                 <i class="bx bx-home fs-1 text-muted mb-3"></i>
                 <p class="text-muted lead">Không tìm thấy phòng nào phù hợp với yêu cầu của bạn.</p>
             </div>
-
         </div>
     </div>
 </template>
@@ -291,7 +277,6 @@ export default {
             today.setDate(today.getDate() + 1);
             return today.toISOString().split('T')[0];
         },
-        // ĐÃ SỬA HOÀN CHỈNH - TÍNH ĐÚNG TIỀN DỊCH VỤ
         tongTienDichVu() {
             return this.ds_dich_vu
                 .filter(dv => dv.chon)
@@ -327,58 +312,51 @@ export default {
                 this.toasterIds[field] = null;
             }
         },
-
         tangSoPhong() { if (this.tt_dat_phong.so_phong < 3) this.tt_dat_phong.so_phong++; },
         giamSoPhong() { if (this.tt_dat_phong.so_phong > 1) this.tt_dat_phong.so_phong--; },
         tangNguoiLon() { if (this.tt_dat_phong.nguoi_lon < 4) this.tt_dat_phong.nguoi_lon++; },
         giamNguoiLon() { if (this.tt_dat_phong.nguoi_lon > 1) this.tt_dat_phong.nguoi_lon--; },
         tangTreEm() { if (this.tt_dat_phong.tre_em < 3) this.tt_dat_phong.tre_em++; },
         giamTreEm() { if (this.tt_dat_phong.tre_em > 0) this.tt_dat_phong.tre_em--; },
-
         capNhatNgayDiTuDong() {
             if (this.tt_dat_phong.ngay_di < this.minNgayDi) {
                 this.tt_dat_phong.ngay_di = this.minNgayDi;
             }
         },
-
         datPhong() {
-        if (!this.is_login) {
-            toaster.error("Bạn cần đăng nhập trước!");
-            this.$router.push('/khach-hang/dang-nhap');
-            return;
-        }
-
-        if (this.info.so_phong <= 0) {
-            toaster.warning("Bạn chưa chọn phòng nào!");
-            return;
-        }
-
-        const payload = {
-            tt_dat_phong: this.tt_dat_phong,
-            tt_loai_phong: this.ds_loai_phong.filter(p => p.chon_phong && p.so_phong_dat > 0),
-            ds_dich_vu: this.ds_dich_vu
-                .filter(dv => dv.chon)
-                .map(dv => ({
-                    id: dv.id,
-                    don_gia: dv.don_gia  // số nguyên, không format
-                }))
-        };
-
-        axios.post("http://127.0.0.1:8000/api/khach-hang-dat-phong", payload, {
-            headers: { Authorization: 'Bearer ' + localStorage.getItem("token_khachhang") }
-        })
-        .then(res => {
-            if (res.data.status) {
-                toaster.success(res.data.message || "Đặt phòng thành công! Kiểm tra email của bạn.");
-                setTimeout(() => location.reload(), 2000);
+            if (!this.is_login) {
+                toaster.error("Bạn cần đăng nhập trước!");
+                this.$router.push('/khach-hang/dang-nhap');
+                return;
             }
-        })
-        .catch(err => {
-            console.error(err);
-            toaster.error("Đặt phòng thất bại, vui lòng thử lại!");
-        });
-    },
-
+            if (this.info.so_phong <= 0) {
+                toaster.warning("Bạn chưa chọn phòng nào!");
+                return;
+            }
+            const payload = {
+                tt_dat_phong: this.tt_dat_phong,
+                tt_loai_phong: this.ds_loai_phong.filter(p => p.chon_phong && p.so_phong_dat > 0),
+                ds_dich_vu: this.ds_dich_vu
+                    .filter(dv => dv.chon)
+                    .map(dv => ({
+                        id: dv.id,
+                        don_gia: dv.don_gia
+                    }))
+            };
+            axios.post("http://127.0.0.1:8000/api/khach-hang-dat-phong", payload, {
+                headers: { Authorization: 'Bearer ' + localStorage.getItem("token_khachhang") }
+            })
+            .then(res => {
+                if (res.data.status) {
+                    toaster.success(res.data.message || "Đặt phòng thành công! Kiểm tra email của bạn.");
+                    setTimeout(() => location.reload(), 2000);
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                toaster.error("Đặt phòng thất bại, vui lòng thử lại!");
+            });
+        },
         kiemTraDangNhap() {
             axios
                 .get("http://127.0.0.1:8000/api/kiem-tra-token-khach-hang", {
@@ -386,11 +364,9 @@ export default {
                 })
                 .then((res) => { this.is_login = res.data.status; });
         },
-
         formatVND(number) {
             return new Intl.NumberFormat('vi-VI', { style: 'currency', currency: 'VND' }).format(number);
         },
-
         getToday() {
             const today = new Date();
             const yyyy = today.getFullYear();
@@ -400,9 +376,7 @@ export default {
             this.tt_dat_phong.min_ngay_den = todayStr;
             this.tt_dat_phong.min_ngay_di = todayStr;
         },
-
         inLog() {
-            // Reset tổng
             this.info.so_phong = 0;
             this.info.so_lon = 0;
             this.info.so_tre = 0;
@@ -424,20 +398,16 @@ export default {
                 }
             });
 
-            // Cộng tiền dịch vụ từ computed (đã sửa đúng)
             this.info.so_tien += this.tongTienDichVu;
         },
-
         tru(value) {
             value.so_phong_dat = Math.max(value.so_phong_dat - 1, 0);
             this.inLog();
         },
-
         cong(value) {
             value.so_phong_dat = Math.min(value.so_phong_dat + 1, value.so_phong_trong);
             this.inLog();
         },
-
         layDanhSachPhong() {
             this.clearToaster('ngay_den');
             this.clearToaster('ngay_di');
@@ -466,7 +436,6 @@ export default {
                 })
                 .catch(() => toaster.error("Không tải được danh sách phòng!"));
         },
-
         layDanhSachDichVu() {
             axios
                 .get('http://127.0.0.1:8000/api/dich-vu')
@@ -480,13 +449,12 @@ export default {
                     }
                 })
                 .catch(() => toaster.error("Không kết nối được server"));
-        },
+        }
     }
 }
 </script>
 
 <style scoped>
-/* Giữ nguyên toàn bộ style cũ của bạn */
 .dat-phong-page {
     background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.45)),
         url('https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg') center/cover no-repeat fixed;
@@ -518,4 +486,31 @@ export default {
 .room-item { transition: all 0.4s ease; }
 .room-item:hover { transform: translateY(-8px); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1) !important; }
 .summary-card { background: white; border-radius: 1rem; }
+
+/* DỊCH VỤ BỔ SUNG - SẠCH SẼ, KHÔNG ICON, KHÔNG TỔNG TIỀN */
+.text-gold { color: #DBAB57 !important; }
+.bg-gold { background: linear-gradient(135deg, #DBAB57, #e68a00) !important; }
+
+.service-item {
+    transition: all 0.35s ease;
+    background: white !important;
+}
+.service-item:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(219, 171, 87, 0.2) !important;
+    border-color: #DBAB57 !important;
+}
+.service-item:hover .hover-overlay {
+    opacity: 0.07;
+}
+.service-item .form-check-input {
+    border: 2.5px solid #DBAB57;
+}
+.service-item .form-check-input:checked {
+    background-color: #DBAB57;
+    border-color: #DBAB57;
+}
+.hover-overlay {
+    pointer-events: none;
+}
 </style>
