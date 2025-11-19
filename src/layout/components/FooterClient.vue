@@ -86,9 +86,7 @@
       <hr class="footer-divider my-5" />
       <div class="text-center text-light small py-3">
         © Hẹn gặp bạn tại <strong class="text-gold">AIHotel Pro!</strong>
-        <a href="#top" class="back-to-top ms-3 text-light">
-          <i class="fas fa-arrow-up"></i>
-        </a>
+        <!-- ĐÃ XÓA HOÀN TOÀN NÚT BACK TO TOP TẠI ĐÂY -->
       </div>
     </div>
   </footer>
@@ -97,15 +95,7 @@
 <script>
 export default {
   name: "PremiumFooter",
-  mounted() {
-    // Back to top smooth
-    document.querySelectorAll(".back-to-top").forEach((btn) => {
-      btn.addEventListener("click", (e) => {
-        e.preventDefault();
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      });
-    });
-  },
+  // ĐÃ XÓA HOÀN TOÀN PHẦN mounted() VỀ BACK TO TOP
 };
 </script>
 
@@ -247,26 +237,7 @@ export default {
   box-shadow: 0 8px 20px rgba(255, 153, 0, 0.4);
 }
 
-/* Nút back to top */
-.back-to-top {
-  width: 36px;
-  height: 36px;
-  background: #DBAB57;
-  color: white;
-  border-radius: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  transition: all 0.4s ease;
-  box-shadow: 0 4px 12px rgba(255, 153, 0, 0.3);
-}
-
-.back-to-top:hover {
-  background: #cc7700;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(255, 153, 0, 0.5);
-}
+/* ĐÃ XÓA TOÀN BỘ CSS CỦA .back-to-top */
 
 /* Divider */
 .footer-divider {
