@@ -27,7 +27,7 @@
                     placeholder="you@example.com" required>
                 </div>
 
-                <!-- Mật khẩu -->
+                <!-- Mật khẩu - ĐÃ SỬA ICON ĐÚNG LOGIC -->
                 <div class="col-12">
                   <label class="form-label text-dark fw-semibold">Mật khẩu</label>
                   <div class="input-group">
@@ -35,12 +35,13 @@
                       class="form-control form-control-lg rounded-pill" placeholder="••••••••" required>
                     <span class="input-group-text bg-white border-0 rounded-end-pill" @click="togglePasswordVisibility"
                       style="cursor: pointer;">
-                      <i :class="passwordFieldType === 'password' ? 'fa-regular fa-eye' : 'fa-regular fa-eye-slash'"></i>
+                      <!-- ĐÚNG: mắt nhắm khi đang ẩn, mắt mở khi đang hiện -->
+                      <i :class="passwordFieldType === 'password' ? 'fa-regular fa-eye-slash' : 'fa-regular fa-eye'"></i>
                     </span>
                   </div>
                 </div>
 
-                <!-- Quên mật khẩu – ĐÃ SỬA ANIMATION -->
+                <!-- Quên mật khẩu -->
                 <div class="col-12 text-end">
                   <router-link to="/quen-mat-khau" class="text-muted small text-decoration-underline link-forgot">
                     Quên mật khẩu?
@@ -74,7 +75,7 @@ export default {
         email: '',
         password: '',
       },
-      passwordFieldType: 'password',
+      passwordFieldType: 'password', // mặc định ẩn
     }
   },
   mounted() {
@@ -133,14 +134,13 @@ export default {
 </script>
 
 <style scoped>
-/* Trang đăng nhập */
+/* Toàn bộ style giữ nguyên đẹp như cũ */
 .login-page {
   background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
   min-height: 100vh;
   padding-top: 0 !important;
 }
 
-/* Header vàng cam */
 .card-header {
   background: linear-gradient(135deg, #DBAB57, #977334) !important;
   position: relative;
@@ -161,7 +161,6 @@ export default {
   margin: 0 !important;
 }
 
-/* Input */
 .form-control {
   border: 2px solid #ddd;
   transition: all 0.3s ease;
@@ -175,7 +174,6 @@ export default {
   background-color: white;
 }
 
-/* Nút Đăng nhập */
 .btn-login {
   background: linear-gradient(135deg, #DBAB57, #e68a00);
   color: white;
@@ -190,7 +188,6 @@ export default {
   box-shadow: 0 10px 25px rgba(255, 153, 0, 0.4);
 }
 
-/* === LINK "ĐĂNG KÝ TẠI ĐÂY" (trắng + hover vàng) === */
 .link-glow {
   transition: all 0.3s ease;
   position: relative;
@@ -220,7 +217,6 @@ export default {
   transform-origin: left;
 }
 
-/* === LINK "QUÊN MẬT KHẨU?" – ĐÃ SỬA, KHÔNG BỊ ẨN === */
 .link-forgot {
   color: #888 !important;
   transition: all 0.3s ease;
@@ -246,7 +242,6 @@ export default {
   width: 100%;
 }
 
-/* Responsive */
 @media (max-width: 576px) {
   .card { margin: 1rem; border-radius: 1rem; }
   .card-body { padding: 1.5rem !important; }
