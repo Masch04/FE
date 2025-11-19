@@ -1,100 +1,84 @@
-<!-- src/layout/components/Chatbot.vue -->
 <template>
-  <div class="dialogflow-chat-container container-fluid p-0">
+  <div class="aihotel-chatbot">
+    <!-- 
+      Tôi đã thêm thuộc tính chat-icon để đổi icon tia sét mặc định thành icon lễ tân/tai nghe 
+      cho phù hợp với khách sạn. Bạn có thể thay link ảnh khác nếu muốn.
+    -->
     <df-messenger
       intent="WELCOME"
-      chat-title="chatbotkhachsan"
+      chat-title="Hỗ trợ viên AIHOTEL"
       agent-id="1dd2bc54-57b1-4d86-8878-42e0f48c5e42"
       language-code="vi"
-      class="dialogflow-messenger-custom"
+      chat-icon="https://cdn-icons-png.flaticon.com/512/4233/4233830.png"
     ></df-messenger>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'Chatbot',
-  mounted() {
+<script setup>
+import { onMounted } from 'vue';
+
+// Tự động nhúng script của Dialogflow khi component được load
+// Giúp bạn không phải sửa file index.html
+onMounted(() => {
+  if (!document.querySelector('script[src*="dialogflow-console/fast/messenger/bootstrap.js"]')) {
     const script = document.createElement('script');
     script.src = "https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1";
-    document.head.appendChild(script);
+    script.async = true;
+    document.body.appendChild(script);
   }
-}
+});
 </script>
 
-<style scoped>
-.dialogflow-chat-container {
+<style>
+/* 
+  LƯU Ý: Style này không để 'scoped' vì df-messenger là web component bên ngoài.
+  Tôi đã cấu hình màu sắc theo đúng tông Vàng/Đen của web AIHOTEL PRO.
+*/
+
+df-messenger {
+  /* --- 1. MÀU SẮC CHỦ ĐẠO (THEO WEB KHÁCH SẠN) --- */
+  
+  /* Màu nút tròn icon chat & Thanh tiêu đề (Màu Vàng Gold lấy từ nút web của bạn) */
+  --df-messenger-button-titlebar-color: #cda050; 
+  
+  /* Màu nền bên trong khung chat (Trắng ngà nhẹ cho sang) */
+  --df-messenger-chat-background-color: #ffffff;
+  
+  /* Màu chữ trên thanh tiêu đề */
+  --df-messenger-button-titlebar-font-color: #ffffff;
+  
+  /* --- 2. BONG BÓNG CHAT --- */
+  
+  /* Tin nhắn của Khách (Màu Vàng Gold đồng bộ) */
+  --df-messenger-user-message: #cda050;
+  
+  /* Tin nhắn của Bot (Màu xám nhạt sạch sẽ) */
+  --df-messenger-bot-message: #f5f5f5;
+  
+  /* Màu chữ trong bong bóng chat */
+  --df-messenger-font-color: #333333;
+  
+  /* --- 3. CÁC CHI TIẾT KHÁC --- */
+  
+  /* Màu icon nút gửi tin nhắn */
+  --df-messenger-send-icon: #cda050;
+  
+  /* Vị trí cố định góc phải màn hình */
   position: fixed;
   bottom: 20px;
-  left: 20px;
-  width: 100%;
-  max-width: 380px;
-  height: auto;
-  max-height: 500px;
-  z-index: 1000;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  border-radius: 15px;
-  overflow: hidden;
+  right: 20px;
+  z-index: 9999;
 }
 
-.dialogflow-messenger-custom {
-  --df-messenger-bot-message: #878fac;
-  --df-messenger-user-message: #479b3d;
-  --df-messenger-chat-background: #f0f2f5;
-  --df-messenger-font-color: white;
-  --df-messenger-send-icon: #878fac;
-  --df-messenger-button-title: #ffffff;
-  --df-messenger-button-background-color: #479b3d;
-  --df-messenger-border-radius: 15px;
-  --df-messenger-border: 1px solid #ccc;
-  width: 100%;
-  height: 100%;
+/* Tùy chỉnh nút chat (Shadow DOM) - Tạo hiệu ứng bóng đổ sang trọng */
+df-messenger::part(button) {
+  box-shadow: 0 4px 20px rgba(205, 160, 80, 0.4);
+  border: 2px solid #fff; /* Viền trắng mỏng làm nổi bật nút vàng */
 }
 
-@media (max-width: 768px) {
-  .dialogflow-chat-container {
-    max-width: 90%;
-    max-height: 450px;
-    left: 5%;
-    bottom: 15px;
-  }
-}
-
-@media (min-width: 769px) and (max-width: 1200px) {
-  .dialogflow-chat-container {
-    max-width: 340px;
-    max-height: 480px;
-    left: 20px;
-    bottom: 20px;
-  }
-}
-
-@media (min-width: 1201px) {
-  .dialogflow-chat-container {
-    max-width: 380px;
-    max-height: 500px;
-    left: 20px;
-    bottom: 20px;
-  }
-}
-</style>
-
-<!-- CSS toàn cục để force Dialogflow Messenger hiển thị xuống dòng -->
-<style>
-/* Force xuống dòng cho tin nhắn bot */
-df-messenger::part(chat-bubble-text) {
-  white-space: pre-line !important;
-  word-wrap: break-word !important;
-  line-height: 1.6 !important;
-}
-
-/* Thử thêm selector này nếu cách trên không hiệu quả */
-df-messenger::part(message-text) {
-  white-space: pre-wrap !important;
-}
-
-/* Force cho tất cả text trong messenger */
-df-messenger * {
-  white-space: pre-line !important;
+/* Tùy chỉnh khung chat khi mở ra */
+df-messenger::part(chat-wrapper) {
+  border-radius: 12px;
+  box-shadow: 0 5px 40px rgba(0,0,0,0.3);
 }
 </style>
