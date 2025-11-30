@@ -214,6 +214,13 @@ const routes = [
         component: () => import("../components/Client/GioiThieu/index.vue"),
         meta: { layout: "client" },
     },
+    {
+        path: '/chi-tiet-phong/:id', // :id là tham số động
+        name: 'RoomDetail',
+        component: () => import ("../components/Client/RoomDetail/index.vue"),
+        props: true, // Cho phép truyền id như một props
+        meta: { layout: "client" },
+  },
 ];
 
 const router = createRouter({

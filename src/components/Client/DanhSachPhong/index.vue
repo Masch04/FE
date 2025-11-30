@@ -31,11 +31,12 @@
         <div class="row g-4">
           <template v-for="(v, k) in ds_loai_phong" :key="v.id || k">
             <div class="col-lg-4 col-md-6" data-aos="fade-up" :data-aos-delay="k * 100">
-              <div class="room-card rounded-4 overflow-hidden shadow-lg bg-white position-relative">
+              <div class="room-card rounded-4 overflow-hidden shadow-lg bg-white position-relative" @click="goToDetail(v.id)">
 
                 <!-- Ảnh -->
                 <div class="ratio ratio-4x3 position-relative overflow-hidden">
-                  <img :src="v.hinh_anh" class="w-100 h-100 object-cover img-scale" :alt="v.ten_loai_phong">
+                  <img :src="v.hinh_anh" class="w-100 h-100 object-cover img-scale" :alt="v.ten_loai_phong" >
+                  
                 </div>
 
                 <!-- Nội dung mặc định -->
@@ -131,6 +132,9 @@ export default {
       const num = parseInt(price);
       if (!num || isNaN(num)) return 'Chưa có giá';
       return new Intl.NumberFormat('vi-VN').format(num) + 'đ';
+    },
+    goToDetail(id) {
+      this.$router.push({ name: 'RoomDetail', params: { id } });
     }
   }
 }
