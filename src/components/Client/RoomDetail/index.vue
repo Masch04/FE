@@ -40,7 +40,7 @@
               class="badge bg-success rounded-pill px-3 py-2 border border-white backdrop-blur"
               v-if="room.so_phong_trong > 0"
             >
-              Sẵn sàng: {{ room.so_phong_trong }} phòng
+              Còn trống: {{ room.so_phong_trong }} phòng
             </span>
             <span
               class="badge bg-danger rounded-pill px-3 py-2 border border-white backdrop-blur"
