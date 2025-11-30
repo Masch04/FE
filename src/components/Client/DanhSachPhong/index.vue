@@ -121,7 +121,7 @@ export default {
         "Suite": "Căn hộ suite riêng biệt gồm phòng khách và phòng ngủ, nội thất tinh tế, sofa lớn, bàn làm việc. Hoàn hảo cho gia đình hoặc khách muốn không gian riêng rộng rãi.",
         "Family": "Phòng gia đình rộng tới 60m², có thể kê thêm giường phụ, nối thông hoặc 2 giường đôi. An toàn, tiện nghi và thân thiện với trẻ nhỏ.",
         "Executive": "Dành cho doanh nhân với bàn làm việc lớn, wifi siêu tốc, dịch vụ ưu tiên check-in, trà chiều miễn phí và quyền sử dụng Executive Lounge.",
-        "Presidential": "Đỉnh cao sang trọng với phòng khách riêng, phòng ngủ master, bồn tắm jacuzzi, view panorama toàn cảnh biển. Trải nghiệm hoàng gia đích thực.",
+        "Vip  ": "Đỉnh cao sang trọng với phòng khách riêng, phòng ngủ master, bồn tắm jacuzzi, view panorama toàn cảnh biển. Trải nghiệm hoàng gia đích thực.",
         "Bungalow": "Nhà gỗ riêng biệt giữa vườn nhiệt đới hoặc sát biển, mái lá, hiên rộng, không gian mở gần gũi thiên nhiên – lựa chọn hoàn hảo cho kỳ nghỉ riêng tư.",
         "Villa": "Biệt thự riêng có hồ bơi riêng, bếp, phòng khách rộng, nhân viên phục vụ riêng 24/7. Sự lựa chọn tối thượng cho gia đình lớn hoặc nhóm bạn."
       };
