@@ -337,20 +337,43 @@ export default {
         if(this.booking.ngay_den >= this.booking.ngay_di) this.booking.ngay_di = this.minNgayDi;
     },
 
-    async xuLyDatPhong() {
+      async xuLyDatPhong() {
+        // Kiểm tra số lượng phòng
         if (this.booking.so_phong > this.room.so_phong_trong) {
             toaster.error(`Chỉ còn ${this.room.so_phong_trong} phòng trống!`);
             return;
         }
 
+        // 1. Ép kiểu số nguyên để tránh lỗi tính toán
+        const giaPhong = parseInt(this.room.gia_mac_dinh);
+        const soLuongPhong = parseInt(this.booking.so_phong);
+
+        // 2. Tạo dữ liệu Y HỆT cấu trúc trang DatPhong.vue
         const payload = {
-            tt_dat_phong: this.booking,
+            tt_dat_phong: {
+                ngay_den: this.booking.ngay_den,
+                ngay_di: this.booking.ngay_di,
+                so_phong: soLuongPhong,
+                nguoi_lon: parseInt(this.booking.nguoi_lon),
+                tre_em: parseInt(this.booking.tre_em),
+            },
+            
+            // Backend dùng mảng này để tính tiền
             tt_loai_phong: [{
-                ...this.room,
-                so_phong_dat: this.booking.so_phong,
-                gia_trung_binh_ko_format: this.room.gia_mac_dinh
+                id: this.room.id,
+                ten_loai_phong: this.room.ten_loai_phong,
+                // QUAN TRỌNG: Backend tìm key này để nhân tiền
+                gia_trung_binh_ko_format: giaPhong, 
+                // QUAN TRỌNG: Backend nhân với số lượng này
+                so_phong_dat: soLuongPhong,
             }],
-            ds_dich_vu: this.ds_dich_vu.filter(dv => dv.chon).map(dv => ({ id: dv.id, don_gia: dv.don_gia }))
+
+            ds_dich_vu: this.ds_dich_vu
+                .filter(dv => dv.chon)
+                .map(dv => ({ 
+                    id: dv.id, 
+                    don_gia: parseInt(dv.don_gia) 
+                }))
         };
 
         try {
@@ -358,21 +381,29 @@ export default {
                 headers: { Authorization: 'Bearer ' + localStorage.getItem("token_khachhang") }
             });
             if (res.data.status) {
-                toaster.success(res.data.message || "Đặt phòng thành công!");
+                toaster.success(res.data.message || "Đặt phòng thành công! Vui lòng kiểm tra email.");
                 this.showModal = false;
+                
+                // Dọn dẹp session cũ
+                sessionStorage.removeItem('pending_booking');
+                sessionStorage.removeItem('pending_booking_full');
+
                 setTimeout(() => location.reload(), 2000); 
             } else {
                 toaster.error(res.data.message);
             }
         } catch (error) {
+            console.error(error);
             toaster.error("Có lỗi xảy ra khi đặt phòng.");
         }
     },
+
     formatPrice(price) {
       if(!price) return '0 VNĐ';
       return new Intl.NumberFormat('vi-VN').format(price) + ' VNĐ';
     }
-}
+    // --- KẾT THÚC METHODS ---
+  }
 }
 </script>
 
