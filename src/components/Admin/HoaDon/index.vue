@@ -33,7 +33,7 @@
                             class="form-control search-control border border-3 border-secondary"
                             placeholder="Tìm kiếm mã hoá đơn, tên khách...">
                         <span class="position-absolute top-50 translate-middle-y" style="left: 15px;">
-                            <i class="bx bx-search"></i>
+                            <i class='bx bx-search'></i>
                         </span>
                         <button @click="timKiemNe()" class="btn btn-outline-secondary">Tìm Kiếm</button>
                     </div>
@@ -64,36 +64,26 @@
                                     <td class="text-center">{{ formatDateA(hd.ngay_di) }}</td>
                                     <td class="text-end text-danger fw-bold">{{ formatVND(hd.tong_tien) }}</td>
                                     
-                                    <!-- CỘT TÌNH TRẠNG - CLICK VÀO BADGE ĐỂ MỞ MODAL -->
+                                    <!-- CỘT TÌNH TRẠNG - CHỈ CHO CLICK KHI CHƯA THANH TOÁN -->
                                     <td class="text-center">
                                         <div class="mb-2">
-                                            <!-- Badge có thể click, mở modal luôn -->
-                                            <span 
-                                                v-if="hd.is_thanh_toan == -1" 
-                                                class="badge bg-danger cursor-pointer"
-                                                data-bs-toggle="modal" 
-                                                data-bs-target="#thanhToanModal"
-                                                @click="moModalTrangThai(hd)">
+                                            <!-- Trường hợp đã xử lý rồi (Đã thanh toán hoặc Đã huỷ) → không cho click -->
+                                            <span v-if="hd.is_thanh_toan == -1" class="badge bg-danger">
                                                 Đã huỷ
                                             </span>
-                                            <span 
-                                                v-else-if="hd.is_thanh_toan == 0" 
+                                            <span v-else-if="hd.is_thanh_toan == 1" class="badge bg-success">
+                                                Đã thanh toán
+                                            </span>
+
+                                            <!-- Chỉ khi CHƯA thanh toán (0) mới cho click mở modal -->
+                                            <span v-else 
                                                 class="badge bg-warning text-dark cursor-pointer"
                                                 data-bs-toggle="modal" 
                                                 data-bs-target="#thanhToanModal"
                                                 @click="moModalTrangThai(hd)">
                                                 Chưa thanh toán
                                             </span>
-                                            <span 
-                                                v-else 
-                                                class="badge bg-success cursor-pointer"
-                                                data-bs-toggle="modal" 
-                                                data-bs-target="#thanhToanModal"
-                                                @click="moModalTrangThai(hd)">
-                                                Đã thanh toán
-                                            </span>
                                         </div>
-                                        <!-- ĐÃ BỎ NÚT CẬP NHẬT -->
                                     </td>
 
                                     <td class="text-center">{{ formatDate(hd.created_at) }}</td>
@@ -178,7 +168,7 @@
                     </div>
                 </div>
 
-                <!-- MODAL CẬP NHẬT TRẠNG THÁI (KHÔNG ĐỔI) -->
+                <!-- MODAL CẬP NHẬT TRẠNG THÁI (GIỮ NGUYÊN) -->
                 <div class="modal fade" id="thanhToanModal" tabindex="-1">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -244,8 +234,6 @@ export default {
             tong_tien_phong: 0,
             tong_tien_dich_vu: 0,
             tim_kiem: {},
-            
-            // Biến lưu trạng thái cho modal
             trang_thai_update: 0
         }
     },
@@ -279,13 +267,11 @@ export default {
             }
         },
 
-        // Mở Modal và gán giá trị hiện tại
         moModalTrangThai(hd) {
             this.chi_tiet = hd;
             this.trang_thai_update = parseInt(hd.is_thanh_toan); 
         },
 
-        // Gửi dữ liệu cập nhật lên server
         xacNhanCapNhat() {
             const payload = {
                 id_hoa_don: this.chi_tiet.id,

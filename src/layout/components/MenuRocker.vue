@@ -12,28 +12,10 @@
         </div>
         <nav class="navbar navbar-expand-xl w-100">
             <ul class="navbar-nav justify-content-start flex-grow-1 gap-1">
-                <li class="nav-item dropdown">
-                    <a href="javascript:;" class="nav-link dropdown-toggle dropdown-toggle-nocaret"
-                        data-bs-toggle="dropdown">
-                        <div class="parent-icon"><i class='bx bx-home-circle'></i>
-                        </div>
-                        <div class="menu-title text-nowrap">Dashboard</div>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li> <a class="dropdown-item" href="index.html"><i class="bx bx-right-arrow-alt"></i>Default</a>
-                        </li>
-                        <li> <a class="dropdown-item" href="index2.html"><i
-                                    class="bx bx-right-arrow-alt"></i>Alternate</a>
-                        </li>
-                        <li> <a class="dropdown-item" href="index3.html"><i
-                                    class="bx bx-right-arrow-alt"></i>Graphical</a>
-                        </li>
-                    </ul>
-                </li>
                 <li class="nav-item">
                     <router-link to="/admin/loai-phong">
                         <a class="nav-link" href="/admin/loai-phong">
-                            <div class="parent-icon"><i class="fa-solid fa-chess-rook"></i>
+                            <div class="parent-icon"><i class="fa-solid"></i>
                             </div>
                             <div class="menu-title text-nowrap">Loại Phòng</div>
                         </a>
@@ -42,7 +24,7 @@
                 <li class="nav-item">
                     <router-link to="/admin/dich-vu">
                         <a class="nav-link" href="/admin/dich-vu">
-                            <div class="parent-icon"><i class="fa-brands fa-servicestack"></i>
+                            <div class="parent-icon"><i class="fa-brands"></i>
                             </div>
                             <div class="menu-title text-nowrap">Dịch Vụ</div>
                         </a>
@@ -51,7 +33,7 @@
                 <li class="nav-item dropdown">
                     <router-link to="/admin/quan-ly-phong">
                         <a class="nav-link" href="/admin/quan-ly-phong">
-                            <div class="parent-icon"><i class="fa-solid fa-hotel"></i>
+                            <div class="parent-icon"><i class="fa-solid"></i>
                             </div>
                             <div class="menu-title text-nowrap">Quản Lý Phòng</div>
                         </a>
@@ -74,7 +56,7 @@
                 <li class="nav-item dropdown">
                     <a href="javascript:;" class="nav-link dropdown-toggle dropdown-toggle-nocaret"
                         data-bs-toggle="dropdown">
-                        <div class="parent-icon"><i class="fa-solid fa-users"></i>
+                        <div class="parent-icon"><i class="fa-solid"></i>
                         </div>
                         <div class="menu-title">Quản Lý Người Dùng</div>
                     </a>
@@ -102,7 +84,7 @@
                 <li class="nav-item dropdown">
                     <a href="javascript:;" class="nav-link dropdown-toggle dropdown-toggle-nocaret"
                         data-bs-toggle="dropdown">
-                        <div class="parent-icon"><i class="fa-solid fa-ranking-star"></i>
+                        <div class="parent-icon"><i class="fa-solid"></i>
                         </div>
                         <div class="menu-title">Quản Lý HomePage</div>
                     </a>
@@ -136,7 +118,7 @@
                 <li class="nav-item">
                     <router-link to="/admin/danh-sach-hoa-don">
                         <a class="nav-link" href="/admin/danh-sach-hoa-don">
-                            <div class="parent-icon"><i class="fa-solid fa-file-invoice-dollar"></i>
+                            <div class="parent-icon"><i class="fa-solid"></i>
                             </div>
                             <div class="menu-title text-nowrap">Danh Sách Hóa Đơn </div>
                         </a>
@@ -144,7 +126,7 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link">
-                        <div class="parent-icon"><i class="fa-solid fa-chart-column"></i>
+                        <div class="parent-icon"><i class="fa-solid"></i>
                         </div>
                         <div class="menu-title text-nowrap">Thống Kê</div>
                     </a>
