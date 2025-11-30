@@ -1,5 +1,6 @@
 <template>
     <div class="row">
+        <!-- FILTER DATE (Giữ nguyên) -->
         <div class="col">
             <div class="card">
                 <div class="card-body">
@@ -40,18 +41,18 @@
 
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered table-hover">
+                        <table class="table table-bordered table-hover align-middle">
                             <thead class="table-light">
                                 <tr>
-                                    <th>#</th>
-                                    <th>Mã Hoá Đơn</th>
+                                    <th class="text-center">#</th>
+                                    <th class="text-center">Mã Hoá Đơn</th>
                                     <th>Khách Hàng</th>
-                                    <th>Ngày Đến</th>
-                                    <th>Ngày Đi</th>
+                                    <th class="text-center">Ngày Đến</th>
+                                    <th class="text-center">Ngày Đi</th>
                                     <th class="text-end">Tổng Tiền</th>
-                                    <th>Tình Trạng</th>
-                                    <th>Ngày Đặt</th>
-                                    <th>Chi Tiết</th>
+                                    <th class="text-center">Tình Trạng</th>
+                                    <th class="text-center">Ngày Đặt</th>
+                                    <th class="text-center">Chi Tiết</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -62,17 +63,27 @@
                                     <td class="text-center">{{ formatDateA(hd.ngay_den) }}</td>
                                     <td class="text-center">{{ formatDateA(hd.ngay_di) }}</td>
                                     <td class="text-end text-danger fw-bold">{{ formatVND(hd.tong_tien) }}</td>
+                                    
+                                    <!-- CỘT TÌNH TRẠNG & NÚT CẬP NHẬT -->
                                     <td class="text-center">
-                                        <span v-if="hd.is_thanh_toan == -1" class="badge bg-danger">Đã huỷ</span>
-                                        <span v-else-if="hd.is_thanh_toan == 0" class="badge bg-warning text-dark">Chưa
-                                            thanh toán</span>
-                                        <span v-else class="badge bg-success">Đã thanh toán</span>
+                                        <div class="mb-2">
+                                            <span v-if="hd.is_thanh_toan == -1" class="badge bg-danger">Đã huỷ</span>
+                                            <span v-else-if="hd.is_thanh_toan == 0" class="badge bg-warning text-dark">Chưa thanh toán</span>
+                                            <span v-else class="badge bg-success">Đã thanh toán</span>
+                                        </div>
+                                        <button class="btn btn-outline-dark btn-sm py-0" 
+                                                style="font-size: 12px;"
+                                                data-bs-toggle="modal" 
+                                                data-bs-target="#thanhToanModal"
+                                                @click="moModalTrangThai(hd)">
+                                            <i class="bx bx-edit"></i> Cập nhật
+                                        </button>
                                     </td>
+
                                     <td class="text-center">{{ formatDate(hd.created_at) }}</td>
                                     <td class="text-center">
                                         <button @click="chiTietThue(hd)" data-bs-toggle="modal"
-                                            data-bs-target="#chiTietModal" class="btn btn-primary btn-sm">Chi
-                                            Tiết</button>
+                                            data-bs-target="#chiTietModal" class="btn btn-primary btn-sm">Chi Tiết</button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -80,29 +91,23 @@
                     </div>
                 </div>
 
-                <!-- MODAL CHI TIẾT – HIỆN ĐẸP CẢ PHÒNG + DỊCH VỤ -->
+                <!-- MODAL CHI TIẾT (GIỮ NGUYÊN) -->
                 <div class="modal fade" id="chiTietModal" tabindex="-1">
                     <div class="modal-dialog modal-xl">
                         <div class="modal-content">
                             <div class="modal-header bg-primary text-white">
                                 <h5 class="modal-title">Chi tiết hoá đơn #{{ chi_tiet.ma_hoa_don }}</h5>
-                                <button type="button" class="btn-close btn-close-white"
-                                    data-bs-dismiss="modal"></button>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                             </div>
                             <div class="modal-body">
-
-                                <!-- Thông tin khách & thời gian -->
                                 <div class="row mb-4 text-muted">
                                     <div class="col-md-6">
                                         <strong>Khách hàng:</strong> {{ chi_tiet.ho_lot }} {{ chi_tiet.ten }}
                                     </div>
                                     <div class="col-md-6 text-end">
-                                        <strong>Thời gian ở:</strong> {{ formatDateA(chi_tiet.ngay_den) }} → {{
-                                            formatDateA(chi_tiet.ngay_di) }}
+                                        <strong>Thời gian ở:</strong> {{ formatDateA(chi_tiet.ngay_den) }} → {{ formatDateA(chi_tiet.ngay_di) }}
                                     </div>
                                 </div>
-
-                                <!-- Bảng tóm tắt tiền (giống email) -->
                                 <table class="table table-bordered">
                                     <tr>
                                         <td><strong>Tiền phòng</strong></td>
@@ -115,17 +120,13 @@
                                                 • {{ dv.ten_dich_vu || 'Dịch vụ' }}: {{ formatVND(dv.thanh_tien || 0) }}
                                             </small>
                                         </td>
-                                        <td class="text-end text-success fw-bold">+ {{ formatVND(tong_tien_dich_vu) }}
-                                        </td>
+                                        <td class="text-end text-success fw-bold">+ {{ formatVND(tong_tien_dich_vu) }}</td>
                                     </tr>
                                     <tr class="table-danger">
                                         <td class="fw-bold fs-5">TỔNG CỘNG</td>
-                                        <td class="text-end fw-bold fs-4 text-danger">{{ formatVND(chi_tiet.tong_tien)
-                                        }}</td>
+                                        <td class="text-end fw-bold fs-4 text-danger">{{ formatVND(chi_tiet.tong_tien) }}</td>
                                     </tr>
                                 </table>
-
-                                <!-- Chi tiết phòng (có thể ẩn/hiện) -->
                                 <details class="mt-4">
                                     <summary class="text-primary fw-bold cursor-pointer">
                                         Xem chi tiết phòng đã đặt ({{ chi_tiet_phong.length }} lượt thuê)
@@ -146,15 +147,13 @@
                                                     <td>{{ i + 1 }}</td>
                                                     <td>{{ formatDateA(p.ngay_thue) }}</td>
                                                     <td>{{ p.ten_loai_phong }}</td>
-                                                    <td class="fw-bold text-primary">{{ p.ten_phong || 'Chưa phân phòng'
-                                                        }}</td> <!-- THÊM DÒNG NÀY -->
+                                                    <td class="fw-bold text-primary">{{ p.ten_phong || 'Chưa phân phòng' }}</td>
                                                     <td class="text-end">{{ formatVND(p.gia_thue) }}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                     </div>
                                 </details>
-
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
@@ -163,33 +162,53 @@
                     </div>
                 </div>
 
-                <!-- Modal xác nhận thanh toán/huỷ -->
+                <!-- MODAL CẬP NHẬT TRẠNG THÁI (ĐÃ SỬA LOGIC) -->
                 <div class="modal fade" id="thanhToanModal" tabindex="-1">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title">Xác nhận xử lý hoá đơn</h5>
+                                <h5 class="modal-title">Cập nhật trạng thái hoá đơn</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                             </div>
                             <div class="modal-body">
-                                <div class="form-check">
-                                    <input v-model="check_tt" class="form-check-input" type="radio" value="1" id="tt1">
-                                    <label class="form-check-label" for="tt1">Khách đã thanh toán</label>
-                                </div>
-                                <div class="form-check">
-                                    <input v-model="check_huy" class="form-check-input" type="radio" value="1"
-                                        id="huy1">
-                                    <label class="form-check-label" for="huy1">Khách đã huỷ đặt phòng</label>
+                                <p>Đang xử lý hoá đơn: <b class="text-primary">{{ chi_tiet.ma_hoa_don }}</b></p>
+                                
+                                <div class="alert alert-light border">
+                                    <label class="form-label fw-bold mb-3">Chọn trạng thái mới:</label>
+                                    
+                                    <!-- Radio 0: Chưa thanh toán -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="radio" name="trangthai" id="tt0" :value="0" v-model="trang_thai_update">
+                                        <label class="form-check-label text-warning fw-bold cursor-pointer" for="tt0">
+                                            <i class="bx bx-time"></i> Chưa thanh toán
+                                        </label>
+                                    </div>
+
+                                    <!-- Radio 1: Đã thanh toán -->
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="radio" name="trangthai" id="tt1" :value="1" v-model="trang_thai_update">
+                                        <label class="form-check-label text-success fw-bold cursor-pointer" for="tt1">
+                                            <i class="bx bx-check-circle"></i> Đã thanh toán
+                                        </label>
+                                    </div>
+
+                                    <!-- Radio -1: Đã huỷ -->
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="trangthai" id="tt_1" :value="-1" v-model="trang_thai_update">
+                                        <label class="form-check-label text-danger fw-bold cursor-pointer" for="tt_1">
+                                            <i class="bx bx-x-circle"></i> Huỷ hoá đơn
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                                <button @click="xacNhan()" class="btn btn-primary" data-bs-dismiss="modal">Xác
-                                    nhận</button>
+                                <button @click="xacNhanCapNhat()" class="btn btn-primary" data-bs-dismiss="modal">Lưu thay đổi</button>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -211,9 +230,10 @@ export default {
             dich_vu: [],
             tong_tien_phong: 0,
             tong_tien_dich_vu: 0,
-            check_tt: null,
-            check_huy: null,
-            tim_kiem: {}
+            tim_kiem: {},
+            
+            // Biến lưu trạng thái cho modal
+            trang_thai_update: 0
         }
     },
     mounted() {
@@ -234,36 +254,43 @@ export default {
 
         async chiTietThue(hd) {
             this.chi_tiet = hd;
-
             try {
-                const res = await baseRequest.get(`hoa-don/chi-tiet/${hd.id}`); // ← DÙNG CÁI NÀY
-
+                const res = await baseRequest.get(`hoa-don/chi-tiet/${hd.id}`);
                 this.chi_tiet_phong = res.data.phong || [];
                 this.dich_vu = res.data.dich_vu || [];
                 this.tong_tien_phong = res.data.tong_tien_phong || 0;
                 this.tong_tien_dich_vu = res.data.tong_tien_dich_vu || 0;
-
             } catch (err) {
                 console.error(err);
                 toaster.error("Lỗi tải chi tiết hoá đơn");
             }
         },
 
+        // --- CÁC HÀM MỚI ĐỂ XỬ LÝ TRẠNG THÁI ---
 
-        xacNhan() {
+        // 1. Mở Modal và gán giá trị hiện tại (có ép kiểu int)
+        moModalTrangThai(hd) {
+            this.chi_tiet = hd;
+            this.trang_thai_update = parseInt(hd.is_thanh_toan); 
+        },
+
+        // 2. Gửi dữ liệu cập nhật lên server
+        xacNhanCapNhat() {
             const payload = {
-                thanh_toan: this.check_tt ? 1 : 0,
-                id_hoa_don: this.chi_tiet.id
+                id_hoa_don: this.chi_tiet.id,
+                thanh_toan: parseInt(this.trang_thai_update) // Đảm bảo gửi số nguyên
             };
+            
             baseRequest.post("hoa-don/xac-nhan-don-hang", payload)
                 .then(res => {
                     if (res.data.status) {
                         toaster.success(res.data.message);
-                        this.loadData();
+                        this.loadData(); // Load lại bảng
                     } else {
                         toaster.error(res.data.message);
                     }
-                });
+                })
+                .catch(() => toaster.error("Lỗi server!"));
         },
 
         formatVND(number) {
@@ -272,20 +299,11 @@ export default {
         formatDateA(date) { return moment(date).format("DD/MM/YYYY"); },
         formatDate(date) { return moment(date).format("DD/MM/YYYY HH:mm:ss"); }
     }
-
 }
 </script>
 
 <style scoped>
-.cursor-pointer {
-    cursor: pointer;
-}
-
-.text-danger {
-    color: #dc3545 !important;
-}
-
-.text-success {
-    color: #28a745 !important;
-}
+.cursor-pointer { cursor: pointer; }
+.text-danger { color: #dc3545 !important; }
+.text-success { color: #28a745 !important; }
 </style>
