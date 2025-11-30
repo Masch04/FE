@@ -5,68 +5,44 @@
             <div class="card search-card mb-5 shadow-lg border-0 rounded-4" data-aos="fade-up">
                 <div class="card-body p-4 p-lg-5">
                     <div class="row g-3 align-items-end">
-
-                        <!-- Ngày Đến -->
                         <div class="col-md">
                             <label class="form-label fw-semibold text-dark">Ngày Đến</label>
                             <input v-bind:min="tt_dat_phong.min_ngay_den"
                                 @change="capNhatNgayDiTuDong(); clearToaster('ngay_den')"
                                 v-model="tt_dat_phong.ngay_den" type="date" class="form-control rounded-pill h-50px">
                         </div>
-
-                        <!-- Ngày Đi -->
                         <div class="col-md">
                             <label class="form-label fw-semibold text-dark">Ngày Đi</label>
                             <input :min="minNgayDi" v-model="tt_dat_phong.ngay_di" type="date"
                                 @change="clearToaster('ngay_di')" class="form-control rounded-pill h-50px">
                         </div>
-
-                        <!-- Số Phòng -->
                         <div class="col-md-auto">
                             <label class="form-label fw-semibold text-dark">Số Phòng</label>
                             <div class="d-inline-flex align-items-center border rounded-pill p-1 w-100 h-50px">
-                                <button @click="giamSoPhong" class="btn btn-outline-secondary rounded-pill px-3 h-100"
-                                    :disabled="tt_dat_phong.so_phong <= 1">-</button>
-                                <input v-model="tt_dat_phong.so_phong"
-                                    class="form-control text-center border-0 mx-2 flex-grow-1" style="width: 50px;" readonly>
-                                <button @click="tangSoPhong" class="btn btn-outline-secondary rounded-pill px-3 h-100"
-                                    :disabled="tt_dat_phong.so_phong >= 3">+</button>
+                                <button @click="giamSoPhong" class="btn btn-outline-secondary rounded-pill px-3 h-100" :disabled="tt_dat_phong.so_phong <= 1">-</button>
+                                <input v-model="tt_dat_phong.so_phong" class="form-control text-center border-0 mx-2 flex-grow-1" style="width: 50px;" readonly>
+                                <button @click="tangSoPhong" class="btn btn-outline-secondary rounded-pill px-3 h-100" :disabled="tt_dat_phong.so_phong >= 3">+</button>
                             </div>
                         </div>
-
-                        <!-- Người Lớn -->
                         <div class="col-md-auto">
                             <label class="form-label fw-semibold text-dark">Người Lớn</label>
                             <div class="d-inline-flex align-items-center border rounded-pill p-1 w-100 h-50px">
-                                <button @click="giamNguoiLon" class="btn btn-outline-secondary rounded-pill px-3 h-100"
-                                    :disabled="tt_dat_phong.nguoi_lon <= 1">-</button>
-                                <input v-model="tt_dat_phong.nguoi_lon"
-                                    class="form-control text-center border-0 mx-2 flex-grow-1" style="width: 50px;" readonly>
-                                <button @click="tangNguoiLon" class="btn btn-outline-secondary rounded-pill px-3 h-100"
-                                    :disabled="tt_dat_phong.nguoi_lon >= 4">+</button>
+                                <button @click="giamNguoiLon" class="btn btn-outline-secondary rounded-pill px-3 h-100" :disabled="tt_dat_phong.nguoi_lon <= 1">-</button>
+                                <input v-model="tt_dat_phong.nguoi_lon" class="form-control text-center border-0 mx-2 flex-grow-1" style="width: 50px;" readonly>
+                                <button @click="tangNguoiLon" class="btn btn-outline-secondary rounded-pill px-3 h-100" :disabled="tt_dat_phong.nguoi_lon >= 4">+</button>
                             </div>
                         </div>
-
-                        <!-- Trẻ Em -->
                         <div class="col-md-auto">
                             <label class="form-label fw-semibold text-dark">Trẻ Em</label>
                             <div class="d-inline-flex align-items-center border rounded-pill p-1 w-100 h-50px">
-                                <button @click="giamTreEm" class="btn btn-outline-secondary rounded-pill px-3 h-100"
-                                    :disabled="tt_dat_phong.tre_em <= 0">-</button>
-                                <input v-model="tt_dat_phong.tre_em"
-                                    class="form-control text-center border-0 mx-2 flex-grow-1" style="width: 50px;" readonly>
-                                <button @click="tangTreEm" class="btn btn-outline-secondary rounded-pill px-3 h-100"
-                                    :disabled="tt_dat_phong.tre_em >= 3">+</button>
+                                <button @click="giamTreEm" class="btn btn-outline-secondary rounded-pill px-3 h-100" :disabled="tt_dat_phong.tre_em <= 0">-</button>
+                                <input v-model="tt_dat_phong.tre_em" class="form-control text-center border-0 mx-2 flex-grow-1" style="width: 50px;" readonly>
+                                <button @click="tangTreEm" class="btn btn-outline-secondary rounded-pill px-3 h-100" :disabled="tt_dat_phong.tre_em >= 3">+</button>
                             </div>
                         </div>
-
-                        <!-- Nút Tìm Kiếm -->
                         <div class="col-md-auto">
                             <div class="d-flex flex-column h-100 justify-content-end">
-                                <button @click="layDanhSachPhong()"
-                                    class="btn btn-warning fw-bold text-uppercase shadow-sm px-4 py-2 w-100 rounded-pill h-50px">
-                                    TÌM KIẾM
-                                </button>
+                                <button @click="layDanhSachPhong()" class="btn btn-warning fw-bold text-uppercase shadow-sm px-4 py-2 w-100 rounded-pill h-50px">TÌM KIẾM</button>
                             </div>
                         </div>
                     </div>
@@ -106,122 +82,88 @@
                         </div>
                     </div>
 
-                    <!-- DỊCH VỤ BỔ SUNG - ĐÃ BỎ ICON + BỎ TỔNG TIỀN -->
+                    <!-- DỊCH VỤ BỔ SUNG -->
                     <div v-if="ds_dich_vu.length > 0" class="mt-5 pt-4 border-top border-light">
-                        <h5 class="text-center mb-4 fw-bold text-gold">
-                            Dịch Vụ Bổ Sung (Tùy Chọn)
-                        </h5>
+                        <h5 class="text-center mb-4 fw-bold text-gold">Dịch Vụ Bổ Sung (Tùy Chọn)</h5>
                         <div class="row g-4">
                             <div class="col-md-6" v-for="dv in ds_dich_vu" :key="dv.id">
                                 <div class="service-item d-flex align-items-center justify-content-between p-4 rounded-4 border transition-all position-relative overflow-hidden shadow-sm"
                                      :class="dv.chon ? 'border-warning bg-warning bg-opacity-10' : 'border-light bg-white'"
                                      @click="dv.chon = !dv.chon; inLog()"
                                      style="cursor: pointer; min-height: 90px;">
-                                    
-                                    <!-- Checkbox + Tên dịch vụ -->
                                     <div class="d-flex align-items-center">
                                         <div class="me-4">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" v-model="dv.chon" @change.stop 
-                                                       style="width: 1.5em; height: 1.5em;">
+                                                <input class="form-check-input" type="checkbox" v-model="dv.chon" @change.stop style="width: 1.5em; height: 1.5em;">
                                             </div>
                                         </div>
                                         <h6 class="fw-bold mb-0 text-dark">{{ dv.ten_dich_vu }}</h6>
                                     </div>
-
-                                    <!-- Giá tiền -->
                                     <p class="text-success fw-bold mb-0">{{ formatVND(dv.don_gia) }}</p>
-
-                                    <!-- Hover overlay -->
                                     <div class="position-absolute inset-0 bg-gold opacity-0 hover-overlay transition-all"></div>
                                 </div>
                             </div>
                         </div>
-                        <!-- ĐÃ BỎ HOÀN TOÀN PHẦN TỔNG TIỀN DỊCH VỤ -->
                     </div>
                 </div>
             </div>
 
-            <!-- DANH SÁCH PHÒNG (giữ nguyên hoàn toàn) -->
+            <!-- DANH SÁCH PHÒNG -->
             <template v-for="(value, index) in ds_loai_phong" :key="index">
-                <div class="card room-item mb-4 shadow-sm border-0 rounded-4 overflow-hidden" data-aos="fade-up"
-                    :data-aos-delay="index * 100">
+                <div class="card room-item mb-4 shadow-sm border-0 rounded-4 overflow-hidden" data-aos="fade-up" :data-aos-delay="index * 100">
+                    <div v-if="value.so_phong_trong <= 0" class="position-absolute w-100 h-100 bg-white opacity-50" style="z-index: 10;"></div>
                     <div class="row g-0">
                         <div class="col-lg-4 position-relative">
                             <img :src="value.hinh_anh" class="w-100 room-img-fixed object-fit-cover" alt="">
-                            <div class="position-absolute top-0 end-0 p-3">
+                            <div class="position-absolute top-0 end-0 p-3" v-if="value.so_phong_trong > 0">
                                 <div class="form-check form-switch">
-                                    <input v-model="value.chon_phong" @change="inLog()" class="form-check-input"
-                                        type="checkbox" style="transform: scale(1.3);">
+                                    <input v-model="value.chon_phong" @change="inLog()" class="form-check-input" type="checkbox" style="transform: scale(1.3);">
                                 </div>
                             </div>
+                            <div v-if="value.so_phong_trong <= 0" class="position-absolute top-50 start-50 translate-middle badge bg-danger fs-3 shadow" style="z-index: 20;">HẾT PHÒNG</div>
                         </div>
-
                         <div class="col-lg-8 d-flex align-items-center">
                             <div class="card-body p-4 w-100 room-content-overlay">
                                 <div class="d-flex justify-content-between align-items-start mb-3">
                                     <h4 class="fw-bold text-dark mb-0">{{ value.ten_loai_phong }}</h4>
-                                    <span class="badge bg-success fs-6">Còn {{ value.so_phong_trong }} phòng</span>
+                                    <span v-if="value.so_phong_trong > 0" class="badge bg-success fs-6">Còn {{ value.so_phong_trong }} phòng</span>
+                                    <span v-else class="badge bg-secondary fs-6">Đã hết phòng</span>
                                 </div>
-
                                 <div class="row g-3 mb-4">
-                                    <div class="col-sm-4">
-                                        <p class="mb-1 text-dark"><i class="bx bx-expand text-warning me-2"></i><strong>{{ value.dien_tich }} m²</strong></p>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <p class="mb-1 text-dark"><i class="bx bx-bed text-warning me-2"></i><strong>{{ value.so_giuong }} giường</strong></p>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <p class="mb-1 text-dark"><i class="bx bx-user text-warning me-2"></i><strong>{{ value.so_nguoi_lon }} NL + {{ value.so_tre_em }} TE</strong></p>
-                                    </div>
+                                    <div class="col-sm-4"><p class="mb-1 text-dark"><i class="bx bx-expand text-warning me-2"></i><strong>{{ value.dien_tich }} m²</strong></p></div>
+                                    <div class="col-sm-4"><p class="mb-1 text-dark"><i class="bx bx-bed text-warning me-2"></i><strong>{{ value.so_giuong }} giường</strong></p></div>
+                                    <div class="col-sm-4"><p class="mb-1 text-dark"><i class="bx bx-user text-warning me-2"></i><strong>{{ value.so_nguoi_lon }} NL + {{ value.so_tre_em }} TE</strong></p></div>
                                 </div>
-
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="bg-white p-3 rounded-3 shadow-sm">
                                             <div class="row text-center">
                                                 <div class="col">
-                                                    <p class="text-decoration-line-through small"
-                                                        style="color:red!important; font-style:italic!important;">
-                                                        3.666.667đ
-                                                    </p>
-                                                    <p class="fw-bold text-success fs-4 mb-0">
-                                                        {{ formatVND(value.gia_trung_binh_ko_format) }}
-                                                        <small class="text-muted">/đêm</small>
-                                                    </p>
+                                                    <p class="text-decoration-line-through small" style="color:red!important; font-style:italic!important;">{{ formatVND(value.gia_trung_binh_ko_format * 1.2) }}</p>
+                                                    <p class="fw-bold text-success fs-4 mb-0">{{ formatVND(value.gia_trung_binh_ko_format) }} <small class="text-muted">/đêm</small></p>
                                                 </div>
                                                 <div class="col">
                                                     <p class="text-muted small mb-1">Lợi ích</p>
                                                     <ul class="list-unstyled small mb-0 text-success">
-                                                        <li>Miễn phí ăn sáng</li>
-                                                        <li>Wifi tốc độ cao</li>
+                                                        <li><i class="bx bx-check"></i> Miễn phí ăn sáng</li>
+                                                        <li><i class="bx bx-check"></i> Wifi tốc độ cao</li>
                                                     </ul>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="col-md-4 text-center">
-                                        <div class="d-inline-flex align-items-center border rounded-pill p-1 bg-white">
-                                            <button @click="tru(value)"
-                                                class="btn btn-outline-secondary rounded-pill px-3">-</button>
-                                            <input v-model="value.so_phong_dat"
-                                                class="form-control text-center border-0 mx-2" style="width: 50px;"
-                                                readonly>
-                                            <button @click="cong(value)"
-                                                class="btn btn-outline-secondary rounded-pill px-3">+</button>
+                                        <div class="d-inline-flex align-items-center border rounded-pill p-1 bg-white" :class="{'opacity-50 pointer-events-none': value.so_phong_trong <= 0}">
+                                            <button @click="tru(value)" class="btn btn-outline-secondary rounded-pill px-3" :disabled="value.so_phong_dat <= 0">-</button>
+                                            <input v-model="value.so_phong_dat" class="form-control text-center border-0 mx-2" style="width: 50px;" readonly>
+                                            <button @click="cong(value)" class="btn btn-outline-secondary rounded-pill px-3" :disabled="value.so_phong_dat >= value.so_phong_trong">+</button>
                                         </div>
+                                        <div v-if="value.so_phong_dat >= value.so_phong_trong && value.so_phong_trong > 0" class="text-danger small mt-1">Đã đạt tối đa</div>
                                     </div>
                                 </div>
-
                                 <div class="mt-3">
-                                    <a data-bs-toggle="collapse" :href="'#collapse' + value.id"
-                                        class="text-warning small fw-semibold">
-                                        Xem thêm tiện ích
-                                    </a>
-                                    <div class="collapse mt-2" :id="'collapse' + value.id">
-                                        <div v-html="value.tien_ich" class="small text-dark"></div>
-                                    </div>
+                                    <a data-bs-toggle="collapse" :href="'#collapse' + value.id" class="text-warning small fw-semibold">Xem thêm tiện ích</a>
+                                    <div class="collapse mt-2" :id="'collapse' + value.id"><div v-html="value.tien_ich" class="small text-dark"></div></div>
                                 </div>
                             </div>
                         </div>
@@ -260,10 +202,9 @@ export default {
             ds_dich_vu: [],
             info: { so_phong: 0, so_tre: 0, so_lon: 0, so_tien: 0 },
             is_login: 0,
-            toasterIds: {
-                ngay_den: null,
-                ngay_di: null
-            }
+            toasterIds: { ngay_den: null, ngay_di: null },
+            // Biến tạm để lưu dữ liệu khôi phục
+            saved_state: null 
         }
     },
     computed: {
@@ -284,25 +225,34 @@ export default {
         }
     },
     watch: {
-        'tt_dat_phong.ngay_di'(newVal) {
-            if (newVal && newVal < this.minNgayDi) {
-                this.tt_dat_phong.ngay_di = this.minNgayDi;
-            }
-        },
-        'tt_dat_phong.ngay_den'(newVal) {
-            if (newVal && this.tt_dat_phong.ngay_di < this.minNgayDi) {
-                this.tt_dat_phong.ngay_di = this.minNgayDi;
-            }
-        }
+        'tt_dat_phong.ngay_di'(newVal) { if (newVal && newVal < this.minNgayDi) this.tt_dat_phong.ngay_di = this.minNgayDi; },
+        'tt_dat_phong.ngay_den'(newVal) { if (newVal && this.tt_dat_phong.ngay_di < this.minNgayDi) this.tt_dat_phong.ngay_di = this.minNgayDi; }
     },
     mounted() {
-        this.tt_dat_phong.ngay_den = this.$route.params.ngay_den || '';
-        this.tt_dat_phong.ngay_di = this.$route.params.ngay_di || '';
-        this.tt_dat_phong.so_phong = Math.min(3, Math.max(1, parseInt(this.$route.params.so_phong) || 1));
-        this.tt_dat_phong.nguoi_lon = Math.min(4, Math.max(1, parseInt(this.$route.params.nguoi_lon) || 1));
-        this.tt_dat_phong.tre_em = Math.min(3, Math.max(0, parseInt(this.$route.params.tre_em) || 0));
-
         this.getToday();
+
+        // --- KHÔI PHỤC DỮ LIỆU ĐÃ LƯU ---
+        const savedJson = sessionStorage.getItem('pending_booking_full');
+        
+        if (savedJson) {
+            this.saved_state = JSON.parse(savedJson);
+            // 1. Khôi phục form tìm kiếm
+            this.tt_dat_phong = this.saved_state.tt_dat_phong;
+            
+            // 2. Xóa session để không lưu mãi
+            sessionStorage.removeItem('pending_booking_full');
+            
+            // 3. Gọi API lấy phòng (Logic khôi phục phòng sẽ nằm trong hàm layDanhSachPhong)
+            this.layDanhSachPhong();
+        } else {
+            // Logic cũ: lấy từ URL
+            if(this.$route.params.ngay_den) this.tt_dat_phong.ngay_den = this.$route.params.ngay_den;
+            if(this.$route.params.ngay_di) this.tt_dat_phong.ngay_di = this.$route.params.ngay_di;
+            this.tt_dat_phong.so_phong = Math.min(3, Math.max(1, parseInt(this.$route.params.so_phong) || 1));
+            this.tt_dat_phong.nguoi_lon = Math.min(4, Math.max(1, parseInt(this.$route.params.nguoi_lon) || 1));
+            this.tt_dat_phong.tre_em = Math.min(3, Math.max(0, parseInt(this.$route.params.tre_em) || 0));
+        }
+
         this.kiemTraDangNhap();
     },
     methods: {
@@ -325,8 +275,23 @@ export default {
         },
         datPhong() {
             if (!this.is_login) {
-                toaster.error("Bạn cần đăng nhập trước!");
-                this.$router.push('/khach-hang/dang-nhap');
+                // --- LƯU TOÀN BỘ TRẠNG THÁI (PHÒNG + DỊCH VỤ) ---
+                const fullState = {
+                    tt_dat_phong: this.tt_dat_phong,
+                    // Chỉ lưu ID và Số lượng của phòng đã chọn
+                    selected_rooms: this.ds_loai_phong
+                        .filter(p => p.chon_phong && p.so_phong_dat > 0)
+                        .map(p => ({ id: p.id, sl: p.so_phong_dat })),
+                    // Chỉ lưu ID của dịch vụ đã chọn
+                    selected_services: this.ds_dich_vu
+                        .filter(dv => dv.chon)
+                        .map(dv => dv.id)
+                };
+                
+                sessionStorage.setItem('pending_booking_full', JSON.stringify(fullState));
+                
+                toaster.warning("Vui lòng đăng nhập để hoàn tất đặt phòng!");
+                this.$router.push({ path: '/khach-hang/dang-nhap', query: { redirect: this.$route.fullPath } });
                 return;
             }
             if (this.info.so_phong <= 0) {
@@ -336,37 +301,28 @@ export default {
             const payload = {
                 tt_dat_phong: this.tt_dat_phong,
                 tt_loai_phong: this.ds_loai_phong.filter(p => p.chon_phong && p.so_phong_dat > 0),
-                ds_dich_vu: this.ds_dich_vu
-                    .filter(dv => dv.chon)
-                    .map(dv => ({
-                        id: dv.id,
-                        don_gia: dv.don_gia
-                    }))
+                ds_dich_vu: this.ds_dich_vu.filter(dv => dv.chon).map(dv => ({ id: dv.id, don_gia: dv.don_gia }))
             };
             axios.post("http://127.0.0.1:8000/api/khach-hang-dat-phong", payload, {
                 headers: { Authorization: 'Bearer ' + localStorage.getItem("token_khachhang") }
             })
             .then(res => {
                 if (res.data.status) {
-                    toaster.success(res.data.message || "Đặt phòng thành công! Kiểm tra email của bạn.");
+                    toaster.success(res.data.message || "Đặt phòng thành công!");
                     setTimeout(() => location.reload(), 2000);
                 }
             })
             .catch(err => {
                 console.error(err);
-                toaster.error("Đặt phòng thất bại, vui lòng thử lại!");
+                toaster.error("Đặt phòng thất bại!");
             });
         },
         kiemTraDangNhap() {
-            axios
-                .get("http://127.0.0.1:8000/api/kiem-tra-token-khach-hang", {
-                    headers: { Authorization: 'Bearer ' + localStorage.getItem("token_khachhang") }
-                })
-                .then((res) => { this.is_login = res.data.status; });
+            axios.get("http://127.0.0.1:8000/api/kiem-tra-token-khach-hang", {
+                headers: { Authorization: 'Bearer ' + localStorage.getItem("token_khachhang") }
+            }).then(res => { this.is_login = res.data.status; });
         },
-        formatVND(number) {
-            return new Intl.NumberFormat('vi-VI', { style: 'currency', currency: 'VND' }).format(number);
-        },
+        formatVND(number) { return new Intl.NumberFormat('vi-VI', { style: 'currency', currency: 'VND' }).format(number); },
         getToday() {
             const today = new Date();
             const yyyy = today.getFullYear();
@@ -390,14 +346,12 @@ export default {
                 if (value.chon_phong && value.so_phong_dat > 0) {
                     const giaPhong = parseInt(value.gia_trung_binh_ko_format, 10) || 0;
                     const soPhongDat = parseInt(value.so_phong_dat, 10) || 0;
-
                     this.info.so_phong += soPhongDat;
                     this.info.so_tien += soPhongDat * giaPhong * soDem;
                     this.info.so_lon += soPhongDat * value.so_nguoi_lon;
                     this.info.so_tre += soPhongDat * value.so_tre_em;
                 }
             });
-
             this.info.so_tien += this.tongTienDichVu;
         },
         tru(value) {
@@ -411,106 +365,88 @@ export default {
         layDanhSachPhong() {
             this.clearToaster('ngay_den');
             this.clearToaster('ngay_di');
-
             let hasError = false;
-            if (!this.tt_dat_phong.ngay_den) {
-                this.toasterIds.ngay_den = toaster.warning("Bạn vui lòng chọn ngày đến");
-                hasError = true;
-            }
-            if (!this.tt_dat_phong.ngay_di) {
-                this.toasterIds.ngay_di = toaster.warning("Bạn vui lòng chọn ngày đi");
-                hasError = true;
-            }
+            if (!this.tt_dat_phong.ngay_den) { this.toasterIds.ngay_den = toaster.warning("Chọn ngày đến"); hasError = true; }
+            if (!this.tt_dat_phong.ngay_di) { this.toasterIds.ngay_di = toaster.warning("Chọn ngày đi"); hasError = true; }
             if (hasError) return;
 
-            baseRequest
-                .post('danh-sach-phong-dat', this.tt_dat_phong)
+            baseRequest.post('danh-sach-phong-dat', this.tt_dat_phong)
                 .then((res) => {
                     this.ds_loai_phong = res.data.data || [];
+                    
+                    // --- KHÔI PHỤC TRẠNG THÁI PHÒNG (NẾU CÓ) ---
                     this.ds_loai_phong.forEach(v => {
                         v.so_phong_dat = 0;
                         v.chon_phong = false;
+
+                        // Nếu có dữ liệu đã lưu
+                        if (this.saved_state && this.saved_state.selected_rooms) {
+                            const found = this.saved_state.selected_rooms.find(item => item.id === v.id);
+                            if (found) {
+                                v.chon_phong = true;
+                                v.so_phong_dat = found.sl;
+                            }
+                        }
                     });
-                    this.layDanhSachDichVu();
-                    this.inLog();
+
+                    this.layDanhSachDichVu(); // Gọi tiếp dịch vụ
+                    this.inLog(); // Tính lại tiền
                 })
                 .catch(() => toaster.error("Không tải được danh sách phòng!"));
         },
         layDanhSachDichVu() {
-            axios
-                .get('http://127.0.0.1:8000/api/dich-vu')
+            axios.get('http://127.0.0.1:8000/api/dich-vu')
                 .then((res) => {
                     if (res.data.status) {
-                        this.ds_dich_vu = res.data.dich_vu.map(dv => ({
-                            ...dv,
-                            chon: false,
-                            don_gia: parseInt(dv.don_gia) || 0
-                        }));
+                        this.ds_dich_vu = res.data.dich_vu.map(dv => {
+                            let isChecked = false;
+                            
+                            // --- KHÔI PHỤC TRẠNG THÁI DỊCH VỤ (NẾU CÓ) ---
+                            if (this.saved_state && this.saved_state.selected_services) {
+                                if (this.saved_state.selected_services.includes(dv.id)) {
+                                    isChecked = true;
+                                }
+                            }
+
+                            return {
+                                ...dv,
+                                chon: isChecked,
+                                don_gia: parseInt(dv.don_gia) || 0
+                            }
+                        });
+                        
+                        // Tính lại tiền lần nữa sau khi load xong dịch vụ
+                        this.inLog();
                     }
                 })
-                .catch(() => toaster.error("Không kết nối được server"));
+                .catch(() => toaster.error("Lỗi tải dịch vụ"));
         }
     }
 }
 </script>
 
 <style scoped>
-.dat-phong-page {
-    background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.45)),
-        url('https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg') center/cover no-repeat fixed;
-    min-height: 100vh;
-    color: #fff;
-}
+/* Giữ nguyên Style cũ */
+.dat-phong-page { background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.45)), url('https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg') center/cover no-repeat fixed; min-height: 100vh; color: #fff; }
 .h-50px { height: 50px !important; }
 .search-card .d-inline-flex { min-width: 140px; max-width: 160px; justify-content: space-between; }
 .search-card .btn-outline-secondary { width: 38px; height: 38px; padding: 0; display: flex; align-items: center; justify-content: center; font-weight: bold; }
 .search-card .d-inline-flex input[readonly] { min-width: 50px; font-weight: 600; color: #333; }
 .search-card .btn-warning { min-width: 120px; }
 .search-card .form-control, .search-card .btn { height: 50px; }
-.room-content-overlay {
-    background: rgba(255, 255, 255, 0.95) !important;
-    border-radius: 1rem;
-    backdrop-filter: blur(4px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    min-height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-.room-content-overlay h4, .room-content-overlay p, .room-content-overlay li, .room-content-overlay a {
-    color: #212529 !important;
-    font-weight: 600 !important;
-}
+.room-content-overlay { background: rgba(255, 255, 255, 0.95) !important; border-radius: 1rem; backdrop-filter: blur(4px); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); min-height: 100%; display: flex; flex-direction: column; justify-content: center; }
+.room-content-overlay h4, .room-content-overlay p, .room-content-overlay li, .room-content-overlay a { color: #212529 !important; font-weight: 600 !important; }
 .room-img-fixed { height: 260px; object-fit: cover; }
 @media (min-width: 992px) { .room-img-fixed { height: 100%; max-height: 300px; } }
 .room-item { transition: all 0.4s ease; }
 .room-item:hover { transform: translateY(-8px); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1) !important; }
 .summary-card { background: white; border-radius: 1rem; }
-
-/* DỊCH VỤ BỔ SUNG - SẠCH SẼ, KHÔNG ICON, KHÔNG TỔNG TIỀN */
 .text-gold { color: #DBAB57 !important; }
 .bg-gold { background: linear-gradient(135deg, #DBAB57, #e68a00) !important; }
-
-.service-item {
-    transition: all 0.35s ease;
-    background: white !important;
-}
-.service-item:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 30px rgba(219, 171, 87, 0.2) !important;
-    border-color: #DBAB57 !important;
-}
-.service-item:hover .hover-overlay {
-    opacity: 0.07;
-}
-.service-item .form-check-input {
-    border: 2.5px solid #DBAB57;
-}
-.service-item .form-check-input:checked {
-    background-color: #DBAB57;
-    border-color: #DBAB57;
-}
-.hover-overlay {
-    pointer-events: none;
-}
+.service-item { transition: all 0.35s ease; background: white !important; }
+.service-item:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(219, 171, 87, 0.2) !important; border-color: #DBAB57 !important; }
+.service-item:hover .hover-overlay { opacity: 0.07; }
+.service-item .form-check-input { border: 2.5px solid #DBAB57; }
+.service-item .form-check-input:checked { background-color: #DBAB57; border-color: #DBAB57; }
+.hover-overlay { pointer-events: none; }
 </style>

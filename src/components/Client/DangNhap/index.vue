@@ -27,7 +27,7 @@
                     placeholder="you@example.com" required>
                 </div>
 
-                <!-- Mật khẩu - ĐÃ SỬA ICON ĐÚNG LOGIC -->
+                <!-- Mật khẩu -->
                 <div class="col-12">
                   <label class="form-label text-dark fw-semibold">Mật khẩu</label>
                   <div class="input-group">
@@ -35,7 +35,6 @@
                       class="form-control form-control-lg rounded-pill" placeholder="••••••••" required>
                     <span class="input-group-text bg-white border-0 rounded-end-pill" @click="togglePasswordVisibility"
                       style="cursor: pointer;">
-                      <!-- ĐÚNG: mắt nhắm khi đang ẩn, mắt mở khi đang hiện -->
                       <i :class="passwordFieldType === 'password' ? 'fa-regular fa-eye-slash' : 'fa-regular fa-eye'"></i>
                     </span>
                   </div>
@@ -100,7 +99,19 @@ export default {
             toaster.success(res.data.message);
             localStorage.setItem('token_khachhang', res.data.token);
             localStorage.setItem('ho_ten', res.data.ho_ten);
-            this.$router.push('/');
+            
+            // --- SỬA Ở ĐÂY: Kiểm tra có link redirect không ---
+            const redirectPath = this.$route.query.redirect;
+            
+            if (redirectPath) {
+                // Nếu có (ví dụ: /chi-tiet-phong/5), quay lại đó
+                this.$router.push(redirectPath);
+            } else {
+                // Nếu không có, về trang chủ
+                this.$router.push('/');
+            }
+            // --------------------------------------------------
+            
           } else {
             toaster.error(res.data.message);
           }
@@ -125,7 +136,13 @@ export default {
         })
         .then((res) => {
           if (res.data.status) {
-            this.$router.push('/');
+            // Cũng kiểm tra redirect ở đây luôn cho chắc
+            const redirectPath = this.$route.query.redirect;
+            if (redirectPath) {
+                this.$router.push(redirectPath);
+            } else {
+                this.$router.push('/');
+            }
           }
         });
     }
