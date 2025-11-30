@@ -64,20 +64,36 @@
                                     <td class="text-center">{{ formatDateA(hd.ngay_di) }}</td>
                                     <td class="text-end text-danger fw-bold">{{ formatVND(hd.tong_tien) }}</td>
                                     
-                                    <!-- CỘT TÌNH TRẠNG & NÚT CẬP NHẬT -->
+                                    <!-- CỘT TÌNH TRẠNG - CLICK VÀO BADGE ĐỂ MỞ MODAL -->
                                     <td class="text-center">
                                         <div class="mb-2">
-                                            <span v-if="hd.is_thanh_toan == -1" class="badge bg-danger">Đã huỷ</span>
-                                            <span v-else-if="hd.is_thanh_toan == 0" class="badge bg-warning text-dark">Chưa thanh toán</span>
-                                            <span v-else class="badge bg-success">Đã thanh toán</span>
-                                        </div>
-                                        <button class="btn btn-outline-dark btn-sm py-0" 
-                                                style="font-size: 12px;"
+                                            <!-- Badge có thể click, mở modal luôn -->
+                                            <span 
+                                                v-if="hd.is_thanh_toan == -1" 
+                                                class="badge bg-danger cursor-pointer"
                                                 data-bs-toggle="modal" 
                                                 data-bs-target="#thanhToanModal"
                                                 @click="moModalTrangThai(hd)">
-                                            <i class="bx bx-edit"></i> Cập nhật
-                                        </button>
+                                                Đã huỷ
+                                            </span>
+                                            <span 
+                                                v-else-if="hd.is_thanh_toan == 0" 
+                                                class="badge bg-warning text-dark cursor-pointer"
+                                                data-bs-toggle="modal" 
+                                                data-bs-target="#thanhToanModal"
+                                                @click="moModalTrangThai(hd)">
+                                                Chưa thanh toán
+                                            </span>
+                                            <span 
+                                                v-else 
+                                                class="badge bg-success cursor-pointer"
+                                                data-bs-toggle="modal" 
+                                                data-bs-target="#thanhToanModal"
+                                                @click="moModalTrangThai(hd)">
+                                                Đã thanh toán
+                                            </span>
+                                        </div>
+                                        <!-- ĐÃ BỎ NÚT CẬP NHẬT -->
                                     </td>
 
                                     <td class="text-center">{{ formatDate(hd.created_at) }}</td>
@@ -162,7 +178,7 @@
                     </div>
                 </div>
 
-                <!-- MODAL CẬP NHẬT TRẠNG THÁI (ĐÃ SỬA LOGIC) -->
+                <!-- MODAL CẬP NHẬT TRẠNG THÁI (KHÔNG ĐỔI) -->
                 <div class="modal fade" id="thanhToanModal" tabindex="-1">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -176,27 +192,24 @@
                                 <div class="alert alert-light border">
                                     <label class="form-label fw-bold mb-3">Chọn trạng thái mới:</label>
                                     
-                                    <!-- Radio 0: Chưa thanh toán -->
                                     <div class="form-check mb-2">
                                         <input class="form-check-input" type="radio" name="trangthai" id="tt0" :value="0" v-model="trang_thai_update">
                                         <label class="form-check-label text-warning fw-bold cursor-pointer" for="tt0">
-                                            <i class="bx bx-time"></i> Chưa thanh toán
+                                            Chưa thanh toán
                                         </label>
                                     </div>
 
-                                    <!-- Radio 1: Đã thanh toán -->
                                     <div class="form-check mb-2">
                                         <input class="form-check-input" type="radio" name="trangthai" id="tt1" :value="1" v-model="trang_thai_update">
                                         <label class="form-check-label text-success fw-bold cursor-pointer" for="tt1">
-                                            <i class="bx bx-check-circle"></i> Đã thanh toán
+                                            Đã thanh toán
                                         </label>
                                     </div>
 
-                                    <!-- Radio -1: Đã huỷ -->
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="trangthai" id="tt_1" :value="-1" v-model="trang_thai_update">
                                         <label class="form-check-label text-danger fw-bold cursor-pointer" for="tt_1">
-                                            <i class="bx bx-x-circle"></i> Huỷ hoá đơn
+                                            Huỷ hoá đơn
                                         </label>
                                     </div>
                                 </div>
@@ -266,26 +279,24 @@ export default {
             }
         },
 
-        // --- CÁC HÀM MỚI ĐỂ XỬ LÝ TRẠNG THÁI ---
-
-        // 1. Mở Modal và gán giá trị hiện tại (có ép kiểu int)
+        // Mở Modal và gán giá trị hiện tại
         moModalTrangThai(hd) {
             this.chi_tiet = hd;
             this.trang_thai_update = parseInt(hd.is_thanh_toan); 
         },
 
-        // 2. Gửi dữ liệu cập nhật lên server
+        // Gửi dữ liệu cập nhật lên server
         xacNhanCapNhat() {
             const payload = {
                 id_hoa_don: this.chi_tiet.id,
-                thanh_toan: parseInt(this.trang_thai_update) // Đảm bảo gửi số nguyên
+                thanh_toan: parseInt(this.trang_thai_update)
             };
             
             baseRequest.post("hoa-don/xac-nhan-don-hang", payload)
                 .then(res => {
                     if (res.data.status) {
                         toaster.success(res.data.message);
-                        this.loadData(); // Load lại bảng
+                        this.loadData();
                     } else {
                         toaster.error(res.data.message);
                     }
