@@ -61,7 +61,7 @@
           <!-- SỬA: Đổi animation sang 'fade-in-up delay-200' mượt hơn -->
           <div class="bg-white p-5 rounded-4 shadow-sm fade-in-up delay-200">
             <h3 class="font-playfair fw-bold mb-4">Mô tả phòng</h3>
-            
+
             <!-- ĐÃ SỬA: Gọi hàm getRoomDescription và truyền tên phòng vào -->
             <div
               class="text-muted lead mb-5"
@@ -143,7 +143,7 @@
                   <i class="bx bx-phone text-gold me-2"></i>Hỗ trợ 24/7
                 </p>
                 <a
-                  href="tel:19001000"
+                  href="tel:0357989225"
                   class="fw-bold text-dark text-decoration-none fs-5 hover-gold-text transition-all"
                   >0357989225</a
                 >
@@ -155,157 +155,176 @@
     </section>
 
     <!-- ============================================ -->
-   <!-- MODAL ĐẶT PHÒNG -->
+    <!-- MODAL ĐẶT PHÒNG -->
     <!-- ============================================ -->
     <div v-if="showModal" class="modal-backdrop-custom fade-in">
-  <div class="modal-content-custom rounded-4 shadow-lg pop-up-gentle">
-    <div class="d-flex justify-content-between align-items-center p-4 border-bottom bg-light rounded-top-4">
-      <h4 class="mb-0 font-playfair fw-bold text-dark">
-        Đặt: {{ room.ten_loai_phong }}
-      </h4>
-      <button @click="showModal = false" class="btn-close hover-rotate"></button>
-    </div>
-
-    <div class="modal-body-custom p-4">
-      <div class="row g-4">
-        <!-- Cột Trái -->
-        <div class="col-lg-7 border-end">
-          
-          <!-- SỬA: Đã xóa 'align-items-end' để các ô căn thẳng hàng từ trên xuống -->
-          <div class="row g-3">
-            <div class="col-md-4">
-              <label class="form-label fw-bold small text-muted">NGÀY ĐẾN</label>
-              <input
-                type="date"
-                v-model="booking.ngay_den"
-                :min="minToday"
-                @change="capNhatNgay"
-                class="form-control h-50px focus-ring"
-              />
-            </div>
-            <div class="col-md-4">
-              <label class="form-label fw-bold small text-muted">NGÀY ĐI</label>
-              <input
-                type="date"
-                v-model="booking.ngay_di"
-                :min="minNgayDi"
-                @change="capNhatNgay"
-                class="form-control h-50px focus-ring"
-              />
-            </div>
-
-            <div class="col-md-4">
-              <label class="form-label fw-bold small text-muted">SỐ PHÒNG</label>
-              <div class="input-group">
-                <button
-                  class="btn btn-outline-secondary h-50px"
-                  @click="booking.so_phong > 1 ? booking.so_phong-- : null"
-                >
-                  -
-                </button>
-                <input
-                  type="text"
-                  class="form-control text-center h-50px"
-                  v-model="booking.so_phong"
-                  readonly
-                />
-                <button
-                  class="btn btn-outline-secondary h-50px"
-                  @click="
-                    booking.so_phong < room.so_phong_trong
-                      ? booking.so_phong++
-                      : null
-                  "
-                  :disabled="booking.so_phong >= room.so_phong_trong"
-                >
-                  +
-                </button>
-              </div>
-              <small class="text-danger d-block mt-1" style="font-size: 0.75rem">
-                Tối đa: {{ room.so_phong_trong }} phòng
-              </small>
-            </div>
-          </div>
-          
-          <!-- Phần Dịch vụ bổ sung -->
-          <div class="mt-4 pt-3 border-top">
-            <h6 class="fw-bold text-gold mb-3">DỊCH VỤ BỔ SUNG</h6>
-            <div
-              class="d_services_list custom-scrollbar"
-              style="max-height: 200px; overflow-y: auto"
-            >
-              <div
-                v-for="dv in ds_dich_vu"
-                :key="dv.id"
-                class="d-flex justify-content-between align-items-center p-2 mb-2 border rounded-3 service-item transition-bg"
-                :class="dv.chon ? 'border-warning bg-warning bg-opacity-10' : ''"
-                @click="dv.chon = !dv.chon"
-              >
-                <div class="form-check pointer-events-none">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    v-model="dv.chon"
-                  />
-                  <label class="form-check-label ms-2 small fw-bold">
-                    {{ dv.ten_dich_vu }}
-                  </label>
-                </div>
-                <span class="text-success small fw-bold">
-                  {{ formatPrice(dv.don_gia) }}
-                </span>
-              </div>
-            </div>
-          </div>
+      <div class="modal-content-custom rounded-4 shadow-lg pop-up-gentle">
+        <div
+          class="d-flex justify-content-between align-items-center p-4 border-bottom bg-light rounded-top-4"
+        >
+          <h4 class="mb-0 font-playfair fw-bold text-dark">
+            Đặt: {{ room.ten_loai_phong }}
+          </h4>
+          <button
+            @click="showModal = false"
+            class="btn-close hover-rotate"
+          ></button>
         </div>
 
-        <!-- Cột Phải (Thanh toán) -->
-        <div class="col-lg-5">
-          <div class="bg-light p-4 rounded-4 h-100 d-flex flex-column justify-content-between">
-            <div>
-              <h5 class="fw-bold mb-3">Thanh toán</h5>
-              <div class="d-flex justify-content-between mb-2 small">
-                <span>Đơn giá:</span>
-                <span>{{ formatPrice(room.gia_mac_dinh) }}</span>
+        <div class="modal-body-custom p-4">
+          <div class="row g-4">
+            <!-- Cột Trái -->
+            <div class="col-lg-7 border-end">
+              <!-- SỬA: Đã xóa 'align-items-end' để các ô căn thẳng hàng từ trên xuống -->
+              <div class="row g-3">
+                <div class="col-md-4">
+                  <label class="form-label fw-bold small text-muted"
+                    >NGÀY ĐẾN</label
+                  >
+                  <input
+                    type="date"
+                    v-model="booking.ngay_den"
+                    :min="minToday"
+                    @change="capNhatNgay"
+                    class="form-control h-50px focus-ring"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label fw-bold small text-muted"
+                    >NGÀY ĐI</label
+                  >
+                  <input
+                    type="date"
+                    v-model="booking.ngay_di"
+                    :min="minNgayDi"
+                    @change="capNhatNgay"
+                    class="form-control h-50px focus-ring"
+                  />
+                </div>
+
+                <div class="col-md-4">
+                  <label class="form-label fw-bold small text-muted"
+                    >SỐ PHÒNG</label
+                  >
+                  <div class="input-group">
+                    <button
+                      class="btn btn-outline-secondary h-50px"
+                      @click="booking.so_phong > 1 ? booking.so_phong-- : null"
+                    >
+                      -
+                    </button>
+                    <input
+                      type="text"
+                      class="form-control text-center h-50px"
+                      v-model="booking.so_phong"
+                      readonly
+                    />
+                    <button
+                      class="btn btn-outline-secondary h-50px"
+                      @click="
+                        booking.so_phong < room.so_phong_trong
+                          ? booking.so_phong++
+                          : null
+                      "
+                      :disabled="booking.so_phong >= room.so_phong_trong"
+                    >
+                      +
+                    </button>
+                  </div>
+                  <small
+                    class="text-danger d-block mt-1"
+                    style="font-size: 0.75rem"
+                  >
+                    Tối đa: {{ room.so_phong_trong }} phòng
+                  </small>
+                </div>
               </div>
-              <div class="d-flex justify-content-between mb-2 small">
-                <span>Thời gian:</span>
-                <span>x {{ soDem }} đêm</span>
-              </div>
-              <div class="d-flex justify-content-between mb-2 small">
-                <span>Số lượng:</span>
-                <span>x {{ booking.so_phong }} phòng</span>
-              </div>
-              <div
-                class="d-flex justify-content-between mb-2 small text-success slide-in-soft"
-                v-if="tongTienDichVu > 0"
-              >
-                <span>Dịch vụ:</span>
-                <span>+ {{ formatPrice(tongTienDichVu) }}</span>
-              </div>
-              <hr />
-              <div class="d-flex justify-content-between align-items-center">
-                <span class="fw-bold fs-5">TỔNG:</span>
-                <span class="fw-bold fs-4 text-gold transition-colors">
-                  {{ formatPrice(tongTien) }}
-                </span>
+
+              <!-- Phần Dịch vụ bổ sung -->
+              <div class="mt-4 pt-3 border-top">
+                <h6 class="fw-bold text-gold mb-3">DỊCH VỤ BỔ SUNG</h6>
+                <div
+                  class="d_services_list custom-scrollbar"
+                  style="max-height: 200px; overflow-y: auto"
+                >
+                  <div
+                    v-for="dv in ds_dich_vu"
+                    :key="dv.id"
+                    class="d-flex justify-content-between align-items-center p-2 mb-2 border rounded-3 service-item transition-bg"
+                    :class="
+                      dv.chon ? 'border-warning bg-warning bg-opacity-10' : ''
+                    "
+                    @click="dv.chon = !dv.chon"
+                  >
+                    <div class="form-check pointer-events-none">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        v-model="dv.chon"
+                      />
+                      <label class="form-check-label ms-2 small fw-bold">
+                        {{ dv.ten_dich_vu }}
+                      </label>
+                    </div>
+                    <span class="text-success small fw-bold">
+                      {{ formatPrice(dv.don_gia) }}
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div class="mt-4">
-              <button
-                @click="xuLyDatPhong"
-                class="btn btn-warning w-100 py-3 fw-bold text-white rounded-3 shadow-sm hover-up hover-glow transition-all"
+            <!-- Cột Phải (Thanh toán) -->
+            <div class="col-lg-5">
+              <div
+                class="bg-light p-4 rounded-4 h-100 d-flex flex-column justify-content-between"
               >
-                XÁC NHẬN ĐẶT PHÒNG
-              </button>
+                <div>
+                  <h5 class="fw-bold mb-3">Thanh toán</h5>
+                  <div class="d-flex justify-content-between mb-2 small">
+                    <span>Đơn giá:</span>
+                    <span>{{ formatPrice(room.gia_mac_dinh) }}</span>
+                  </div>
+                  <div class="d-flex justify-content-between mb-2 small">
+                    <span>Thời gian:</span>
+                    <span>x {{ soDem }} đêm</span>
+                  </div>
+                  <div class="d-flex justify-content-between mb-2 small">
+                    <span>Số lượng:</span>
+                    <span>x {{ booking.so_phong }} phòng</span>
+                  </div>
+                  <div
+                    class="d-flex justify-content-between mb-2 small text-success slide-in-soft"
+                    v-if="tongTienDichVu > 0"
+                  >
+                    <span>Dịch vụ:</span>
+                    <span>+ {{ formatPrice(tongTienDichVu) }}</span>
+                  </div>
+                  <hr />
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <span class="fw-bold fs-5">TỔNG:</span>
+                    <span class="fw-bold fs-4 text-gold transition-colors">
+                      {{ formatPrice(tongTien) }}
+                    </span>
+                  </div>
+                </div>
+
+                <div class="mt-4">
+                  <button
+                    @click="xuLyDatPhong"
+                    class="btn btn-warning w-100 py-3 fw-bold text-white rounded-3 shadow-sm hover-up hover-glow transition-all"
+                  >
+                    XÁC NHẬN ĐẶT PHÒNG
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
   </div>
 
   <div
@@ -385,19 +404,33 @@ export default {
   methods: {
     getRoomDescription(tenPhong) {
       const desc = {
-        "Standard": "Phòng tiêu chuẩn ấm cúng, đầy đủ tiện nghi cơ bản, phù hợp cho khách lẻ hoặc chuyến công tác ngắn ngày. Thiết kế hiện đại, sạch sẽ với cửa sổ lớn đón ánh sáng tự nhiên.",
-        "Superior": "Không gian rộng rãi hơn Standard, nội thất cao cấp hơn, view thành phố hoặc vườn xanh mát. Lý tưởng cho cặp đôi muốn chút riêng tư và thoải mái.",
-        "Deluxe": "Phòng sang trọng với ban công riêng, tầm nhìn đẹp ra biển hoặc hồ bơi. Giường king-size êm ái, phòng tắm rộng có bồn tắm, mang lại trải nghiệm nghỉ dưỡng thực thụ.",
-        "Suite": "Căn hộ suite riêng biệt gồm phòng khách và phòng ngủ, nội thất tinh tế, sofa lớn, bàn làm việc. Hoàn hảo cho gia đình hoặc khách muốn không gian riêng rộng rãi.",
-        "Family": "Phòng gia đình rộng tới 60m², có thể kê thêm giường phụ, nối thông hoặc 2 giường đôi. An toàn, tiện nghi và thân thiện với trẻ nhỏ.",
-        "Executive": "Dành cho doanh nhân với bàn làm việc lớn, wifi siêu tốc, dịch vụ ưu tiên check-in, trà chiều miễn phí và quyền sử dụng Executive Lounge.",
-        "Vip  ": "Đỉnh cao sang trọng với phòng khách riêng, phòng ngủ master, bồn tắm jacuzzi, view panorama toàn cảnh biển. Trải nghiệm hoàng gia đích thực.",
-        "Bungalow": "Nhà gỗ riêng biệt giữa vườn nhiệt đới hoặc sát biển, mái lá, hiên rộng, không gian mở gần gũi thiên nhiên – lựa chọn hoàn hảo cho kỳ nghỉ riêng tư.",
-        "Villa": "Biệt thự riêng có hồ bơi riêng, bếp, phòng khách rộng, nhân viên phục vụ riêng 24/7. Sự lựa chọn tối thượng cho gia đình lớn hoặc nhóm bạn."
+        Standard:
+          "Phòng tiêu chuẩn ấm cúng, đầy đủ tiện nghi cơ bản, phù hợp cho khách lẻ hoặc chuyến công tác ngắn ngày. Thiết kế hiện đại, sạch sẽ với cửa sổ lớn đón ánh sáng tự nhiên.",
+        Superior:
+          "Không gian rộng rãi hơn Standard, nội thất cao cấp hơn, view thành phố hoặc vườn xanh mát. Lý tưởng cho cặp đôi muốn chút riêng tư và thoải mái.",
+        Deluxe:
+          "Phòng sang trọng với ban công riêng, tầm nhìn đẹp ra biển hoặc hồ bơi. Giường king-size êm ái, phòng tắm rộng có bồn tắm, mang lại trải nghiệm nghỉ dưỡng thực thụ.",
+        Suite:
+          "Căn hộ suite riêng biệt gồm phòng khách và phòng ngủ, nội thất tinh tế, sofa lớn, bàn làm việc. Hoàn hảo cho gia đình hoặc khách muốn không gian riêng rộng rãi.",
+        Family:
+          "Phòng gia đình rộng tới 60m², có thể kê thêm giường phụ, nối thông hoặc 2 giường đôi. An toàn, tiện nghi và thân thiện với trẻ nhỏ.",
+        Executive:
+          "Dành cho doanh nhân với bàn làm việc lớn, wifi siêu tốc, dịch vụ ưu tiên check-in, trà chiều miễn phí và quyền sử dụng Executive Lounge.",
+        "Vip  ":
+          "Đỉnh cao sang trọng với phòng khách riêng, phòng ngủ master, bồn tắm jacuzzi, view panorama toàn cảnh biển. Trải nghiệm hoàng gia đích thực.",
+        Bungalow:
+          "Nhà gỗ riêng biệt giữa vườn nhiệt đới hoặc sát biển, mái lá, hiên rộng, không gian mở gần gũi thiên nhiên – lựa chọn hoàn hảo cho kỳ nghỉ riêng tư.",
+        Villa:
+          "Biệt thự riêng có hồ bơi riêng, bếp, phòng khách rộng, nhân viên phục vụ riêng 24/7. Sự lựa chọn tối thượng cho gia đình lớn hoặc nhóm bạn.",
       };
       // Tìm key khớp (không phân biệt hoa thường)
-      const key = Object.keys(desc).find(k => tenPhong && tenPhong.toLowerCase().includes(k.toLowerCase()));
-      return desc[key] || "Phòng được thiết kế tinh tế với đầy đủ tiện nghi hiện đại, mang đến sự thoải mái và thư giãn tuyệt đối cho kỳ nghỉ của bạn.";
+      const key = Object.keys(desc).find(
+        (k) => tenPhong && tenPhong.toLowerCase().includes(k.toLowerCase())
+      );
+      return (
+        desc[key] ||
+        "Phòng được thiết kế tinh tế với đầy đủ tiện nghi hiện đại, mang đến sự thoải mái và thư giãn tuyệt đối cho kỳ nghỉ của bạn."
+      );
     },
     async fetchRoomDetail() {
       try {
@@ -526,7 +559,6 @@ export default {
       if (!price) return "0 VNĐ";
       return new Intl.NumberFormat("vi-VN").format(price) + " VNĐ";
     },
-    
   },
 };
 </script>
