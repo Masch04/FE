@@ -1,11 +1,9 @@
 <template>
-  <!-- 1. BANNER -->
   <section
     class="hero-section position-relative overflow-hidden mb-5"
     data-aos="fade-zoom-in"
     data-aos-delay="100"
   >
-    <!-- Carousel Banner -->
     <div
       id="carouselHero"
       class="carousel slide h-100"
@@ -49,7 +47,6 @@
       </div>
     </div>
 
-    <!-- Nội dung trên banner -->
     <div
       class="hero-content position-absolute top-50 start-50 translate-middle text-center w-100 px-3"
       style="z-index: 3"
@@ -58,8 +55,9 @@
         class="hero-title display-3 fw-bold text-white mb-4 animate__animated animate__fadeInDown"
       >
         <span class="d-block">Thiên đường nghỉ dưỡng</span>
-        <span class="d-block" style="color: #DBAB58;">sang trọng & đẳng cấp</span>
-
+        <span class="d-block" style="color: #dbab58"
+          >sang trọng & đẳng cấp</span
+        >
       </h1>
 
       <p
@@ -69,7 +67,6 @@
         Trải nghiệm dịch vụ 5 sao – Nơi mọi giấc mơ trở thành hiện thực
       </p>
 
-      <!-- NÚT KHÁM PHÁ NGAY – GRADIENT VÀNG SANG TRỌNG -->
       <router-link to="/danh-sach-phong" class="d-inline-block">
         <button
           class="btn btn-explore btn-lg animate__animated animate__zoomIn animate__delay-1s"
@@ -80,7 +77,6 @@
     </div>
   </section>
 
-  <!-- 2. PHẦN GIỚI THIỆU -->
   <section class="intro-section py-5 bg-light">
     <div class="container">
       <div class="row g-5 align-items-center">
@@ -143,14 +139,12 @@
     </div>
   </section>
 
-  <!-- 3. PHÒNG NGHỈ – CHỈ ẢNH + TÊN PHÒNG, TỰ ĐỘNG CHẬM, KHÔNG CHẤM -->
   <section
     class="py-5"
     style="background: linear-gradient(180deg, #111827 0%, #0f172a 100%)"
     id="rooms"
   >
     <div class="container">
-      <!-- Tiêu đề -->
       <div class="text-center mb-5">
         <p
           class="text-uppercase small mb-2"
@@ -164,7 +158,6 @@
         </h2>
       </div>
 
-      <!-- Carousel tự động chậm, không chấm -->
       <div
         id="roomsCarousel"
         class="carousel slide"
@@ -186,7 +179,6 @@
                     class="position-relative rounded-3 overflow-hidden shadow-lg"
                     style="height: 280px"
                   >
-                    <!-- Ảnh -->
                     <img
                       :src="
                         phong.hinh_anh ||
@@ -201,7 +193,6 @@
                       @mouseleave="$event.target.style.transform = 'scale(1)'"
                     />
 
-                    <!-- Tên phòng (dưới ảnh, nền mờ) -->
                     <div
                       class="position-absolute bottom-0 start-0 end-0 p-3 text-center"
                       style="
@@ -225,18 +216,22 @@
           </template>
         </div>
       </div>
-      <!-- Nút xem tất cả -->
       <div class="text-center mt-5">
-<router-link
-  to="/danh-sach-phong"
-  class="btn px-5 py-3 text-uppercase fw-bold"
-  style="border-radius: 50px; font-size: 0.9rem; background-color: #DBAB57; border-color: #DBAB57; color: #fff;"
-  data-aos="zoom-in"
-  data-aos-delay="200"
->
-  Xem tất cả phòng
-</router-link>
-
+        <router-link
+          to="/danh-sach-phong"
+          class="btn px-5 py-3 text-uppercase fw-bold"
+          style="
+            border-radius: 50px;
+            font-size: 0.9rem;
+            background-color: #dbab57;
+            border-color: #dbab57;
+            color: #fff;
+          "
+          data-aos="zoom-in"
+          data-aos-delay="200"
+        >
+          Xem tất cả phòng
+        </router-link>
       </div>
     </div>
   </section>
@@ -379,7 +374,6 @@
     </div>
   </section>
 
-  <!-- 5. TIỆN ÍCH XUNG QUANH -->
   <section class="py-5 bg-white" id="amenities">
     <div class="container">
       <div class="text-center mb-5">
@@ -441,11 +435,9 @@
     </div>
   </section>
 
-  <!-- 6. DỊCH VỤ CHẤT LƯỢNG -->
   <section class="py-5 bg-light" id="services">
     <div class="container">
       <div class="row g-5">
-        <!-- Gym -->
         <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
           <div class="row g-4 align-items-center">
             <div class="col-md-5">
@@ -476,7 +468,6 @@
           </div>
         </div>
 
-        <!-- Nhà hàng -->
         <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
           <div class="row g-4 align-items-center">
             <div class="col-md-5 order-md-2">
@@ -507,7 +498,6 @@
           </div>
         </div>
 
-        <!-- Spa -->
         <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
           <div class="row g-4 align-items-center">
             <div class="col-md-5">
@@ -538,7 +528,6 @@
           </div>
         </div>
 
-        <!-- Hồ bơi -->
         <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
           <div class="row g-4 align-items-center">
             <div class="col-md-5 order-md-2">
@@ -729,7 +718,6 @@ export default {
 </script>
 
 <style scoped>
-/* === BANNER === */
 .hero-section {
   height: 100vh;
   min-height: 600px;
@@ -754,7 +742,6 @@ export default {
   }
 }
 
-/* Nút chấm tròn */
 #carouselHero .carousel-indicators button {
   transition: all 0.3s ease;
 }
@@ -764,7 +751,6 @@ export default {
   transform: scale(1.2);
 }
 
-/* NÚT KHÁM PHÁ NGAY – GRADIENT VÀNG SANG TRỌNG */
 .btn-explore {
   background: linear-gradient(135deg, #dbab57 0%, #815b19 100%);
   color: white !important;
@@ -820,7 +806,6 @@ export default {
   }
 }
 
-/* === ẨN NÚT PREV/NEXT === */
 #roomsCarousel .carousel-control-prev,
 #roomsCarousel .carousel-control-next,
 #reviewCarousel .carousel-control-prev,
@@ -828,13 +813,11 @@ export default {
   display: none !important;
 }
 
-/* === TỐC ĐỘ TRƯỢT === */
 #roomsCarousel .carousel-item,
 #reviewCarousel .carousel-item {
   transition: transform 3s ease-in-out !important;
 }
 
-/* === THANH TIẾN TRÌNH === */
 #reviewCarousel .progress-bar {
   transition: width 6s linear !important;
 }
@@ -847,7 +830,6 @@ export default {
   width: 0% !important;
 }
 
-/* === RESPONSIVE === */
 @media (max-width: 992px) {
   .hero-title {
     font-size: 2.5rem !important;
@@ -878,7 +860,6 @@ export default {
   }
 }
 
-/* === TIỆN ÍCH XUNG QUANH === */
 #amenities .row.g-5 {
   align-items: stretch !important;
 }
@@ -930,9 +911,8 @@ export default {
 }
 
 .text-gold {
-  color: #DBAB57 !important;
+  color: #dbab57 !important;
 }
-/* === DỊCH VỤ CHẤT LƯỢNG === */
 #services .btn-warning {
   background: #d4a373;
   border: none;

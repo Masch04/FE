@@ -5,7 +5,7 @@
                 <h6><b>Danh Sách Khách Hàng</b></h6>
                 <div class="input-group mt-3 w-100">
                     <input v-on:keyup.enter="timKiemNe()" v-model="tim_kiem.noi_dung_tim" type="text"
-                        class="form-control search-control border border-3 border-secondary" placeholder="Search...">
+                        class="form-control search-control border border-3 border-secondary">
                     <span class="position-absolute top-50 search-show translate-middle-y" style="left: 15px;"><i
                             class="bx bx-search"></i></span>
                     <button v-on:click="timKiemNe()" class="btn btn-outline-secondary" type="button"

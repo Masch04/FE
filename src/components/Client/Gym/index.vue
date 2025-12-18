@@ -194,7 +194,6 @@ export default {
   font-family: 'Playfair Display', Georgia, serif !important;
 }
 
-/* Banner */
 .hero-gym {
   height: 80vh;
   min-height: 600px;
@@ -220,7 +219,6 @@ export default {
   background: linear-gradient(135deg, #DBAB57, #e68a00) !important;
 }
 
-/* 4 ô lợi ích chính - hover nâng lên */
 .highlight-card {
   transition: all 0.4s ease;
   border: 1px solid transparent;
@@ -232,7 +230,6 @@ export default {
   box-shadow: 0 25px 50px rgba(219,171,87,0.25);
 }
 
-/* Icon nhỏ trong phần lợi ích chi tiết */
 .benefit-icon-sm {
   width: 60px;
   height: 60px;
@@ -244,7 +241,6 @@ export default {
   transform: scale(1.1);
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .hero-gym {
     height: 70vh;

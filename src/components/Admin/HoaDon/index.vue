@@ -30,8 +30,7 @@
                     <h6><b>Danh Sách Hoá Đơn</b></h6>
                     <div class="input-group mt-3 w-100">
                         <input v-on:keyup.enter="timKiemNe()" v-model="tim_kiem.noi_dung_tim" type="text"
-                            class="form-control search-control border border-3 border-secondary"
-                            placeholder="Tìm kiếm mã hoá đơn, tên khách...">
+                            class="form-control search-control border border-3 border-secondary">
                         <span class="position-absolute top-50 translate-middle-y" style="left: 15px;">
                             <i class='bx bx-search'></i>
                         </span>

@@ -113,7 +113,6 @@ export default {
 </script>
   
   <style scoped>
-/* === TOÀN BỘ TRANG: NỀN ĐEN SANG TRỌNG === */
 .blog-detail-page {
   background: #0a0a0a;
   color: #e0e0e0;
@@ -183,7 +182,6 @@ export default {
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
-/* === CARD NỘI DUNG - TRẮNG, ĐẸP, DỄ ĐỌC === */
 .section-article {
   background: #0a0a0a;
   padding-top: 3rem;

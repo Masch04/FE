@@ -59,7 +59,6 @@
                                                     <h6 class="mb-0">Tên</h6>
                                                 </div>
                                                 <div class="col-lg-9 text-secondary">
-                                                    <!-- ĐÃ THÊM @keyup.enter ĐÚNG CHỖ NÀY -->
                                                     <input type="text" v-model="thong_tin.ten"
                                                         @keyup.enter="thayDoiThongTin"
                                                         class="form-control" placeholder="Nhập họ và tên">

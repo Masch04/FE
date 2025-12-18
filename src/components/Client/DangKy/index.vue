@@ -1,86 +1,148 @@
 <template>
-  <div class="register-page min-vh-100 d-flex align-items-center justify-content-center py-5">
+  <div
+    class="register-page min-vh-100 d-flex align-items-center justify-content-center py-5"
+  >
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-          <div class="card border-0 shadow-lg rounded-4 overflow-hidden animate__animated animate__fadeIn">
+          <div
+            class="card border-0 shadow-lg rounded-4 overflow-hidden animate__animated animate__fadeIn"
+          >
             <!-- Header vàng cam -->
-            <div class="card-header bg-gradient text-center py-4 position-relative">
+            <div
+              class="card-header bg-gradient text-center py-4 position-relative"
+            >
               <div class="header-bg"></div>
-              <h3 class="mb-3 fw-bold position-relative z-10 text-dark">Đăng Ký</h3>
-              <p class="mb-0 position-relative z-10 small text-white d-inline-flex align-items-center gap-1 lh-1">
+              <h3 class="mb-3 fw-bold position-relative z-10 text-dark">
+                Đăng Ký
+              </h3>
+              <p
+                class="mb-0 position-relative z-10 small text-white d-inline-flex align-items-center gap-1 lh-1"
+              >
                 Bạn đã có tài khoản?
-                <router-link to="/khach-hang/dang-nhap" class="text-white fw-bold text-decoration-underline link-glow"
-                  style="vertical-align: baseline;">
+                <router-link
+                  to="/khach-hang/dang-nhap"
+                  class="text-white fw-bold text-decoration-underline link-glow"
+                  style="vertical-align: baseline"
+                >
                   Đăng nhập tại đây
                 </router-link>
               </p>
             </div>
 
-            <!-- Form -->
             <div class="card-body p-4 p-md-5">
-              <form @submit.prevent="dangKy()" class="row g-3">
-                <!-- Họ & Tên -->
+              <!-- Đã thêm novalidate để tắt thông báo mặc định của trình duyệt -->
+              <form @submit.prevent="dangKy()" class="row g-3" novalidate>
                 <div class="col-md-6">
                   <label class="form-label text-dark fw-semibold">Họ đệm</label>
-                  <input type="text" class="form-control form-control-lg rounded-pill" v-model="data_dang_ky.ho_lot"
-                    placeholder="Nguyễn Văn" required>
+                  <input
+                    type="text"
+                    class="form-control form-control-lg rounded-pill"
+                    v-model="data_dang_ky.ho_lot"
+                    placeholder="Nguyễn Văn"
+                  />
                 </div>
                 <div class="col-md-6">
                   <label class="form-label text-dark fw-semibold">Tên</label>
-                  <input type="text" class="form-control form-control-lg rounded-pill" v-model="data_dang_ky.ten"
-                    placeholder="A" required>
+                  <input
+                    type="text"
+                    class="form-control form-control-lg rounded-pill"
+                    v-model="data_dang_ky.ten"
+                    placeholder="A"
+                  />
                 </div>
 
-                <!-- Email -->
                 <div class="col-12">
                   <label class="form-label text-dark fw-semibold">Email</label>
-                  <input type="email" class="form-control form-control-lg rounded-pill" v-model="data_dang_ky.email"
-                    placeholder="you@example.com" required>
+                  <input
+                    type="email"
+                    class="form-control form-control-lg rounded-pill"
+                    v-model="data_dang_ky.email"
+                    placeholder="you@example.com"
+                  />
                 </div>
 
-                <!-- SĐT & Ngày sinh -->
                 <div class="col-md-6">
-                  <label class="form-label text-dark fw-semibold">Số điện thoại</label>
-                  <input type="tel" class="form-control form-control-lg rounded-pill"
-                    v-model="data_dang_ky.so_dien_thoai" placeholder="0901234567" required>
+                  <label class="form-label text-dark fw-semibold"
+                    >Số điện thoại</label
+                  >
+                  <input
+                    type="tel"
+                    class="form-control form-control-lg rounded-pill"
+                    v-model="data_dang_ky.so_dien_thoai"
+                    placeholder="0901234567"
+                  />
                 </div>
                 <div class="col-md-6">
-                  <label class="form-label text-dark fw-semibold">Ngày sinh</label>
-                  <input type="date" class="form-control form-control-lg rounded-pill" v-model="data_dang_ky.ngay_sinh"
-                    required>
+                  <label class="form-label text-dark fw-semibold"
+                    >Ngày sinh</label
+                  >
+                  <input
+                    type="date"
+                    class="form-control form-control-lg rounded-pill"
+                    v-model="data_dang_ky.ngay_sinh"
+                  />
                 </div>
 
-                <!-- Mật khẩu – ĐÃ SỬA ICON ĐÚNG LOGIC -->
                 <div class="col-md-6">
-                  <label class="form-label text-dark fw-semibold">Mật khẩu</label>
+                  <label class="form-label text-dark fw-semibold"
+                    >Mật khẩu</label
+                  >
                   <div class="input-group">
-                    <input :type="passwordFieldType" class="form-control form-control-lg rounded-pill"
-                      v-model="data_dang_ky.password" placeholder="••••••••" required>
-                    <span class="input-group-text bg-white border-0 rounded-end-pill" @click="togglePasswordVisibility"
-                      style="cursor: pointer;">
-                      <i :class="passwordFieldType === 'password' ? 'fa-regular fa-eye-slash' : 'fa-regular fa-eye'"></i>
+                    <input
+                      :type="passwordFieldType"
+                      class="form-control form-control-lg rounded-pill"
+                      v-model="data_dang_ky.password"
+                      placeholder="••••••••"
+                    />
+                    <span
+                      class="input-group-text bg-white border-0 rounded-end-pill"
+                      @click="togglePasswordVisibility"
+                      style="cursor: pointer"
+                    >
+                      <i
+                        :class="
+                          passwordFieldType === 'password'
+                            ? 'fa-regular fa-eye-slash'
+                            : 'fa-regular fa-eye'
+                        "
+                      ></i>
                     </span>
                   </div>
                 </div>
 
-                <!-- Nhập lại mật khẩu – ĐÃ SỬA ICON ĐÚNG LOGIC -->
                 <div class="col-md-6">
-                  <label class="form-label text-dark fw-semibold">Nhập lại mật khẩu</label>
+                  <label class="form-label text-dark fw-semibold"
+                    >Nhập lại mật khẩu</label
+                  >
                   <div class="input-group">
-                    <input :type="rePasswordFieldType" class="form-control form-control-lg rounded-pill"
-                      v-model="data_dang_ky.re_password" placeholder="••••••••" required>
-                    <span class="input-group-text bg-white border-0 rounded-end-pill"
-                      @click="toggleRePasswordVisibility" style="cursor: pointer;">
-                      <i :class="rePasswordFieldType === 'password' ? 'fa-regular fa-eye-slash' : 'fa-regular fa-eye'"></i>
+                    <input
+                      :type="rePasswordFieldType"
+                      class="form-control form-control-lg rounded-pill"
+                      v-model="data_dang_ky.re_password"
+                      placeholder="••••••••"
+                    />
+                    <span
+                      class="input-group-text bg-white border-0 rounded-end-pill"
+                      @click="toggleRePasswordVisibility"
+                      style="cursor: pointer"
+                    >
+                      <i
+                        :class="
+                          rePasswordFieldType === 'password'
+                            ? 'fa-regular fa-eye-slash'
+                            : 'fa-regular fa-eye'
+                        "
+                      ></i>
                     </span>
                   </div>
                 </div>
 
-                <!-- Nút Đăng ký -->
                 <div class="col-12 mt-4">
-                  <button type="submit"
-                    class="btn btn-register w-100 py-3 rounded-pill fw-bold text-uppercase shadow-lg">
+                  <button
+                    type="submit"
+                    class="btn btn-register w-100 py-3 rounded-pill fw-bold text-uppercase shadow-lg"
+                  >
                     <i class="fa-solid me-2"></i>Đăng Ký Ngay
                   </button>
                 </div>
@@ -94,65 +156,115 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 import { createToaster } from "@meforma/vue-toaster";
 const toaster = createToaster({ position: "top-right" });
 
 export default {
   data() {
     return {
-      passwordFieldType: 'password',
-      rePasswordFieldType: 'password',
+      passwordFieldType: "password",
+      rePasswordFieldType: "password",
       data_dang_ky: {
-        ho_lot: '',
-        ten: '',
-        email: '',
-        so_dien_thoai: '',
-        ngay_sinh: '',
-        password: '',
-        re_password: '',
-      }
-    }
+        ho_lot: "",
+        ten: "",
+        email: "",
+        so_dien_thoai: "",
+        ngay_sinh: "",
+        password: "",
+        re_password: "",
+      },
+    };
   },
   methods: {
     togglePasswordVisibility() {
-      this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
+      this.passwordFieldType =
+        this.passwordFieldType === "password" ? "text" : "password";
     },
     toggleRePasswordVisibility() {
-      this.rePasswordFieldType = this.rePasswordFieldType === 'password' ? 'text' : 'password';
+      this.rePasswordFieldType =
+        this.rePasswordFieldType === "password" ? "text" : "password";
     },
     dangKy() {
+      // VALIDATION THỦ CÔNG
+      if (!this.data_dang_ky.ho_lot) {
+        toaster.error("Họ đệm không được để trống!");
+        return;
+      }
+      if (!this.data_dang_ky.ten) {
+        toaster.error("Tên không được để trống!");
+        return;
+      }
+      if (!this.data_dang_ky.email) {
+        toaster.error("Email không được để trống!");
+        return;
+      }
+      // Kiểm tra định dạng email bằng Regex
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(this.data_dang_ky.email)) {
+        toaster.error("Email không đúng định dạng!");
+        return;
+      }
+
+      if (!this.data_dang_ky.so_dien_thoai) {
+        toaster.error("Số điện thoại không được để trống!");
+        return;
+      }
+      if (!this.data_dang_ky.ngay_sinh) {
+        toaster.error("Ngày sinh không được để trống!");
+        return;
+      }
+      if (!this.data_dang_ky.password) {
+        toaster.error("Mật khẩu không được để trống!");
+        return;
+      }
+      if (!this.data_dang_ky.re_password) {
+        toaster.error("Vui lòng nhập lại mật khẩu!");
+        return;
+      }
+      if (this.data_dang_ky.password !== this.data_dang_ky.re_password) {
+        toaster.error("Mật khẩu nhập lại không khớp!");
+        return;
+      }
+      // HẾT VALIDATION
+
       axios
-        .post('http://127.0.0.1:8000/api/dang-ky', this.data_dang_ky)
+        .post("http://127.0.0.1:8000/api/dang-ky", this.data_dang_ky)
         .then((res) => {
           if (res.data.status) {
             toaster.success(res.data.message);
             this.data_dang_ky = {
-              ho_lot: '', ten: '', email: '', so_dien_thoai: '', ngay_sinh: '', password: '', re_password: ''
+              ho_lot: "",
+              ten: "",
+              email: "",
+              so_dien_thoai: "",
+              ngay_sinh: "",
+              password: "",
+              re_password: "",
             };
-            this.$router.push('/khach-hang/dang-nhap');
+            this.$router.push("/khach-hang/dang-nhap");
           } else {
             toaster.error(res.data.message);
           }
         })
         .catch((res) => {
           const errors = res.response?.data?.errors || {};
-          Object.values(errors).forEach(errArray => {
-            errArray.forEach(msg => toaster.error(msg));
+          Object.values(errors).forEach((errArray) => {
+            errArray.forEach((msg) => toaster.error(msg));
           });
         });
-    }
+    },
   },
   mounted() {
-    document.body.style.paddingTop = '0';
+    document.body.style.paddingTop = "0";
   },
   beforeUnmount() {
-    const navbar = document.querySelector('.sticky-header');
+    const navbar = document.querySelector(".sticky-header");
     if (navbar) {
       document.body.style.paddingTop = `${navbar.offsetHeight}px`;
     }
-  }
-}
+  },
+};
 </script>
 
 <style scoped>
@@ -164,7 +276,7 @@ export default {
 }
 
 .card-header {
-  background: linear-gradient(135deg, #DBAB57, #e68a00) !important;
+  background: linear-gradient(135deg, #dbab57, #e68a00) !important;
   position: relative;
   overflow: hidden;
   border-radius: 1.5rem 1.5rem 0 0;
@@ -172,13 +284,20 @@ export default {
 
 .header-bg {
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,30 L100,100 L0,100 Z" fill="rgba(255,255,255,0.1)"/></svg>') no-repeat bottom;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,30 L100,100 L0,100 Z" fill="rgba(255,255,255,0.1)"/></svg>')
+    no-repeat bottom;
   background-size: cover;
   opacity: 0.3;
 }
 
-.card-header p { line-height: 1 !important; margin: 0 !important; }
+.card-header p {
+  line-height: 1 !important;
+  margin: 0 !important;
+}
 
 .form-control {
   border: 2px solid #ddd;
@@ -187,14 +306,14 @@ export default {
   background-color: #f8f9fa;
 }
 .form-control:focus {
-  border-color: #DBAB57;
+  border-color: #dbab57;
   box-shadow: 0 0 0 0.2rem rgba(255, 153, 0, 0.25);
   transform: translateY(-1px);
   background-color: white;
 }
 
 .btn-register {
-  background: linear-gradient(135deg, #DBAB57, #e68a00);
+  background: linear-gradient(135deg, #dbab57, #e68a00);
   color: white;
   font-size: 1.1rem;
   letter-spacing: 1px;
@@ -214,7 +333,7 @@ export default {
   overflow: hidden;
 }
 .link-glow::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
@@ -227,7 +346,8 @@ export default {
 }
 .link-glow:hover {
   color: #fff !important;
-  text-shadow: 0 0 5px rgba(255,255,255,0.8), 0 0 10px rgba(255,255,255,0.6);
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.8),
+    0 0 10px rgba(255, 255, 255, 0.6);
   transform: scale(1.05);
 }
 .link-glow:hover::after {
@@ -236,8 +356,16 @@ export default {
 }
 
 @media (max-width: 576px) {
-  .card { margin: 1rem; border-radius: 1rem; }
-  .card-body { padding: 1.5rem !important; }
-  .btn-register { font-size: 1rem; padding: 0.75rem !important; }
+  .card {
+    margin: 1rem;
+    border-radius: 1rem;
+  }
+  .card-body {
+    padding: 1.5rem !important;
+  }
+  .btn-register {
+    font-size: 1rem;
+    padding: 0.75rem !important;
+  }
 }
 </style>

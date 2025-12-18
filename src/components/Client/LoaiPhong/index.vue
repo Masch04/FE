@@ -1,7 +1,6 @@
 <template>
   <div class="dat-phong-page py-5">
     <div class="container">
-      <!-- FORM TÌM KIẾM (giữ nguyên) -->
       <div
         class="card search-card mb-5 shadow-lg border-0 rounded-4"
         data-aos="fade-up"
@@ -232,33 +231,50 @@
                 class="position-absolute top-0 end-0 p-3"
                 v-if="value.so_phong_trong > 0"
               >
-              <div class="position-absolute top-0 end-0 p-3" style="z-index: 10;">
-  <button
-    @click="value.chon_phong = !value.chon_phong; inLog()"
-    class="btn d-flex align-items-center gap-2 text-nowrap"
-    :class="value.chon_phong ? 'bg-success text-white shadow' : 'text-white shadow-sm'"
-    style="
-      border-radius: 50px; 
-      font-weight: 600; 
-      font-size: 0.95rem;
-      backdrop-filter: blur(12px); 
-      -webkit-backdrop-filter: blur(12px);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      border: 2px solid rgba(255,255,255,0.6);
-      background-color: rgba(255, 255, 255, 0.2);
-    "
-    :style="value.chon_phong ? 'border-color: transparent !important;' : ''"
-  >
-    <i 
-      class="bx" 
-      :class="value.chon_phong ? 'bx-check' : 'bx-plus'"
-      style="font-size: 1.25rem; transition: transform 0.3s ease;"
-    ></i>
-    
-    <span v-if="value.chon_phong">Đã chọn</span>
-    <span v-else>Chọn phòng</span>
-  </button>
-</div>
+                <div
+                  class="position-absolute top-0 end-0 p-3"
+                  style="z-index: 10"
+                >
+                  <button
+                    @click="
+                      value.chon_phong = !value.chon_phong;
+                      inLog();
+                    "
+                    class="btn d-flex align-items-center gap-2 text-nowrap"
+                    :class="
+                      value.chon_phong
+                        ? 'bg-success text-white shadow'
+                        : 'text-white shadow-sm'
+                    "
+                    style="
+                      border-radius: 50px;
+                      font-weight: 600;
+                      font-size: 0.95rem;
+                      backdrop-filter: blur(12px);
+                      -webkit-backdrop-filter: blur(12px);
+                      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                      border: 2px solid rgba(255, 255, 255, 0.6);
+                      background-color: rgba(255, 255, 255, 0.2);
+                    "
+                    :style="
+                      value.chon_phong
+                        ? 'border-color: transparent !important;'
+                        : ''
+                    "
+                  >
+                    <i
+                      class="bx"
+                      :class="value.chon_phong ? 'bx-check' : 'bx-plus'"
+                      style="
+                        font-size: 1.25rem;
+                        transition: transform 0.3s ease;
+                      "
+                    ></i>
+
+                    <span v-if="value.chon_phong">Đã chọn</span>
+                    <span v-else>Chọn phòng</span>
+                  </button>
+                </div>
               </div>
               <div
                 v-if="value.so_phong_trong <= 0"
@@ -342,7 +358,9 @@
                     </div>
                   </div>
                   <div class="col-md-4 text-center">
-                    <div class="mb-2 fw-semibold text-dark small">Số lượng phòng</div>
+                    <div class="mb-2 fw-semibold text-dark small">
+                      Số lượng phòng
+                    </div>
                     <div
                       class="d-inline-flex align-items-center border rounded-pill p-1 bg-white"
                       :class="{
@@ -399,7 +417,6 @@
         </div>
       </template>
 
-      <!-- Không có phòng -->
       <div
         v-if="ds_loai_phong.length === 0"
         class="text-center py-5"
@@ -437,7 +454,6 @@ export default {
       info: { so_phong: 0, so_tre: 0, so_lon: 0, so_tien: 0 },
       is_login: 0,
       toasterIds: { ngay_den: null, ngay_di: null },
-      // Biến tạm để lưu dữ liệu khôi phục
       saved_state: null,
     };
   },
@@ -471,21 +487,16 @@ export default {
   mounted() {
     this.getToday();
 
-    // --- KHÔI PHỤC DỮ LIỆU ĐÃ LƯU ---
     const savedJson = sessionStorage.getItem("pending_booking_full");
 
     if (savedJson) {
       this.saved_state = JSON.parse(savedJson);
-      // 1. Khôi phục form tìm kiếm
       this.tt_dat_phong = this.saved_state.tt_dat_phong;
 
-      // 2. Xóa session để không lưu mãi
       sessionStorage.removeItem("pending_booking_full");
 
-      // 3. Gọi API lấy phòng (Logic khôi phục phòng sẽ nằm trong hàm layDanhSachPhong)
       this.layDanhSachPhong();
     } else {
-      // Logic cũ: lấy từ URL
       if (this.$route.params.ngay_den)
         this.tt_dat_phong.ngay_den = this.$route.params.ngay_den;
       if (this.$route.params.ngay_di)
@@ -538,14 +549,11 @@ export default {
     },
     datPhong() {
       if (!this.is_login) {
-        // --- LƯU TOÀN BỘ TRẠNG THÁI (PHÒNG + DỊCH VỤ) ---
         const fullState = {
           tt_dat_phong: this.tt_dat_phong,
-          // Chỉ lưu ID và Số lượng của phòng đã chọn
           selected_rooms: this.ds_loai_phong
             .filter((p) => p.chon_phong && p.so_phong_dat > 0)
             .map((p) => ({ id: p.id, sl: p.so_phong_dat })),
-          // Chỉ lưu ID của dịch vụ đã chọn
           selected_services: this.ds_dich_vu
             .filter((dv) => dv.chon)
             .map((dv) => dv.id),
@@ -674,12 +682,10 @@ export default {
         .then((res) => {
           this.ds_loai_phong = res.data.data || [];
 
-          // --- KHÔI PHỤC TRẠNG THÁI PHÒNG (NẾU CÓ) ---
           this.ds_loai_phong.forEach((v) => {
             v.so_phong_dat = 0;
             v.chon_phong = false;
 
-            // Nếu có dữ liệu đã lưu
             if (this.saved_state && this.saved_state.selected_rooms) {
               const found = this.saved_state.selected_rooms.find(
                 (item) => item.id === v.id
@@ -691,8 +697,8 @@ export default {
             }
           });
 
-          this.layDanhSachDichVu(); // Gọi tiếp dịch vụ
-          this.inLog(); // Tính lại tiền
+          this.layDanhSachDichVu();
+          this.inLog();
         })
         .catch(() => toaster.error("Không tải được danh sách phòng!"));
     },
@@ -704,7 +710,6 @@ export default {
             this.ds_dich_vu = res.data.dich_vu.map((dv) => {
               let isChecked = false;
 
-              // --- KHÔI PHỤC TRẠNG THÁI DỊCH VỤ (NẾU CÓ) ---
               if (this.saved_state && this.saved_state.selected_services) {
                 if (this.saved_state.selected_services.includes(dv.id)) {
                   isChecked = true;
@@ -718,7 +723,6 @@ export default {
               };
             });
 
-            // Tính lại tiền lần nữa sau khi load xong dịch vụ
             this.inLog();
           }
         })
@@ -729,7 +733,6 @@ export default {
 </script>
 
 <style scoped>
-/* Giữ nguyên Style cũ */
 .dat-phong-page {
   background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.45)),
     url("https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg")

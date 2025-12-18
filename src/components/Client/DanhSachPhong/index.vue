@@ -57,7 +57,6 @@
                       <i class="bx bx-user text-gold"></i>
                       <small>{{ v.so_nguoi_lon }} Người lớn</small>
                     </span>
-                    <!-- ĐÃ SỬA: icon trẻ em giờ cũng màu vàng -->
                     <span class="d-flex align-items-center gap-1">
                       <i class="bx bx-child text-gold"></i>
                       <small>{{ v.so_tre_em > 0 ? v.so_tre_em + ' Trẻ em' : '—' }}</small>
@@ -65,7 +64,6 @@
                   </div>
                 </div>
 
-                <!-- Hover overlay -->
                 <div class="content-hover position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-center px-4 bg-white bg-opacity-95">
                   <h3 class="room-title-hover fw-bold mb-4">{{ v.ten_loai_phong }}</h3>
                   <p class="text-muted lead description-hover px-4 line-clamp-6">
@@ -78,7 +76,6 @@
           </template>
         </div>
 
-        <!-- Không có phòng -->
         <div v-if="ds_loai_phong.length === 0" class="text-center py-5">
           <i class="bx bx-home fs-1 text-muted mb-3"></i>
           <p class="text-muted">Không tìm thấy phòng nào phù hợp.</p>
@@ -88,7 +85,6 @@
   </div>
 </template>
 
-<!-- Script và Style giữ nguyên hoàn toàn như bản trước -->
 <script>
 import axios from 'axios';
 import { createToaster } from "@meforma/vue-toaster";

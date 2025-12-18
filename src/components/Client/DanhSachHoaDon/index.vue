@@ -7,8 +7,7 @@
                         <h6><b>Danh Sách Hoá Đơn</b></h6>
                         <div class="input-group mt-3 w-100">
                             <input v-on:keyup.enter="timKiemNe()" v-model="tim_kiem.noi_dung_tim" type="text"
-                                class="form-control search-control border border-3 border-secondary"
-                                placeholder="Search...">
+                                class="form-control search-control border border-3 border-secondary">
                             <span class="position-absolute top-50 search-show translate-middle-y" style="left: 15px;"><i
                                     class="bx bx-search"></i></span>
                             <button v-on:click="timKiemNe()" class="btn btn-outline-secondary" type="button">Tìm
@@ -189,7 +188,6 @@ export default {
             this.tong_tien_dich_vu = 0;
 
             try {
-                // DÙNG CHUNG 1 API VỚI ADMIN: chiTietHoaDon → TRẢ VỀ ĐỦ PHÒNG + DỊCH VỤ
                 const res = await axios.get(`http://127.0.0.1:8000/api/hoa-don/chi-tiet/${payload.id}`, {
                     headers: { Authorization: 'Bearer ' + localStorage.getItem("token_khachhang") }
                 });

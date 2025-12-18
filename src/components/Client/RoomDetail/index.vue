@@ -1,8 +1,6 @@
 <template>
   <div class="room-detail-page font-primary bg-light min-vh-100" v-if="room">
-    <!-- HEADER ẢNH (HERO) -->
     <section class="detail-hero position-relative overflow-hidden">
-      <!-- SỬA: Thêm class ken-burns để ảnh chuyển động chậm -->
       <div
         class="hero-bg ken-burns"
         :style="{ backgroundImage: `url(${room.hinh_anh})` }"
@@ -12,7 +10,6 @@
       <div
         class="container position-relative h-100 d-flex align-items-end pb-5"
       >
-        <!-- SỬA: Đổi animation class sang custom 'fade-in-up' -->
         <div class="text-white fade-in-up">
           <span
             class="text-gold text-uppercase letter-spacing-2 fw-bold mb-2 d-block"
@@ -22,7 +19,6 @@
             {{ room.ten_loai_phong }}
           </h1>
 
-          <!-- SỬA: Thêm delay nhẹ cho dòng thông tin -->
           <div
             class="d-flex align-items-center gap-4 text-white-50 flex-wrap fade-in-up delay-100"
           >
@@ -53,16 +49,12 @@
       </div>
     </section>
 
-    <!-- NỘI DUNG CHÍNH -->
     <section class="container py-5 mt-n5 position-relative" style="z-index: 2">
       <div class="row g-5">
-        <!-- CỘT TRÁI -->
         <div class="col-lg-8">
-          <!-- SỬA: Đổi animation sang 'fade-in-up delay-200' mượt hơn -->
           <div class="bg-white p-5 rounded-4 shadow-sm fade-in-up delay-200">
             <h3 class="font-playfair fw-bold mb-4">Mô tả phòng</h3>
 
-            <!-- ĐÃ SỬA: Gọi hàm getRoomDescription và truyền tên phòng vào -->
             <div
               class="text-muted lead mb-5"
               style="line-height: 1.8; white-space: pre-line"
@@ -96,9 +88,7 @@
           </div>
         </div>
 
-        <!-- CỘT PHẢI -->
         <div class="col-lg-4">
-          <!-- SỬA: Thêm animation trượt nhẹ từ phải sang -->
           <div
             class="card border-0 shadow-lg rounded-4 sticky-top fade-in-right delay-300"
             style="top: 100px"
@@ -154,9 +144,6 @@
       </div>
     </section>
 
-    <!-- ============================================ -->
-    <!-- MODAL ĐẶT PHÒNG -->
-    <!-- ============================================ -->
     <div v-if="showModal" class="modal-backdrop-custom fade-in">
       <div class="modal-content-custom rounded-4 shadow-lg pop-up-gentle">
         <div
@@ -173,9 +160,7 @@
 
         <div class="modal-body-custom p-4">
           <div class="row g-4">
-            <!-- Cột Trái -->
             <div class="col-lg-7 border-end">
-              <!-- SỬA: Đã xóa 'align-items-end' để các ô căn thẳng hàng từ trên xuống -->
               <div class="row g-3">
                 <div class="col-md-4">
                   <label class="form-label fw-bold small text-muted"
@@ -240,7 +225,6 @@
                 </div>
               </div>
 
-              <!-- Phần Dịch vụ bổ sung -->
               <div class="mt-4 pt-3 border-top">
                 <h6 class="fw-bold text-gold mb-3">DỊCH VỤ BỔ SUNG</h6>
                 <div
@@ -274,7 +258,6 @@
               </div>
             </div>
 
-            <!-- Cột Phải (Thanh toán) -->
             <div class="col-lg-5">
               <div
                 class="bg-light p-4 rounded-4 h-100 d-flex flex-column justify-content-between"
@@ -340,7 +323,6 @@
 </template>
 
 <script>
-// GIỮ NGUYÊN TOÀN BỘ SCRIPT CỦA BẠN
 import axios from "axios";
 import { createToaster } from "@meforma/vue-toaster";
 const toaster = createToaster({ position: "top-right" });
@@ -423,7 +405,6 @@ export default {
         Villa:
           "Biệt thự riêng có hồ bơi riêng, bếp, phòng khách rộng, nhân viên phục vụ riêng 24/7. Sự lựa chọn tối thượng cho gia đình lớn hoặc nhóm bạn.",
       };
-      // Tìm key khớp (không phân biệt hoa thường)
       const key = Object.keys(desc).find(
         (k) => tenPhong && tenPhong.toLowerCase().includes(k.toLowerCase())
       );
@@ -566,7 +547,6 @@ export default {
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600&display=swap");
 
-/* --- GENERAL STYLES --- */
 .font-primary {
   font-family: "Inter", sans-serif;
 }
@@ -580,7 +560,6 @@ export default {
   background-color: #f8f9fa !important;
 }
 
-/* --- HERO SECTION ANIMATION --- */
 .detail-hero {
   height: 60vh;
   min-height: 400px;
@@ -595,7 +574,6 @@ export default {
   filter: brightness(0.8);
 }
 
-/* Hiệu ứng Ken Burns (Zoom chậm) */
 .ken-burns {
   animation: kenBurns 20s infinite alternate;
 }
@@ -621,8 +599,6 @@ export default {
   margin-top: -80px !important;
 }
 
-/* --- CONTENT ANIMATIONS --- */
-/* Fade Up mượt mà */
 .fade-in-up {
   animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
   opacity: 0;
@@ -635,7 +611,6 @@ export default {
   }
 }
 
-/* Fade Right (cho cột giá bên phải) */
 .fade-in-right {
   animation: fadeInRight 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
   opacity: 0;
@@ -648,7 +623,6 @@ export default {
   }
 }
 
-/* Delays */
 .delay-100 {
   animation-delay: 0.1s;
 }
@@ -659,7 +633,6 @@ export default {
   animation-delay: 0.3s;
 }
 
-/* --- MODAL ANIMATIONS --- */
 .modal-backdrop-custom {
   position: fixed;
   top: 0;
@@ -667,14 +640,13 @@ export default {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(8px); /* Blur mạnh hơn chút cho đẹp */
+  backdrop-filter: blur(8px);
   z-index: 1050;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Hiệu ứng Fade In cho nền đen */
 .fade-in {
   animation: fadeIn 0.3s ease-out forwards;
 }
@@ -696,7 +668,6 @@ export default {
   position: relative;
 }
 
-/* Hiệu ứng Pop Up Gentle cho Modal Content */
 .pop-up-gentle {
   animation: popUpGentle 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
   opacity: 0;
@@ -709,7 +680,6 @@ export default {
   }
 }
 
-/* --- INTERACTIVE ELEMENTS --- */
 .service-item {
   cursor: pointer;
   border: 1px solid #dee2e6;
@@ -719,7 +689,6 @@ export default {
   transform: translateX(5px);
 }
 
-/* Transition mượt cho màu nền */
 .transition-bg {
   transition: background-color 0.3s ease, border-color 0.3s ease,
     transform 0.2s ease;
@@ -750,13 +719,11 @@ export default {
   box-shadow: 0 0 15px rgba(212, 175, 55, 0.5) !important;
 }
 
-/* Focus input đẹp hơn */
 .focus-ring:focus {
   box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.15);
   border-color: #d4af37;
 }
 
-/* Scrollbar tùy chỉnh */
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px;
 }
@@ -782,7 +749,6 @@ export default {
   }
 }
 
-/* AMENITIES STYLES (Giữ nguyên) */
 :deep(.amenities-html) {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -815,7 +781,7 @@ export default {
 }
 .pointer-events-none {
   pointer-events: none;
-} /* Chặn click vào label/input để click vào div cha */
+}
 .h-50px {
   height: 45px;
 }
@@ -835,6 +801,6 @@ export default {
   }
   .fade-in-right {
     animation-name: fadeInUp;
-  } /* Mobile thì fade up hết cho đẹp */
+  }
 }
 </style>

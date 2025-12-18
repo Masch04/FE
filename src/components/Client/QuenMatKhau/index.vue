@@ -8,7 +8,6 @@
           <div
             class="card border-0 shadow-lg rounded-4 overflow-hidden animate__animated animate__fadeIn"
           >
-            <!-- Header vàng cam – GIỐNG HỆT ĐĂNG NHẬP -->
             <div
               class="card-header bg-gradient text-center py-4 position-relative"
             >
@@ -30,14 +29,12 @@
               </p>
             </div>
 
-            <!-- Body -->
             <div class="card-body p-4 p-md-5">
               <p class="text-muted text-center mb-4 fst-italic opacity-75">
                 <em>Nhập email của bạn để nhận liên kết đặt lại mật khẩu</em>
               </p>
 
               <form @submit.prevent="gui()" class="row g-3">
-                <!-- Email -->
                 <div class="col-12">
                   <label class="form-label text-dark fw-semibold">Email</label>
                   <input
@@ -49,7 +46,6 @@
                   />
                 </div>
 
-                <!-- Nút Gửi -->
                 <div class="col-12 mt-4">
                   <button
                     type="submit"
@@ -59,7 +55,6 @@
                   </button>
                 </div>
 
-                <!-- Quay lại đăng nhập -->
                 <div class="col-12 text-center mt-3">
                   <router-link
                     to="/khach-hang/dang-nhap"
@@ -78,7 +73,6 @@
 </template>
 
 <script>
-// Giữ nguyên 100% script cũ của bạn – KHÔNG ĐỘNG GÌ HẾT
 import axios from "axios";
 import { createToaster } from "@meforma/vue-toaster";
 const toaster = createToaster({ position: "top-right" });
@@ -125,14 +119,12 @@ export default {
 </script>
 
 <style scoped>
-/* ĐỒNG BỘ HOÀN TOÀN VỚI TRANG ĐĂNG NHẬP */
 .forgot-page {
   background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
   min-height: 100vh;
   padding-top: 0 !important;
 }
 
-/* Header giống hệt đăng nhập */
 .card-header {
   background: linear-gradient(135deg, #dbab57, #977334) !important;
   position: relative;
@@ -157,7 +149,6 @@ export default {
   margin: 0 !important;
 }
 
-/* Input giống hệt */
 .form-control {
   border: 2px solid #ddd;
   transition: all 0.3s ease;
@@ -171,7 +162,6 @@ export default {
   background-color: white;
 }
 
-/* Nút giống hệt nút Đăng nhập */
 .btn-login {
   background: linear-gradient(135deg, #dbab57, #e68a00);
   color: white;
@@ -186,7 +176,6 @@ export default {
   box-shadow: 0 10px 25px rgba(255, 153, 0, 0.4);
 }
 
-/* Link "Đăng nhập ngay" – hiệu ứng glow giống trang đăng nhập */
 .link-glow {
   transition: all 0.3s ease;
   position: relative;
@@ -216,7 +205,6 @@ export default {
   transform-origin: left;
 }
 
-/* Link "Quay lại đăng nhập" */
 .link-forgot {
   color: #888 !important;
   transition: all 0.3s ease;
@@ -225,7 +213,6 @@ export default {
   color: #dbab57 !important;
 }
 
-/* Responsive giống hệt */
 @media (max-width: 576px) {
   .card {
     margin: 1rem;
