@@ -1,21 +1,20 @@
 <template>
     <div class="row">
-        <!-- FILTER DATE (Giữ nguyên) -->
         <div class="col">
             <div class="card">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-5">
-                            <label class="mb-2"><b>Từ Ngày</b></label>
-                            <input type="date" class="form-control mb-2">
+                            <label class="mb-2"><b>Từ Ngày (Ngày Đi)</b></label>
+                            <input type="date" class="form-control mb-2" v-model="tu_ngay_di">
                         </div>
                         <div class="col-lg-5">
-                            <label class="mb-2"><b>Đến Ngày</b></label>
-                            <input type="date" class="form-control mb-2">
+                            <label class="mb-2"><b>Đến Ngày (Ngày Đi)</b></label>
+                            <input type="date" class="form-control mb-2" v-model="den_ngay_di">
                         </div>
                         <div class="col-lg-2">
                             <label class="mb-2">&nbsp;</label>
-                            <button class="mb-2 btn btn-primary w-100">Tìm Kiếm</button>
+                            <button class="mb-2 btn btn-primary w-100" @click="timKiemTheoNgayDi">Tìm Kiếm</button>
                         </div>
                     </div>
                 </div>
@@ -26,18 +25,6 @@
     <div class="row">
         <div class="col">
             <div class="card">
-                <div class="card-header mt-2">
-                    <h6><b>Danh Sách Hoá Đơn</b></h6>
-                    <div class="input-group mt-3 w-100">
-                        <input v-on:keyup.enter="timKiemNe()" v-model="tim_kiem.noi_dung_tim" type="text"
-                            class="form-control search-control border border-3 border-secondary">
-                        <span class="position-absolute top-50 translate-middle-y" style="left: 15px;">
-                            <i class='bx bx-search'></i>
-                        </span>
-                        <button @click="timKiemNe()" class="btn btn-outline-secondary">Tìm Kiếm</button>
-                    </div>
-                </div>
-
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered table-hover align-middle">
@@ -63,10 +50,8 @@
                                     <td class="text-center">{{ formatDateA(hd.ngay_di) }}</td>
                                     <td class="text-end text-danger fw-bold">{{ formatVND(hd.tong_tien) }}</td>
                                     
-                                    <!-- CỘT TÌNH TRẠNG - CHỈ CHO CLICK KHI CHƯA THANH TOÁN -->
                                     <td class="text-center">
                                         <div class="mb-2">
-                                            <!-- Trường hợp đã xử lý rồi (Đã thanh toán hoặc Đã huỷ) → không cho click -->
                                             <span v-if="hd.is_thanh_toan == -1" class="badge bg-danger">
                                                 Đã huỷ
                                             </span>
@@ -74,7 +59,6 @@
                                                 Đã thanh toán
                                             </span>
 
-                                            <!-- Chỉ khi CHƯA thanh toán (0) mới cho click mở modal -->
                                             <span v-else 
                                                 class="badge bg-warning text-dark cursor-pointer"
                                                 data-bs-toggle="modal" 
@@ -96,7 +80,6 @@
                     </div>
                 </div>
 
-                <!-- MODAL CHI TIẾT (GIỮ NGUYÊN) -->
                 <div class="modal fade" id="chiTietModal" tabindex="-1">
                     <div class="modal-dialog modal-xl">
                         <div class="modal-content">
@@ -167,7 +150,6 @@
                     </div>
                 </div>
 
-                <!-- MODAL CẬP NHẬT TRẠNG THÁI (GIỮ NGUYÊN) -->
                 <div class="modal fade" id="thanhToanModal" tabindex="-1">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -233,7 +215,9 @@ export default {
             tong_tien_phong: 0,
             tong_tien_dich_vu: 0,
             tim_kiem: {},
-            trang_thai_update: 0
+            trang_thai_update: 0,
+            tu_ngay_di: null,
+            den_ngay_di: null
         }
     },
     mounted() {
@@ -250,6 +234,27 @@ export default {
             baseRequest.post("hoa-don/tim-kiem", this.tim_kiem)
                 .then(res => this.list_hoa_don = res.data.data || [])
                 .catch(() => toaster.error("Tìm kiếm thất bại"));
+        },
+
+        timKiemTheoNgayDi() {
+            const payload = {};
+            if (this.tu_ngay_di) payload.tu_ngay_di = this.tu_ngay_di;
+            if (this.den_ngay_di) payload.den_ngay_di = this.den_ngay_di;
+
+            if (Object.keys(payload).length === 0) {
+                this.loadData();
+                toaster.info("Đã tải lại toàn bộ danh sách");
+                return;
+            }
+
+            baseRequest.post("hoa-don/tim-kiem", payload)
+                .then(res => {
+                    this.list_hoa_don = res.data.data || [];
+                    if (this.list_hoa_don.length === 0) {
+                        toaster.info("Không tìm thấy hoá đơn nào trong khoảng ngày đi đã chọn");
+                    }
+                })
+                .catch(() => toaster.error("Lỗi tìm kiếm theo ngày đi"));
         },
 
         async chiTietThue(hd) {

@@ -53,7 +53,7 @@
                                     <th class="text-center">#</th>
                                     <th class="text-center">Tên Dịch Vụ</th>
                                     <th class="text-center">Đơn Giá</th>
-                                    <th class="text-center">Đơn Vị Tính</th>
+                                    <!-- <th class="text-center">Đơn Vị Tính</th> -->
                                     <th class="text-center">Ghi Chú</th>
                                     <th class="text-center">Tình Trạng</th>
                                     <th class="text-center">Action</th>
@@ -64,7 +64,7 @@
                                     <th class="text-center align-middle">{{ index + 1 }}</th>
                                     <td class="align-middle">{{ value.ten_dich_vu }}</td>
                                     <td class="align-middle text-end">{{ value.don_gia }}</td>
-                                    <td class="align-middle">{{ value.don_vi_tinh }}</td>
+                                    <!-- <td class="align-middle">{{ value.don_vi_tinh }}</td> -->
                                     <td class="align-middle">{{ value.ghi_chu }}</td>
                                     <td class="align-middle text-center">
                                         <button v-on:click="doiTrangThai(value)" v-if="value.tinh_trang == 0" class="btn btn-warning">Tạm Dừng</button>
